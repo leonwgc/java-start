@@ -37,25 +37,76 @@
    - 参数传递
    - 返回值
 
+5. **ExceptionHandling.java** - 异常处理 ⭐新增
+   - try-catch-finally语句
+   - 多重异常捕获
+   - 自定义异常
+   - throws关键字
+
 ### 第二阶段：面向对象编程 (src/oop)
 
-5. **Person.java** - 类和对象
+6. **Person.java** - 类和对象
    - 类的定义
    - 对象的创建
    - 构造方法
    - 封装（getter/setter）
    - 成员方法
 
+7. **InterfaceDemo.java** - 接口 ⭐新增
+   - 接口定义和实现
+   - 多接口实现
+   - 默认方法和静态方法
+   - 接口作为参数
+
+8. **AbstractClassDemo.java** - 抽象类 ⭐新增
+   - 抽象类和抽象方法
+   - 模板方法模式
+   - 抽象类 vs 接口
+
+9. **InheritanceDemo.java** - 继承和多态 ⭐新增
+   - 继承的使用
+   - super关键字
+   - 方法重写
+   - 多态性和类型转换
+
 ### 第三阶段：集合框架 (src/collections)
 
-6. **CollectionsDemo.java** - 常用集合
-   - ArrayList - 动态数组
-   - HashMap - 键值对映射
-   - HashSet - 去重集合
+10. **CollectionsDemo.java** - 常用集合
+    - ArrayList - 动态数组
+    - HashMap - 键值对映射
+    - HashSet - 去重集合
 
-### 第四阶段：Spring框架 (src/spring)
+### 第四阶段：Java高级特性 (src/advanced) ⭐新增
 
-（为学习Spring做准备，后续添加）
+11. **LambdaDemo.java** - Lambda表达式
+    - Lambda语法
+    - 函数式接口
+    - 方法引用
+    - 实际应用场景
+
+12. **StreamDemo.java** - Stream API
+    - Stream创建和操作
+    - 过滤、映射、排序
+    - 聚合操作
+    - 收集器使用
+
+13. **AnnotationDemo.java** - 注解
+    - 注解概念和作用
+    - 自定义注解
+    - 元注解
+    - 模拟Spring注解
+
+### 第五阶段：文件I/O操作 (src/io) ⭐新增
+
+14. **FileIODemo.java** - 文件操作
+    - 文件读写
+    - 缓冲流使用
+    - NIO文件操作
+    - 文件和目录管理
+
+### 第六阶段：Spring框架 (src/spring)
+
+（即将添加，敬请期待！）
 
 ## 🚀 如何运行
 
@@ -89,14 +140,22 @@ java -cp src basics.HelloWorld
 - 使用调试功能，逐步执行代码
 - 记录学习笔记
 
-## 🎯 下一步学习
+## 🎯 当前学习进度
 
-完成基础学习后，你可以：
-1. 学习Java异常处理
-2. 学习文件I/O操作
-3. 学习多线程编程
-4. 学习数据库操作（JDBC）
-5. 开始学习Spring框架
+你已经掌握：
+- ✅ Java基础语法
+- ✅ 面向对象编程（OOP）
+- ✅ 集合框架
+- ✅ Lambda和Stream API
+- ✅ 文件I/O操作
+- ✅ 注解基础
+
+下一步可以学习：
+1. 多线程和并发编程
+2. 网络编程（Socket）
+3. 数据库操作（JDBC）
+4. Maven/Gradle构建工具
+5. **开始学习Spring框架** 🎯
 
 ## 📝 常用命令
 
