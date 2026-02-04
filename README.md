@@ -96,17 +96,45 @@
     - 元注解
     - 模拟Spring注解
 
-### 第五阶段：文件I/O操作 (src/io) ⭐新增
+14. **GenericsDemo.java** - 泛型 ⭐新增
+    - 泛型类和泛型方法
+    - 类型安全
+    - 泛型通配符
+    - 多类型参数
 
-14. **FileIODemo.java** - 文件操作
+15. **ReflectionDemo.java** - 反射 ⭐新增
+    - Class对象获取
+    - 操作字段和方法
+    - 动态创建对象
+    - Spring IoC原理
+
+16. **ThreadDemo.java** - 多线程 ⭐新增
+    - 线程创建方式
+    - 线程生命周期
+    - 线程同步
+    - synchronized关键字
+
+17. **DesignPatternsDemo.java** - 设计模式 ⭐新增
+    - 单例模式
+    - 工厂模式
+    - 建造者模式
+    - 代理模式（AOP原理）
+
+### 第五阶段：文件I/O操作 (src/io)
+
+18. **FileIODemo.java** - 文件操作
     - 文件读写
     - 缓冲流使用
     - NIO文件操作
     - 文件和目录管理
 
-### 第六阶段：Spring框架 (src/spring)
+### 第六阶段：准备Spring开发 ⭐新增
 
-（即将添加，敬请期待！）
+**已添加Maven配置**：[pom.xml](pom.xml)
+- Maven项目结构
+- 依赖管理
+- 插件配置
+- 准备好进入Spring学习！
 
 ## 🚀 如何运行
 
@@ -115,19 +143,25 @@
 2. 点击右上角的▶️运行按钮
 3. 查看输出结果
 
-### 方法2：使用终端
-```bash
-# 编译Java文件
-javac src/basics/HelloWorld.java
+### 方法2：使用终端（变量、控制流、方法）
+- ✅ 面向对象编程（类、接口、抽象类、继承、多态）
+- ✅ 集合框架（ArrayList、HashMap、HashSet）
+- ✅ 异常处理（try-catch、自定义异常）
+- ✅ Lambda和Stream API
+- ✅ 文件I/O操作
+- ✅ 注解基础
+- ✅ 泛型编程
+- ✅ 反射机制 ⭐Spring核心
+- ✅ 多线程基础
+- ✅ 常用设计模式 ⭐Spring大量使用
+- ✅ Maven项目管理
 
-# 运行Java程序
-java -cp src basics.HelloWorld
-```
+**恭喜！你已经具备了学习Spring框架的所有基础知识！**
 
-## 📖 学习建议
-
-1. **循序渐进**：按照学习路径顺序学习
-2. **动手实践**：运行每个示例程序，观察输出
+下一步：
+1. ✅ 已完成Java核心基础
+2. 🎯 **可以开始学习Spring Boot了！**
+3. 后续深入：Spring Data JPA、Spring Security等察输出
 3. **修改代码**：尝试修改代码，看看会发生什么
 4. **多做练习**：基于示例创建自己的程序
 5. **理解原理**：不仅要知道怎么做，还要知道为什么
@@ -153,15 +187,34 @@ java -cp src basics.HelloWorld
 下一步可以学习：
 1. 多线程和并发编程
 2. 网络编程（Socket）
-3. 数据库操作（JDBC）
-4. Maven/Gradle构建工具
-5. **开始学习Spring框架** 🎯
-
-## 📝 常用命令
-
+### Java命令
 ```bash
 # 查看Java版本
 java -version
+
+# 编译所有Java文件
+find src -name "*.java" -exec javac {} \;
+
+# 清理编译文件
+find src -name "*.class" -delete
+```
+
+### Maven命令
+```bash
+# 编译项目
+mvn compile
+
+# 运行测试
+mvn test
+
+# 打包项目
+mvn package
+
+# 清理编译文件
+mvn clean
+
+# 查看依赖树
+mvn dependency:tre
 
 # 编译所有Java文件
 find src -name "*.java" -exec javac {} \;
