@@ -1,5 +1,7 @@
 package basics;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.StringJoiner;
 
@@ -91,7 +93,13 @@ public class Test {
         dog.bark();
         dog.speak();
 
+        // 用instanceof不但匹配指定类型，还匹配指定类型的子类
+        System.out.println(dog instanceof Dog); // true
+        System.out.println(dog instanceof Animal); // true
+
         // reflection
+        // 由于JVM为每个加载的class创建了对应的Class实例，并在实例中保存了该class的所有信息，包括类名、包名、父类、实现的接口、所有方法、字段等，因此，如果获取了某个Class实例，我们就可以通过这个Class实例获取到该实例对应的class的所有信息。
+        // 这种通过Class实例获取class信息的方法称为反射（Reflection）。
         Class<?> dogClass = dog.getClass();
         System.out.println("Class Name: " + dogClass.getName());
         System.out.println("Superclass: " + dogClass.getSuperclass().getName());
@@ -105,5 +113,22 @@ public class Test {
         }
 
         System.out.println(dogClass2.equals(dogClass3));
+
+
+        // collection
+        var list=new ArrayList<>();
+        list.add("hello");
+        list.add("world");
+        for(var item:list){
+            System.out.println(item);
+        }
+
+        HashMap<String,Number> map=new HashMap<>();
+        map.put("leon",1);
+        map.put("lisa",2.5);
+        for(var entry:map.entrySet()){
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
+
     }
 }
