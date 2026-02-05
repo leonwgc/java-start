@@ -3,6 +3,7 @@ package basics;
 import java.util.Random;
 import java.util.StringJoiner;
 
+// 枚举类型 with value
 enum Weekday {
     SUN(1), MON(2), TUE(3), WED(4), THU(5), FRI(6), SAT(7);
 
@@ -12,6 +13,37 @@ enum Weekday {
         this.value = value;
     }
 
+}
+
+// 简单的继承示例
+class Animal {
+    String name;
+    int age;
+
+    public Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Dog extends Animal implements speack {
+    public Dog(String name, int age) {
+        super(name, age);
+    }
+
+    public void bark() {
+        System.out.println(name + " says: Woof!");
+    }
+
+    @Override
+    public void speak() {
+        System.out.println(name + " is speaking.");
+    }
+}
+
+// interface example
+interface speack {
+    void speak();
 }
 
 public class Test {
@@ -54,6 +86,24 @@ public class Test {
         System.out.println(rd.nextDouble()); // 0.0-1.0
         System.out.println(rd.nextBoolean()); // true/false
 
+        // class inheritance
+        var dog = new Dog("Buddy", 3);
+        dog.bark();
+        dog.speak();
 
+        // reflection
+        Class<?> dogClass = dog.getClass();
+        System.out.println("Class Name: " + dogClass.getName());
+        System.out.println("Superclass: " + dogClass.getSuperclass().getName());
+
+        var dogClass2 = Dog.class;
+        Class<?> dogClass3 = null;
+        try {
+            dogClass3 = Class.forName("basics.Dog");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(dogClass2.equals(dogClass3));
     }
 }
