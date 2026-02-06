@@ -11,6 +11,9 @@ import java.net.URLEncoder;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
+// thread-pool
+import java.util.concurrent.*;
+
 // 枚举类型 with value
 enum Weekday {
     SUN(1), MON(2), TUE(3), WED(4), THU(5), FRI(6), SAT(7);
@@ -177,6 +180,30 @@ public class Test {
         var orginalUrl = URLDecoder.decode(encodedUrl, StandardCharsets.UTF_8);
         System.out.println("Original URL: " + orginalUrl);
 
+        // thread
+        var task = new Task("My");
+        var thread = new Thread(task);
+        thread.start();
+
+        // threadpool
+        // 线程数根据任务动态调整的线程池；
+        var executor = Executors.newCachedThreadPool();
+        executor.submit(new Task("Task1"));
+        executor.submit(new Task("Task2"));
+        executor.submit(new Task("Task3"));
+
+        int min = 1;
+        int max = 3;
+        ExecutorService executorMinMax = new ThreadPoolExecutor(
+                min, max,
+                60L, TimeUnit.SECONDS,
+                new SynchronousQueue<Runnable>());
+
+        executorMinMax.submit(new Task("Task4"));
+        executorMinMax.submit(new Task("Task5"));
+        executorMinMax.submit(new Task("Task6"));
+        executorMinMax.submit(new Task("Task7"));
+
     }
 }
 
@@ -184,5 +211,18 @@ class Utils {
     public static boolean isValidEmail(String email) {
         var emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
         return email.matches(emailRegex);
+    }
+}
+
+class Task implements Runnable {
+    private final String name;
+
+    public Task(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(this.name + "Task is running in a separate thread.");
     }
 }
