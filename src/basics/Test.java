@@ -140,6 +140,15 @@ public class Test {
 
         // file I/O
         try {
+            var writer = new java.io.FileWriter("src/basics/io.txt", true);
+            var now2 = new Date();
+            var sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            writer.write("\n" + sdf2.format(now2));
+            writer.close();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+        try {
             var reader = new java.io.BufferedReader(new java.io.FileReader("src/basics/io.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
