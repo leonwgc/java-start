@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.StringJoiner;
 
+import java.net.URLEncoder;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
 // 枚举类型 with value
 enum Weekday {
     SUN(1), MON(2), TUE(3), WED(4), THU(5), FRI(6), SAT(7);
@@ -159,5 +163,26 @@ public class Test {
             e.printStackTrace();
         }
 
+        // regex
+        var email = "leon@125.com";
+        var invalidEmail = "leon#125.com";
+        System.out.println(Utils.isValidEmail(email)); // true
+        System.out.println(Utils.isValidEmail(invalidEmail)); // false
+
+        // URL encoding
+        var url = "https://www.example.com/search?q=java编程";
+        var encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8);
+        System.out.println("Encoded URL: " + encodedUrl);
+
+        var orginalUrl = URLDecoder.decode(encodedUrl, StandardCharsets.UTF_8);
+        System.out.println("Original URL: " + orginalUrl);
+
+    }
+}
+
+class Utils {
+    public static boolean isValidEmail(String email) {
+        var emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        return email.matches(emailRegex);
     }
 }
