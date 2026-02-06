@@ -192,17 +192,25 @@ public class Test {
         executor.submit(new Task("Task2"));
         executor.submit(new Task("Task3"));
 
+        // 最少一个，最多三个线程的线程池，超过三个线程的任务会被放入队列中等待执行；
         int min = 1;
         int max = 3;
         ExecutorService executorMinMax = new ThreadPoolExecutor(
                 min, max,
                 60L, TimeUnit.SECONDS,
-                new SynchronousQueue<Runnable>());
+                new LinkedBlockingQueue<Runnable>());
 
         executorMinMax.submit(new Task("Task4"));
         executorMinMax.submit(new Task("Task5"));
         executorMinMax.submit(new Task("Task6"));
         executorMinMax.submit(new Task("Task7"));
+
+        // ScheduledThreadPool
+        var scheduledExecutor = Executors.newScheduledThreadPool(2);
+        var formatter = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        scheduledExecutor.scheduleAtFixedRate(
+            () -> System.out.println("Current time: " + java.time.LocalDateTime.now().format(formatter)),
+            0, 1, TimeUnit.SECONDS);
 
     }
 }
