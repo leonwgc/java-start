@@ -1,5 +1,7 @@
 package basics;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -114,20 +116,38 @@ public class Test {
 
         System.out.println(dogClass2.equals(dogClass3));
 
-
         // collection
-        var list=new ArrayList<>();
+        var list = new ArrayList<>();
         list.add("hello");
         list.add("world");
-        for(var item:list){
+        for (var item : list) {
             System.out.println(item);
         }
 
-        HashMap<String,Number> map=new HashMap<>();
-        map.put("leon",1);
-        map.put("lisa",2.5);
-        for(var entry:map.entrySet()){
-            System.out.println(entry.getKey()+":"+entry.getValue());
+        HashMap<String, Number> map = new HashMap<>();
+        map.put("leon", 1);
+        map.put("lisa", 2.5);
+        for (var entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
+
+        // Date and Time
+        var now = java.time.LocalDateTime.now();
+        System.out.println("Current Date and Time: " + now);
+        var now1 = new Date();
+        var sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("Current Date and Time: " + sdf.format(now1));
+
+        // file I/O
+        try {
+            var reader = new java.io.BufferedReader(new java.io.FileReader("src/basics/io.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
         }
 
     }
