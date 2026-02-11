@@ -2,9 +2,30 @@
 
 欢迎来到Java学习之旅！这个项目专门为Java初学者设计，包含了从基础到Spring框架的完整学习路径。
 
+## 🆕 最新更新（2026-02）
+
+**新增Spring核心概念示例** ⭐⭐⭐：
+- 🔥 [IoCDemo.java](src/advanced/IoCDemo.java) - IoC控制反转和依赖注入（**Spring核心**）
+- 🔥 [AopDemo.java](src/advanced/AopDemo.java) - AOP面向切面编程（**Spring核心**）
+- ⚙️ [PropertiesDemo.java](src/advanced/PropertiesDemo.java) - 配置管理
+- ⚡ [AsyncDemo.java](src/advanced/AsyncDemo.java) - 异步编程CompletableFuture
+- 🏗️ [BuilderDemo.java](src/advanced/BuilderDemo.java) - Builder模式和链式调用
+
+**新增实用工具类**：
+- Optional、Enum、DateTime、Regex
+- JSON处理、HTTP客户端、JDBC数据库
+
+📖 详细说明：[Spring核心概念学习指南.md](Spring核心概念学习指南.md) | [学习示例完整清单.md](学习示例完整清单.md)
+
+---
+
 ## 📋 项目介绍
 
-这是一个系统的Java学习代码库，通过实际代码示例帮助你掌握Java编程。
+这是一个系统的Java学习代码库，包含 **31个精心设计的学习示例**，通过实际代码帮助你：
+1. 掌握Java核心语法
+2. 理解面向对象编程
+3. 学会常用设计模式
+4. **理解Spring框架核心思想**（IoC、AOP）
 
 ## 🛠️ 开发环境
 
