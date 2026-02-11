@@ -37,16 +37,22 @@
    - 参数传递
    - 返回值
 
-5. **ExceptionHandling.java** - 异常处理 ⭐新增
+5. **JUnitDemo.java** - 单元测试 ⭐新增
+   - JUnit 5基础
+   - 测试断言和注解
+   - 测试生命周期
+   - Spring Test的基础
+
+6. **ExceptionHandling.java** - 异常处理
    - try-catch-finally语句
-   - 多重异常捕获
+7  - 多重异常捕获
    - 自定义异常
    - throws关键字
 
 ### 第二阶段：面向对象编程 (src/oop)
 
 6. **Person.java** - 类和对象
-   - 类的定义
+8. **InterfaceDemo.java** - 接口
    - 对象的创建
    - 构造方法
    - 封装（getter/setter）
@@ -58,12 +64,12 @@
    - 默认方法和静态方法
    - 接口作为参数
 
-8. **AbstractClassDemo.java** - 抽象类 ⭐新增
+9. **AbstractClassDemo.java** - 抽象类
    - 抽象类和抽象方法
    - 模板方法模式
    - 抽象类 vs 接口
 
-9. **InheritanceDemo.java** - 继承和多态 ⭐新增
+10. **InheritanceDemo.java** - 继承和多态
    - 继承的使用
    - super关键字
    - 方法重写
@@ -71,82 +77,100 @@
 
 ### 第三阶段：集合框架 (src/collections)
 
-10. **CollectionsDemo.java** - 常用集合
+11. **CollectionsDemo.java** - 常用集合
     - ArrayList - 动态数组
     - HashMap - 键值对映射
     - HashSet - 去重集合
 
-### 第四阶段：Java高级特性 (src/advanced) ⭐新增
+### 第四阶段：Java高级特性 (src/advanced)
 
-11. **LambdaDemo.java** - Lambda表达式
+12. **LambdaDemo.java** - Lambda表达式
     - Lambda语法
     - 函数式接口
     - 方法引用
     - 实际应用场景
 
-12. **StreamDemo.java** - Stream API
+13. **StreamDemo.java** - Stream API
     - Stream创建和操作
     - 过滤、映射、排序
     - 聚合操作
     - 收集器使用
 
-13. **AnnotationDemo.java** - 注解
+14. **AnnotationDemo.java** - 注解
     - 注解概念和作用
     - 自定义注解
     - 元注解
     - 模拟Spring注解
 
-14. **GenericsDemo.java** - 泛型 ⭐新增
+15. **GenericsDemo.java** - 泛型
     - 泛型类和泛型方法
     - 类型安全
     - 泛型通配符
     - 多类型参数
 
-15. **ReflectionDemo.java** - 反射 ⭐新增
+16. **ReflectionDemo.java** - 反射
     - Class对象获取
     - 操作字段和方法
     - 动态创建对象
     - Spring IoC原理
 
-16. **ThreadDemo.java** - 多线程 ⭐新增
+17. **ThreadDemo.java** - 多线程
     - 线程创建方式
     - 线程生命周期
     - 线程同步
     - synchronized关键字
 
-17. **DesignPatternsDemo.java** - 设计模式 ⭐新增
+18. **DesignPatternsDemo.java** - 设计模式
     - 单例模式
     - 工厂模式
     - 建造者模式
     - 代理模式（AOP原理）
 
-18. **DateTimeDemo.java** - 日期时间API ⭐新增
+19. **DateTimeDemo.java** - 日期时间API ⭐新增
     - LocalDate/LocalTime/LocalDateTime
     - 日期格式化和解析
     - 日期计算
     - 时区处理
 
-19. **OptionalDemo.java** - Optional类 ⭐新增
+20. **OptionalDemo.java** - Optional类 ⭐新增
     - Optional的创建和使用
     - 避免空指针异常
     - Optional的转换和过滤
     - Spring Data JPA中的应用
 
-20. **EnumDemo.java** - 枚举类型 ⭐新增
+21. **EnumDemo.java** - 枚举类型 ⭐新增
     - 枚举的基本使用
     - 带属性和方法的枚举
     - 枚举的实战应用
     - 订单状态管理示例
 
-21. **RegexDemo.java** - 正则表达式 ⭐新增
+22. **RegexDemo.java** - 正则表达式 ⭐新增
     - 正则表达式基础语法
     - Pattern和Matcher使用
     - 常用验证模式
     - 表单验证实战
 
+23. **JsonDemo.java** - JSON处理 ⭐新增
+    - Jackson库的使用
+    - 对象与JSON互转
+    - Jackson注解
+    - REST API响应格式
+
+24. **HttpClientDemo.java** - HTTP客户端 ⭐新增
+    - Java HttpClient使用
+    - GET/POST/PUT/DELETE请求
+    - 同步和异步请求
+    - API客户端封装
+
+25. **JdbcDemo.java** - JDBC数据库操作 ⭐新增
+    - 数据库连接和操作
+    - CRUD操作
+    - 事务处理
+    - PreparedStatement防SQL注入
+
 ### 第五阶段：文件I/O操作 (src/io)
 
-22. **FileIODemo.java** - 文件操作
+26. **FileIODemo.java** - 文件操作
     - 文件读写
     - 缓冲流使用
     - NIO文件操作
