@@ -120,9 +120,33 @@
     - 建造者模式
     - 代理模式（AOP原理）
 
+18. **DateTimeDemo.java** - 日期时间API ⭐新增
+    - LocalDate/LocalTime/LocalDateTime
+    - 日期格式化和解析
+    - 日期计算
+    - 时区处理
+
+19. **OptionalDemo.java** - Optional类 ⭐新增
+    - Optional的创建和使用
+    - 避免空指针异常
+    - Optional的转换和过滤
+    - Spring Data JPA中的应用
+
+20. **EnumDemo.java** - 枚举类型 ⭐新增
+    - 枚举的基本使用
+    - 带属性和方法的枚举
+    - 枚举的实战应用
+    - 订单状态管理示例
+
+21. **RegexDemo.java** - 正则表达式 ⭐新增
+    - 正则表达式基础语法
+    - Pattern和Matcher使用
+    - 常用验证模式
+    - 表单验证实战
+
 ### 第五阶段：文件I/O操作 (src/io)
 
-18. **FileIODemo.java** - 文件操作
+22. **FileIODemo.java** - 文件操作
     - 文件读写
     - 缓冲流使用
     - NIO文件操作
