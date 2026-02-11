@@ -167,6 +167,13 @@
     - CRUD操作
     - 事务处理
     - PreparedStatement防SQL注入
+    - 📖 使用H2内存数据库（[查看说明](H2数据库说明.md)）
+
+26. **JUnitDemo.java** - 单元测试 ⭐新增
+    - JUnit 5测试框架
+    - 测试注解和断言
+    - 参数化测试
+    - 测试生命周期
 
 ### 第五阶段：文件I/O操作 (src/io)
 
@@ -221,6 +228,42 @@
 - 阅读代码注释，理解每行代码的作用
 - 使用调试功能，逐步执行代码
 - 记录学习笔记
+
+## 🔧 常见问题
+
+### JdbcDemo运行错误："Table not found"
+
+**问题**：运行JdbcDemo时出现`Table "USERS" not found`错误
+
+**原因**：H2内存数据库默认在连接关闭后清空数据
+
+**解决**：确保URL包含`DB_CLOSE_DELAY=-1`参数
+```java
+String URL = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
+```
+
+📖 详细说明请查看：[H2数据库说明.md](H2数据库说明.md)
+
+### Maven命令找不到
+
+**问题**：`mvn: command not found`
+
+**解决**：使用javac直接编译
+```bash
+javac src/advanced/YourDemo.java
+cd src && java advanced.YourDemo
+```
+
+### 类找不到或无法加载
+
+**问题**：`ClassNotFoundException`
+
+**解决**：检查包路径和编译输出目录
+```bash
+# 正确的编译和运行方式
+javac -d target/classes src/advanced/Demo.java
+java -cp target/classes advanced.Demo
+```
 
 ## 🎯 当前学习进度
 

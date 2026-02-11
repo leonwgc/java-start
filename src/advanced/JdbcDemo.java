@@ -13,7 +13,22 @@ import java.util.List;
  * 4. 理解JDBC在Spring Data中的基础作用
  */
 public class JdbcDemo {
-    // H2内存数据库URL (DB_CLOSE_DELAY=-1 保持数据库在内存中直到JVM关闭)
+    /**
+     * H2内存数据库配置
+     *
+     * URL参数说明：
+     * - jdbc:h2:mem:testdb - 使用内存模式，数据库名为testdb
+     * - DB_CLOSE_DELAY=-1 - 重要！保持数据库在内存中直到JVM关闭
+     *
+     * 为什么需要DB_CLOSE_DELAY=-1？
+     * - 如果不加此参数，每次Connection关闭后数据库会被清空
+     * - 加上后，多个方法之间可以共享同一个数据库实例
+     * - 这样第一个方法创建的表，在后面的方法中仍然存在
+     *
+     * Spring应用：
+     * - Spring Boot会自动管理数据库连接
+     * - 测试时(@DataJpaTest)会自动配置H2内存数据库
+     */
     private static final String URL = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
     private static final String USER = "sa";
     private static final String PASSWORD = "";
