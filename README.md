@@ -187,6 +187,18 @@
     - 日志、事务、性能监控切面
     - Spring AOP基础
 
+29. **AsyncDemo.java** - 异步编程 ⭐新增
+    - CompletableFuture基础
+    - 异步任务链和组合
+    - 异步异常处理
+    - Spring @Async基础
+
+30. **BuilderDemo.java** - Builder模式 ⭐新增
+    - Builder模式设计
+    - 链式调用实现
+    - SQL查询构建器
+    - Lombok @Builder原理
+
 ### 第四阶段补充：单元测试 (src/basics)
 
 **JUnitDemo.java** - JUnit单元测试
@@ -197,7 +209,7 @@
 
 ### 第五阶段：文件I/O操作 (src/io)
 
-29. **FileIODemo.java** - 文件操作
+31. **FileIODemo.java** - 文件操作
     - 文件读写
     - 缓冲流使用
     - NIO文件操作
@@ -288,16 +300,59 @@ java -cp target/classes advanced.Demo
 ## 🎯 当前学习进度
 
 你已经掌握：
-- ✅ Java基础语法
-- ✅ 面向对象编程（OOP）
-- ✅ 集合框架
-- ✅ Lambda和Stream API
+- ✅ Java基础语法（变量、控制流、方法、异常处理）
+- ✅ 面向对象编程（类、继承、接口、抽象类、多态）
+- ✅ 集合框架（ArrayList、HashMap、HashSet）
+- ✅ Lambda表达式和Stream API
 - ✅ 文件I/O操作
-- ✅ 注解基础
+- ✅ 注解和反射机制
+- ✅ 泛型编程
+- ✅ 多线程基础
+- ✅ 常用设计模式
 
-下一步可以学习：
-1. 多线程和并发编程
-2. 网络编程（Socket）
+**新增核心知识** ⭐：
+- ✅ Optional类（避免空指针）
+- ✅ 枚举类型（业务状态管理）
+- ✅ 日期时间API（LocalDateTime等）
+- ✅ 正则表达式（数据验证）
+- ✅ JSON处理（Jackson）
+- ✅ HTTP客户端（接口调用）
+- ✅ JDBC数据库操作
+- ✅ JUnit单元测试
+
+**Spring核心概念** ⭐⭐⭐：
+- ✅ Properties配置管理
+- ✅ IoC控制反转和依赖注入
+- ✅ AOP面向切面编程
+- ✅ CompletableFuture异步编程
+- ✅ Builder模式和链式调用
+
+**恭喜！你已经具备了学习Spring Boot的所有基础知识！** 🎉
+
+下一步学习建议：
+
+### 1️⃣ 立即开始Spring Boot（推荐）
+你现在已经完全掌握了：
+- IoC/DI容器原理
+- AOP切面编程思想
+- 配置管理基础
+- 异步编程模式
+- Builder模式设计
+
+**可以直接开始学习：**
+- Spring Boot快速入门
+- Spring Data JPA
+- Spring MVC RESTful API
+- Spring Security
+
+### 2️⃣ 深入进阶（可选）
+如果想继续深入Java基础：
+- 并发编程（ExecutorService、锁机制）
+- JVM原理和性能调优
+- 网络编程（Socket、Netty）
+- 微服务架构（Spring Cloud）
+
+### 3️⃣ 推荐学习路径
 ### Java命令
 ```bash
 # 查看Java版本
