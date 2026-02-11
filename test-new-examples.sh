@@ -32,6 +32,27 @@ java advanced.RegexDemo
 echo ""
 echo ""
 
+echo "5️⃣  测试 PropertiesDemo.java - 配置管理"
+echo "-------------------------------------------"
+java advanced.PropertiesDemo
+echo ""
+echo ""
+
+echo "6️⃣  测试 IoCDemo.java - IoC控制反转 ⭐核心"
+echo "-------------------------------------------"
+java advanced.IoCDemo
+echo ""
+echo ""
+
+echo "7️⃣  测试 AopDemo.java - AOP面向切面编程 ⭐核心"
+echo "-------------------------------------------"
+java advanced.AopDemo
+echo ""
+echo ""
+
 echo "========================================="
 echo "✅ 所有示例测试完成！"
+echo ""
+echo "💡 重点关注：IoCDemo 和 AopDemo"
+echo "   这是理解Spring框架的核心！"
 echo "========================================="

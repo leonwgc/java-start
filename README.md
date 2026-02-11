@@ -169,15 +169,35 @@
     - PreparedStatement防SQL注入
     - 📖 使用H2内存数据库（[查看说明](H2数据库说明.md)）
 
-26. **JUnitDemo.java** - 单元测试 ⭐新增
+26. **PropertiesDemo.java** - 配置文件处理 ⭐新增
+    - Properties文件读写
+    - 配置管理
+    - ResourceBundle国际化
+    - Spring配置基础
+
+27. **IoCDemo.java** - IoC控制反转 ⭐新增⭐核心
+    - 依赖注入原理
+    - 模拟Spring IoC容器
+    - 解耦合的重要性
+    - Spring核心概念
+
+28. **AopDemo.java** - AOP面向切面编程 ⭐新增⭐核心
+    - AOP概念和术语
+    - 动态代理实现
+    - 日志、事务、性能监控切面
+    - Spring AOP基础
+
+### 第四阶段补充：单元测试 (src/basics)
+
+**JUnitDemo.java** - JUnit单元测试
     - JUnit 5测试框架
-    - 测试注解和断言
-    - 参数化测试
-    - 测试生命周期
+    - 测试注解(@Test、@BeforeEach等)
+    - 断言方法(assertEquals、assertTrue等)
+    - 参数化测试和测试生命周期
 
 ### 第五阶段：文件I/O操作 (src/io)
 
-26. **FileIODemo.java** - 文件操作
+29. **FileIODemo.java** - 文件操作
     - 文件读写
     - 缓冲流使用
     - NIO文件操作
