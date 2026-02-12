@@ -4,6 +4,12 @@
 
 ## 🆕 最新更新（2026-02）
 
+**最新：新增高级技术示例** ⭐⭐⭐⭐（2026-02-11）：
+- 💾 [NioDemo.java](src/advanced/NioDemo.java) - NIO文件操作（Netty/Tomcat底层）
+- 📝 [LoggingDemo.java](src/advanced/LoggingDemo.java) - SLF4J+Logback日志框架（**Spring Boot默认**）
+- ⏰ [ScheduledTaskDemo.java](src/advanced/ScheduledTaskDemo.java) - 定时任务（@Scheduled底层）
+- 🔄 [SerializationDemo.java](src/advanced/SerializationDemo.java) - 序列化机制（Redis Session）
+
 **新增Spring核心概念示例** ⭐⭐⭐：
 - 🔥 [IoCDemo.java](src/advanced/IoCDemo.java) - IoC控制反转和依赖注入（**Spring核心**）
 - 🔥 [AopDemo.java](src/advanced/AopDemo.java) - AOP面向切面编程（**Spring核心**）
@@ -15,13 +21,13 @@
 - Optional、Enum、DateTime、Regex
 - JSON处理、HTTP客户端、JDBC数据库
 
-📖 详细说明：[Spring核心概念学习指南.md](Spring核心概念学习指南.md) | [学习示例完整清单.md](学习示例完整清单.md)
+📖 详细说明：[新增高级示例说明.md](新增高级示例说明.md) | [Spring核心概念学习指南.md](Spring核心概念学习指南.md) | [学习示例完整清单.md](学习示例完整清单.md)
 
 ---
 
 ## 📋 项目介绍
 
-这是一个系统的Java学习代码库，包含 **31个精心设计的学习示例**，通过实际代码帮助你：
+这是一个系统的Java学习代码库，包含 **35个精心设计的学习示例**，通过实际代码帮助你：
 1. 掌握Java核心语法
 2. 理解面向对象编程
 3. 学会常用设计模式
@@ -220,6 +226,31 @@
     - SQL查询构建器
     - Lombok @Builder原理
 
+31. **NioDemo.java** - NIO文件操作 ⭐新增
+    - Path和Files工具类
+    - FileChannel和ByteBuffer
+    - 目录遍历和文件查找
+    - WatchService文件监听
+    - Spring Boot文件上传底层
+
+32. **LoggingDemo.java** - SLF4J+Logback日志 ⭐新增⭐重要
+    - 日志级别和参数化日志
+    - 异常日志记录
+    - MDC诊断上下文
+    - Spring Boot默认日志框架
+
+33. **ScheduledTaskDemo.java** - 定时任务 ⭐新增
+    - Timer vs ScheduledExecutorService
+    - fixedRate vs fixedDelay
+    - 定时任务模式
+    - Spring @Scheduled注解基础
+
+34. **SerializationDemo.java** - 序列化机制 ⭐新增
+    - Serializable接口
+    - transient和serialVersionUID
+    - 自定义序列化
+    - Redis Session序列化基础
+
 ### 第四阶段补充：单元测试 (src/basics)
 
 **JUnitDemo.java** - JUnit单元测试
@@ -230,7 +261,7 @@
 
 ### 第五阶段：文件I/O操作 (src/io)
 
-31. **FileIODemo.java** - 文件操作
+35. **FileIODemo.java** - 文件操作
     - 文件读写
     - 缓冲流使用
     - NIO文件操作
