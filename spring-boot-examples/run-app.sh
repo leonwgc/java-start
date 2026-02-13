@@ -27,10 +27,19 @@ if [ -z "$APP_NAME" ]; then
     echo ""
     echo "用法: ./run-app.sh [示例名称]"
     echo ""
-    echo "可用示例："
+    echo "📚 可用示例："
+    echo ""
+    echo "基础示例："
     echo "  quickstart  - Spring Boot 快速入门"
     echo "  restful     - RESTful API 实战"
     echo "  jpa         - Spring Data JPA 实战"
+    echo ""
+    echo "进阶示例："
+    echo "  validation  - 表单验证和数据校验"
+    echo "  exception   - 异常处理和统一响应"
+    echo "  config      - 配置属性管理"
+    echo "  interceptor - 拦截器和过滤器"
+    echo "  fileupload  - 文件上传下载"
     echo ""
     echo "示例: ./run-app.sh quickstart"
     exit 1
@@ -49,13 +58,42 @@ case $APP_NAME in
         CLASS_NAME="com.example.jpa.JpaApplication"
         DESCRIPTION="Spring Data JPA 实战"
         ;;
+    validation)
+        CLASS_NAME="com.example.validation.ValidationApplication"
+        DESCRIPTION="表单验证和数据校验"
+        ;;
+    exception)
+        CLASS_NAME="com.example.exception.ExceptionHandlingApplication"
+        DESCRIPTION="异常处理和统一响应"
+        ;;
+    config)
+        CLASS_NAME="com.example.config.ConfigPropertiesApplication"
+        DESCRIPTION="配置属性管理"
+        ;;
+    interceptor)
+        CLASS_NAME="com.example.interceptor.InterceptorApplication"
+        DESCRIPTION="拦截器和过滤器"
+        ;;
+    fileupload)
+        CLASS_NAME="com.example.fileupload.FileUploadApplication"
+        DESCRIPTION="文件上传下载"
+        ;;
     *)
         echo "❌ 未知的示例: $APP_NAME"
         echo ""
-        echo "可用示例："
+        echo "📚 可用示例："
+        echo ""
+        echo "基础示例："
         echo "  quickstart  - Spring Boot 快速入门"
         echo "  restful     - RESTful API 实战"
         echo "  jpa         - Spring Data JPA 实战"
+        echo ""
+        echo "进阶示例："
+        echo "  validation  - 表单验证和数据校验"
+        echo "  exception   - 异常处理和统一响应"
+        echo "  config      - 配置属性管理"
+        echo "  interceptor - 拦截器和过滤器"
+        echo "  fileupload  - 文件上传下载"
         exit 1
         ;;
 esac

@@ -41,3 +41,48 @@ logging:
     com.example: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# ========== 自定义配置示例（用于ConfigPropertiesApplication） ==========
+
+# 应用配置
+app:
+  name: Spring Boot学习示例
+  version: 1.0.0
+  description: 这是一个Spring Boot配置管理示例
+  author: Java学习者
+  features:
+    - RESTful API
+    - Spring Data JPA
+    - 参数验证
+    - 异常处理
+    - 配置管理
+  contacts:
+    email: example@springboot.com
+    github: https://github.com/spring-boot
+    website: https://spring.io
+
+# 数据库配置
+database:
+  url: jdbc:h2:mem:testdb
+  username: sa
+  password: password
+  driver-class-name: org.h2.Driver
+  max-connections: 20
+  timeout: 60
+
+# 安全配置
+security:
+  jwt:
+    secret: my-super-secret-jwt-key-for-token-generation-2024
+    expiration: 86400000  # 24小时（毫秒）
+  cors:
+    enabled: true
+    allowed-origins:
+      - http://localhost:3000
+      - http://localhost:8080
+    allowed-methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
