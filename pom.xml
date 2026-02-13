@@ -68,6 +68,27 @@
             <artifactId>h2</artifactId>
             <version>2.2.224</version>
         </dependency>
+
+        <!-- Bean Validation API (JSR-380) -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
+        <!-- Hibernate Validator - Bean Validation实现 -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.1.Final</version>
+        </dependency>
+
+        <!-- EL实现 - Hibernate Validator需要 -->
+        <dependency>
+            <groupId>org.glassfish.expressly</groupId>
+            <artifactId>expressly</artifactId>
+            <version>5.0.0</version>
+        </dependency>
     </dependencies>
 
     <!-- 构建配置 -->

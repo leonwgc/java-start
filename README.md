@@ -4,13 +4,28 @@
 
 ## 🆕 最新更新（2026-02）
 
-**最新：新增高级技术示例** ⭐⭐⭐⭐（2026-02-11）：
+**最新：新增Java现代特性和高级编程** ⭐⭐⭐⭐⭐（2026-02-13）：
+
+**Java现代特性（Java 14-17+）**：
+- 📦 [RecordsDemo.java](src/advanced/RecordsDemo.java) - 记录类（不可变数据载体）
+- 🔀 [SwitchExpressionDemo.java](src/advanced/SwitchExpressionDemo.java) - Switch表达式（箭头语法、yield）
+- 📝 [TextBlocksDemo.java](src/advanced/TextBlocksDemo.java) - 文本块（多行字符串、SQL/JSON）
+- 🎯 [VarDemo.java](src/advanced/VarDemo.java) - 类型推断（var关键字）
+- 🔒 [SealedClassesDemo.java](src/advanced/SealedClassesDemo.java) - 密封类（限制继承、领域建模）
+
+**高级编程技巧**：
+- 🎭 [FunctionalInterfacesDemo.java](src/advanced/FunctionalInterfacesDemo.java) - 函数式接口详解（Function、Predicate、Consumer）
+- 📊 [CollectionsAdvancedDemo.java](src/collections/CollectionsAdvancedDemo.java) - 集合高级操作（groupingBy、分组统计）
+- ⚡ [ConcurrencyDemo.java](src/advanced/ConcurrencyDemo.java) - 并发工具（线程池、原子类、Lock）
+- ✅ [ValidationDemo.java](src/advanced/ValidationDemo.java) - Bean Validation（JSR-380验证）
+
+**高级技术示例** ⭐⭐⭐⭐（2026-02-11）：
 - 💾 [NioDemo.java](src/advanced/NioDemo.java) - NIO文件操作（Netty/Tomcat底层）
 - 📝 [LoggingDemo.java](src/advanced/LoggingDemo.java) - SLF4J+Logback日志框架（**Spring Boot默认**）
 - ⏰ [ScheduledTaskDemo.java](src/advanced/ScheduledTaskDemo.java) - 定时任务（@Scheduled底层）
 - 🔄 [SerializationDemo.java](src/advanced/SerializationDemo.java) - 序列化机制（Redis Session）
 
-**新增Spring核心概念示例** ⭐⭐⭐：
+**Spring核心概念示例** ⭐⭐⭐：
 - 🔥 [IoCDemo.java](src/advanced/IoCDemo.java) - IoC控制反转和依赖注入（**Spring核心**）
 - 🔥 [AopDemo.java](src/advanced/AopDemo.java) - AOP面向切面编程（**Spring核心**）
 - ⚙️ [PropertiesDemo.java](src/advanced/PropertiesDemo.java) - 配置管理
@@ -21,16 +36,16 @@
 - Optional、Enum、DateTime、Regex
 - JSON处理、HTTP客户端、JDBC数据库
 
-📖 详细说明：[新增高级示例说明.md](新增高级示例说明.md) | [Spring核心概念学习指南.md](Spring核心概念学习指南.md) | [学习示例完整清单.md](学习示例完整清单.md)
+📖 详细说明：[2026-02-13-新增示例总结.md](2026-02-13-新增示例总结.md) | [新增高级示例说明.md](新增高级示例说明.md) | [Spring核心概念学习指南.md](Spring核心概念学习指南.md) | [学习示例完整清单.md](学习示例完整清单.md)
 
 ---
 
 ## 📋 项目介绍
 
-这是一个系统的Java学习代码库，包含 **35个精心设计的学习示例**，通过实际代码帮助你：
-1. 掌握Java核心语法
+这是一个系统的Java学习代码库，包含 **44个精心设计的学习示例**，通过实际代码帮助你：
+1. 掌握Java核心语法和现代特性
 2. 理解面向对象编程
-3. 学会常用设计模式
+3. 学会常用设计模式和高级编程技巧
 4. **理解Spring框架核心思想**（IoC、AOP）
 
 ## 🛠️ 开发环境
@@ -109,75 +124,98 @@
     - HashMap - 键值对映射
     - HashSet - 去重集合
 
+12. **CollectionsAdvancedDemo.java** - 集合高级操作 ⭐新增
+    - groupingBy、partitioningBy分组分区
+    - Collectors高级收集器
+    - 比较器链式调用
+    - 并发集合和不可变集合
+
 ### 第四阶段：Java高级特性 (src/advanced)
 
-12. **LambdaDemo.java** - Lambda表达式
+#### 核心语言特性
+
+13. **LambdaDemo.java** - Lambda表达式
     - Lambda语法
     - 函数式接口
     - 方法引用
     - 实际应用场景
 
-13. **StreamDemo.java** - Stream API
+14. **FunctionalInterfacesDemo.java** - 函数式接口详解 ⭐新增
+    - Function、Predicate、Consumer、Supplier
+    - BiFunction双参数函数
+    - 方法引用和构造器引用
+    - 函数组合（andThen、compose）
+
+15. **StreamDemo.java** - Stream API
     - Stream创建和操作
     - 过滤、映射、排序
     - 聚合操作
     - 收集器使用
 
-14. **AnnotationDemo.java** - 注解
+16. **AnnotationDemo.java** - 注解
     - 注解概念和作用
     - 自定义注解
     - 元注解
     - 模拟Spring注解
 
-15. **GenericsDemo.java** - 泛型
+17. **GenericsDemo.java** - 泛型
     - 泛型类和泛型方法
     - 类型安全
     - 泛型通配符
     - 多类型参数
 
-16. **ReflectionDemo.java** - 反射
+18. **ReflectionDemo.java** - 反射
     - Class对象获取
     - 操作字段和方法
     - 动态创建对象
     - Spring IoC原理
 
-17. **ThreadDemo.java** - 多线程
+19. **ThreadDemo.java** - 多线程
     - 线程创建方式
     - 线程生命周期
     - 线程同步
     - synchronized关键字
 
-18. **DesignPatternsDemo.java** - 设计模式
+20. **ConcurrencyDemo.java** - 并发工具详解 ⭐新增
+    - 线程池（ExecutorService、ThreadPoolExecutor）
+    - 原子类（AtomicInteger、AtomicReference）
+    - 显式锁（ReentrantLock、ReadWriteLock）
+    - 同步工具（CountDownLatch、CyclicBarrier、Semaphore）
+    - 阻塞队列和ForkJoinPool
+
+21. **DesignPatternsDemo.java** - 设计模式
     - 单例模式
     - 工厂模式
     - 建造者模式
     - 代理模式（AOP原理）
 
-19. **DateTimeDemo.java** - 日期时间API ⭐新增
+#### 实用工具类
+
+22. **DateTimeDemo.java** - 日期时间API ⭐新增
     - LocalDate/LocalTime/LocalDateTime
     - 日期格式化和解析
     - 日期计算
     - 时区处理
 
-20. **OptionalDemo.java** - Optional类 ⭐新增
+23. **OptionalDemo.java** - Optional类 ⭐新增
     - Optional的创建和使用
     - 避免空指针异常
     - Optional的转换和过滤
     - Spring Data JPA中的应用
 
-21. **EnumDemo.java** - 枚举类型 ⭐新增
+24. **EnumDemo.java** - 枚举类型 ⭐新增
     - 枚举的基本使用
     - 带属性和方法的枚举
     - 枚举的实战应用
     - 订单状态管理示例
 
-22. **RegexDemo.java** - 正则表达式 ⭐新增
+25. **RegexDemo.java** - 正则表达式 ⭐新增
     - 正则表达式基础语法
     - Pattern和Matcher使用
     - 常用验证模式
     - 表单验证实战
 
-23. **JsonDemo.java** - JSON处理 ⭐新增
+26. **JsonDemo.java** - JSON处理 ⭐新增
     - Jackson库的使用
     - 对象与JSON互转
     - Jackson注解
@@ -196,60 +234,102 @@
     - PreparedStatement防SQL注入
     - 📖 使用H2内存数据库（[查看说明](H2数据库说明.md)）
 
-26. **PropertiesDemo.java** - 配置文件处理 ⭐新增
+26. **ValidationDemo.java** - Bean Validation ⭐新增
+    - JSR-380验证规范
+    - 常用验证注解（@NotNull、@Size、@Email等）
+    - 自定义验证器
+    - 验证组和级联验证
+
+#### Spring核心概念
+
+27. **PropertiesDemo.java** - 配置文件处理 ⭐新增
     - Properties文件读写
     - 配置管理
     - ResourceBundle国际化
     - Spring配置基础
 
-27. **IoCDemo.java** - IoC控制反转 ⭐新增⭐核心
+28. **IoCDemo.java** - IoC控制反转 ⭐新增⭐核心
     - 依赖注入原理
     - 模拟Spring IoC容器
     - 解耦合的重要性
     - Spring核心概念
 
-28. **AopDemo.java** - AOP面向切面编程 ⭐新增⭐核心
+29. **AopDemo.java** - AOP面向切面编程 ⭐新增⭐核心
     - AOP概念和术语
     - 动态代理实现
     - 日志、事务、性能监控切面
     - Spring AOP基础
 
-29. **AsyncDemo.java** - 异步编程 ⭐新增
+30. **AsyncDemo.java** - 异步编程 ⭐新增
     - CompletableFuture基础
     - 异步任务链和组合
     - 异步异常处理
     - Spring @Async基础
 
-30. **BuilderDemo.java** - Builder模式 ⭐新增
+31. **BuilderDemo.java** - Builder模式 ⭐新增
     - Builder模式设计
     - 链式调用实现
     - SQL查询构建器
     - Lombok @Builder原理
 
-31. **NioDemo.java** - NIO文件操作 ⭐新增
+#### 高级技术示例
+
+32. **NioDemo.java** - NIO文件操作 ⭐新增
     - Path和Files工具类
     - FileChannel和ByteBuffer
     - 目录遍历和文件查找
     - WatchService文件监听
     - Spring Boot文件上传底层
 
-32. **LoggingDemo.java** - SLF4J+Logback日志 ⭐新增⭐重要
+33. **LoggingDemo.java** - SLF4J+Logback日志 ⭐新增⭐重要
     - 日志级别和参数化日志
     - 异常日志记录
     - MDC诊断上下文
     - Spring Boot默认日志框架
 
-33. **ScheduledTaskDemo.java** - 定时任务 ⭐新增
+34. **ScheduledTaskDemo.java** - 定时任务 ⭐新增
     - Timer vs ScheduledExecutorService
     - fixedRate vs fixedDelay
     - 定时任务模式
     - Spring @Scheduled注解基础
 
-34. **SerializationDemo.java** - 序列化机制 ⭐新增
+35. **SerializationDemo.java** - 序列化机制 ⭐新增
     - Serializable接口
     - transient和serialVersionUID
     - 自定义序列化
     - Redis Session序列化基础
+
+#### Java现代特性（Java 14-17+）
+
+36. **RecordsDemo.java** - 记录类 ⭐新增
+    - Records定义和使用（Java 14+）
+    - 紧凑构造器和自定义方法
+    - Records vs 传统类
+    - DTO和不可变对象最佳实践
+
+37. **SwitchExpressionDemo.java** - Switch表达式 ⭐新增
+    - 箭头语法（->）和yield关键字
+    - Switch作为表达式返回值
+    - 穷尽性检查
+    - 状态机和路由应用
+
+38. **TextBlocksDemo.java** - 文本块 ⭐新增
+    - 三重引号（"""）语法（Java 15+）
+    - 多行字符串和自动缩进
+    - SQL、JSON、HTML等应用
+    - 格式化方法和转义序列
+
+39. **VarDemo.java** - 类型推断 ⭐新增
+    - var关键字使用（Java 10+）
+    - 局部变量类型推断规则
+    - var最佳实践和限制
+    - 简化复杂泛型声明
+
+40. **SealedClassesDemo.java** - 密封类 ⭐新增
+    - sealed、permits、non-sealed关键字（Java 17+）
+    - 限制继承层次结构
+    - 模式匹配和领域建模
+    - 状态模式、事件系统、API响应类型
 
 ### 第四阶段补充：单元测试 (src/basics)
 
@@ -261,13 +341,13 @@
 
 ### 第五阶段：文件I/O操作 (src/io)
 
-35. **FileIODemo.java** - 文件操作
+41. **FileIODemo.java** - 文件操作
     - 文件读写
     - 缓冲流使用
     - NIO文件操作
     - 文件和目录管理
 
-### 第六阶段：准备Spring开发 ⭐新增
+### 第六阶段：准备Spring开发
 
 **已添加Maven配置**：[pom.xml](pom.xml)
 - Maven项目结构
@@ -354,15 +434,16 @@ java -cp target/classes advanced.Demo
 你已经掌握：
 - ✅ Java基础语法（变量、控制流、方法、异常处理）
 - ✅ 面向对象编程（类、继承、接口、抽象类、多态）
-- ✅ 集合框架（ArrayList、HashMap、HashSet）
+- ✅ 集合框架（ArrayList、HashMap、HashSet、高级操作）
 - ✅ Lambda表达式和Stream API
-- ✅ 文件I/O操作
+- ✅ 函数式编程（Function、Predicate、Consumer）
+- ✅ 文件I/O操作和NIO
 - ✅ 注解和反射机制
 - ✅ 泛型编程
-- ✅ 多线程基础
+- ✅ 多线程和并发工具
 - ✅ 常用设计模式
 
-**新增核心知识** ⭐：
+**实用工具类** ⭐：
 - ✅ Optional类（避免空指针）
 - ✅ 枚举类型（业务状态管理）
 - ✅ 日期时间API（LocalDateTime等）
@@ -370,6 +451,7 @@ java -cp target/classes advanced.Demo
 - ✅ JSON处理（Jackson）
 - ✅ HTTP客户端（接口调用）
 - ✅ JDBC数据库操作
+- ✅ Bean Validation（数据验证）
 - ✅ JUnit单元测试
 
 **Spring核心概念** ⭐⭐⭐：
@@ -378,6 +460,15 @@ java -cp target/classes advanced.Demo
 - ✅ AOP面向切面编程
 - ✅ CompletableFuture异步编程
 - ✅ Builder模式和链式调用
+- ✅ SLF4J+Logback日志框架
+- ✅ 定时任务和序列化
+
+**Java现代特性** ⭐⭐⭐⭐⭐：
+- ✅ Records记录类（Java 14+）
+- ✅ Switch表达式（Java 14+）
+- ✅ 文本块（Java 15+）
+- ✅ var类型推断（Java 10+）
+- ✅ 密封类（Java 17+）
 
 **恭喜！你已经具备了学习Spring Boot的所有基础知识！** 🎉
 
