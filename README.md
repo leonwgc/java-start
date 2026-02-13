@@ -387,13 +387,47 @@
     - NIO文件操作
     - 文件和目录管理
 
-### 第六阶段：准备Spring开发
+### 第六阶段：Spring Boot实战 🎯
 
-**已添加Maven配置**：[pom.xml](pom.xml)
-- Maven项目结构
-- 依赖管理
-- 插件配置
-- 准备好进入Spring学习！
+**Spring Boot项目**：[spring-boot-examples/](spring-boot-examples/)
+
+现在你可以开始Spring Boot实战了！我们已经为你准备了完整的学习路径：
+
+#### Spring Boot学习示例
+
+47. **QuickStartApplication** - Spring Boot快速入门 ⭐新增
+    - Spring Boot核心注解
+    - 自动配置机制
+    - REST接口开发
+    - 内嵌Tomcat服务器
+
+48. **RestfulApplication** - RESTful API实战 ⭐新增
+    - RESTful架构风格
+    - CRUD操作实现
+    - HTTP状态码使用
+    - 路径参数和查询参数
+
+49. **JpaApplication** - Spring Data JPA实战 ⭐新增
+    - JPA实体类定义
+    - Repository接口使用
+    - JPQL查询语言
+    - H2内存数据库
+
+📖 **完整学习路径**：[SpringBoot学习路径.md](SpringBoot学习路径.md)
+
+**快速启动**：
+```bash
+cd spring-boot-examples
+
+# 快速入门
+./run-app.sh quickstart
+
+# RESTful API
+./run-app.sh restful
+
+# Spring Data JPA
+./run-app.sh jpa
+```
 
 ## 🚀 如何运行
 
@@ -476,32 +510,64 @@ java -cp target/classes advanced.Demo
 - ✅ 面向对象编程（类、继承、接口、抽象类、多态）
 - ✅ 集合框架（ArrayList、HashMap、HashSet、高级操作）
 - ✅ Lambda表达式和Stream API
-- ✅ 函数式编程（Function、Predicate、Consumer）
-- ✅ 文件I/O操作和NIO
-- ✅ 注解和反射机制
-- ✅ 泛型编程
-- ✅ 多线程和并发工具
-- ✅ 常用设计模式
+- 基础设施层** ⭐⭐⭐⭐：
+- ✅ Socket网络编程
+- ✅ 数据库连接池
+- ✅ 缓存机制（LRU、TTL）
+- ✅ 重试机制（指数退避）
+- ✅ 事件总线（发布订阅）
 
-**实用工具类** ⭐：
-- ✅ Optional类（避免空指针）
-- ✅ 枚举类型（业务状态管理）
-- ✅ 日期时间API（LocalDateTime等）
-- ✅ 正则表达式（数据验证）
-- ✅ JSON处理（Jackson）
-- ✅ HTTP客户端（接口调用）
-- ✅ JDBC数据库操作
-- ✅ Bean Validation（数据验证）
-- ✅ JUnit单元测试
+**🎊 恭喜！你已经完全准备好开始Spring Boot实战了！**
 
-**Spring核心概念** ⭐⭐⭐：
-- ✅ Properties配置管理
-- ✅ IoC控制反转和依赖注入
-- ✅ AOP面向切面编程
-- ✅ CompletableFuture异步编程
-- ✅ Builder模式和链式调用
-- ✅ SLF4J+Logback日志框架
-- ✅ 定时任务和序列化
+## 🚀 现在开始Spring Boot学习
+
+### Spring Boot实战项目：[spring-boot-examples/](spring-boot-examples/)
+
+我们已经为你准备了3个循序渐进的Spring Boot示例：
+
+1. **QuickStartApplication** - Spring Boot快速入门
+   - 理解核心注解和自动配置
+   - 创建简单的REST接口
+   - 掌握应用启动方式
+
+2. **RestfulApplication** - RESTful API实战
+   - 实现完整的CRUD操作
+   - 学习HTTP方法和状态码
+   - 处理路径参数和请求体
+
+3. **JpaApplication** - Spring Data JPA实战
+   - 使用JPA操作数据库
+   - 理解ORM映射关系
+   - 掌握Repository查询方法
+
+📖 **完整学习路径**：[SpringBoot学习路径.md](SpringBoot学习路径.md)
+
+### 快速开始
+
+```bash
+cd spring-boot-examples
+
+# 1. 快速入门
+./run-app.sh quickstart
+# 访问: http://localhost:8080/hello
+
+# 2. RESTful API
+./run-app.sh restful
+# 测试: curl http://localhost:8080/api/users
+
+# 3. Spring Data JPA
+./run-app.sh jpa
+# 控制台: http://localhost:8080/h2-console
+```
+
+### 学习建议
+
+**第1天**：运行QuickStartApplication，理解Spring Boot基础
+**第2天**：运行RestfulApplication，学习RESTful API开发
+**第3天**：运行JpaApplication，掌握数据库操作
+**第4天**：综合实战，创建自己的用户管理系统
+
+### 下一步深入学习
 
 **Java现代特性** ⭐⭐⭐⭐⭐：
 - ✅ Records记录类（Java 14+）
