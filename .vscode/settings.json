@@ -1,0 +1,6 @@
+{
+    "java.debug.settings.onBuildFailureProceed": true,
+      // ========== GitHub Copilot ==========
+    "github.copilot.chat.localeOverride": "zh-CN",
+    "github.copilot.chat.model": "claude-4.5-sonnet",
+}
