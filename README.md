@@ -49,12 +49,13 @@
 
 ## 📋 项目介绍
 
-这是一个系统的Java学习代码库，包含 **49个精心设计的学习示例**，通过实际代码帮助你：
+这是一个系统的Java学习代码库，包含 **54个精心设计的学习示例**（46个Java基础 + 8个Spring Boot实战），通过实际代码帮助你：
 1. 掌握Java核心语法和现代特性
 2. 理解面向对象编程
 3. 学会常用设计模式和高级编程技巧
 4. **理解Spring框架核心思想**（IoC、AOP）
 5. **掌握基础设施层模式**（缓存、重试、事件总线等）
+6. **完成Spring Boot实战开发**（从入门到生产级应用）
 
 ## 🛠️ 开发环境
 
@@ -391,9 +392,11 @@
 
 **Spring Boot项目**：[spring-boot-examples/](spring-boot-examples/)
 
-现在你可以开始Spring Boot实战了！我们已经为你准备了完整的学习路径：
+现在你可以开始Spring Boot实战了！我们已经为你准备了8个循序渐进的完整示例：
 
-#### Spring Boot学习示例
+#### Spring Boot学习示例（8个完整示例）
+
+**基础示例**（⭐-⭐⭐）：
 
 47. **QuickStartApplication** - Spring Boot快速入门 ⭐新增
     - Spring Boot核心注解
@@ -413,51 +416,109 @@
     - JPQL查询语言
     - H2内存数据库
 
-📖 **完整学习路径**：[SpringBoot学习路径.md](SpringBoot学习路径.md)
+**进阶示例**（⭐⭐-⭐⭐⭐）：
+
+50. **ValidationApplication** - 表单验证实战 ⭐新增
+    - Jakarta Validation（JSR-380）
+    - 验证注解（@NotBlank、@Email、@Min、@Max等）
+    - 全局异常处理
+    - 自定义验证消息
+
+51. **ExceptionHandlingApplication** - 全局异常处理 ⭐新增
+    - @ControllerAdvice全局异常处理器
+    - 自定义异常类（4种异常类型）
+    - 统一响应格式
+    - HTTP状态码映射
+
+52. **ConfigPropertiesApplication** - 配置属性管理 ⭐新增
+    - @ConfigurationProperties类型安全配置
+    - application.yml配置文件
+    - 嵌套配置对象
+    - 配置属性验证
+
+53. **InterceptorApplication** - 拦截器和过滤器 ⭐新增
+    - Filter过滤器（请求日志、编码设置）
+    - Interceptor拦截器（认证、性能监控）
+    - 执行顺序和区别
+    - WebMvcConfigurer配置
+
+54. **FileUploadApplication** - 文件上传下载 ⭐新增
+    - MultipartFile文件上传
+    - 文件类型和大小验证
+    - 文件存储和下载
+    - 安全性处理（路径遍历防护）
+
+📖 **完整学习路径**：[SpringBoot学习路径.md](SpringBoot学习路径.md) | [Spring Boot详细文档](spring-boot-examples/README.md)
 
 **快速启动**：
 ```bash
 cd spring-boot-examples
 
-# 快速入门
-./run-app.sh quickstart
+# 基础示例
+./run-app.sh quickstart    # 快速入门
+./run-app.sh restful       # RESTful API
+./run-app.sh jpa           # Spring Data JPA
 
-# RESTful API
-./run-app.sh restful
-
-# Spring Data JPA
-./run-app.sh jpa
+# 进阶示例
+./run-app.sh validation    # 表单验证
+./run-app.sh exception     # 异常处理
+./run-app.sh config        # 配置管理
+./run-app.sh interceptor   # 拦截器和过滤器
+./run-app.sh fileupload    # 文件上传下载
 ```
 
 ## 🚀 如何运行
 
-### 方法1：使用VS Code运行按钮
+### Java基础示例（src目录）
+
+#### 方法1：使用VS Code运行按钮
 1. 打开任意`.java`文件
 2. 点击右上角的▶️运行按钮
 3. 查看输出结果
 
-### 方法2：使用终端（变量、控制流、方法）
-- ✅ 面向对象编程（类、接口、抽象类、继承、多态）
-- ✅ 集合框架（ArrayList、HashMap、HashSet）
-- ✅ 异常处理（try-catch、自定义异常）
-- ✅ Lambda和Stream API
-- ✅ 文件I/O操作
-- ✅ 注解基础
-- ✅ 泛型编程
-- ✅ 反射机制 ⭐Spring核心
-- ✅ 多线程基础
-- ✅ 常用设计模式 ⭐Spring大量使用
-- ✅ Maven项目管理
+#### 方法2：使用终端命令
+```bash
+# 编译并运行示例（以HelloWorld为例）
+javac src/basics/HelloWorld.java
+java -cp src basics.HelloWorld
 
-**恭喜！你已经具备了学习Spring框架的所有基础知识！**
+# 运行高级示例
+javac src/advanced/LambdaDemo.java
+java -cp src advanced.LambdaDemo
+```
 
-下一步：
-1. ✅ 已完成Java核心基础
-2. 🎯 **可以开始学习Spring Boot了！**
-3. 后续深入：Spring Data JPA、Spring Security等察输出
+### Spring Boot示例（spring-boot-examples目录）
+
+#### 方法1：使用运行脚本（推荐）
+```bash
+cd spring-boot-examples
+./run-app.sh quickstart   # 或其他示例名称
+```
+
+#### 方法2：使用Maven
+```bash
+cd spring-boot-examples
+mvn spring-boot:run -Dstart-class=com.example.quickstart.QuickStartApplication
+```
+
+#### 方法3：使用VS Code调试
+1. 打开`spring-boot-examples`目录
+2. 按F5启动调试
+3. 选择对应的调试配置
+
+---
+
+## 📖 学习建议
+
+1. **按顺序学习**：从基础到高级，循序渐进
+2. **动手实践**：运行每个示例，观察输出
 3. **修改代码**：尝试修改代码，看看会发生什么
 4. **多做练习**：基于示例创建自己的程序
 5. **理解原理**：不仅要知道怎么做，还要知道为什么
+6. **查阅文档**：遇到问题先查看代码注释和相关文档
+7. **持续学习**：完成基础后继续学习Spring Boot实战
+
+---
 
 ## 💡 学习技巧
 
@@ -510,98 +571,171 @@ java -cp target/classes advanced.Demo
 - ✅ 面向对象编程（类、继承、接口、抽象类、多态）
 - ✅ 集合框架（ArrayList、HashMap、HashSet、高级操作）
 - ✅ Lambda表达式和Stream API
-- 基础设施层** ⭐⭐⭐⭐：
-- ✅ Socket网络编程
-- ✅ 数据库连接池
-- ✅ 缓存机制（LRU、TTL）
-- ✅ 重试机制（指数退避）
-- ✅ 事件总线（发布订阅）
+- ✅ 文件I/O和NIO操作
+- ✅ 注解、泛型、反射机制
+- ✅ 多线程和并发编程
+- ✅ 常用设计模式（单例、工厂、代理、建造者）
+- ✅ 实用工具类（DateTime、Optional、Enum、Regex、JSON、HTTP、JDBC、Validation）
+- ✅ **Spring核心概念**（IoC、AOP、配置管理、异步编程、Builder模式）⭐⭐⭐
+- ✅ **Java现代特性**（Records、Switch表达式、文本块、var、密封类）⭐⭐⭐⭐⭐
+- ✅ **基础设施层**（Socket、连接池、缓存、重试、事件总线）⭐⭐⭐⭐
+- ✅ **Spring Boot实战**（8个完整示例：基础入门 + 进阶实战）🎯
 
-**🎊 恭喜！你已经完全准备好开始Spring Boot实战了！**
+**🎊 恭喜！你已经完全准备好成为Spring Boot开发者了！**
 
 ## 🚀 现在开始Spring Boot学习
 
 ### Spring Boot实战项目：[spring-boot-examples/](spring-boot-examples/)
 
-我们已经为你准备了3个循序渐进的Spring Boot示例：
+我们已经为你准备了8个循序渐进的Spring Boot示例，从基础入门到进阶实战！
 
-1. **QuickStartApplication** - Spring Boot快速入门
-   - 理解核心注解和自动配置
-   - 创建简单的REST接口
-   - 掌握应用启动方式
+#### 示例总览
 
-2. **RestfulApplication** - RESTful API实战
-   - 实现完整的CRUD操作
-   - 学习HTTP方法和状态码
-   - 处理路径参数和请求体
-
-3. **JpaApplication** - Spring Data JPA实战
-   - 使用JPA操作数据库
-   - 理解ORM映射关系
-   - 掌握Repository查询方法
-
-📖 **完整学习路径**：[SpringBoot学习路径.md](SpringBoot学习路径.md)
+| 序号 | 示例名称 | 运行命令 | 难度 | 核心内容 |
+|-----|---------|---------|-----|---------|
+| 1 | QuickStart | `./run-app.sh quickstart` | ⭐ | Spring Boot快速入门 |
+| 2 | Restful | `./run-app.sh restful` | ⭐⭐ | RESTful API开发 |
+| 3 | JPA | `./run-app.sh jpa` | ⭐⭐ | Spring Data JPA |
+| 4 | Validation | `./run-app.sh validation` | ⭐⭐ | 表单验证 |
+| 5 | Exception | `./run-app.sh exception` | ⭐⭐⭐ | 全局异常处理 |
+| 6 | Config | `./run-app.sh config` | ⭐⭐ | 配置管理 |
+| 7 | Interceptor | `./run-app.sh interceptor` | ⭐⭐⭐ | 拦截器和过滤器 |
+| 8 | FileUpload | `./run-app.sh fileupload` | ⭐⭐ | 文件上传下载 |
 
 ### 快速开始
 
 ```bash
 cd spring-boot-examples
 
-# 1. 快速入门
-./run-app.sh quickstart
-# 访问: http://localhost:8080/hello
+# 第1周：基础示例（掌握Spring Boot核心）
+./run-app.sh quickstart     # Day 1-2: 快速入门，理解核心注解
+./run-app.sh restful        # Day 3-4: RESTful API，掌握CRUD
+./run-app.sh jpa            # Day 5-7: 数据库操作，学习JPA
 
-# 2. RESTful API
-./run-app.sh restful
-# 测试: curl http://localhost:8080/api/users
+# 第2周：进阶实战（生产级应用技能）
+./run-app.sh validation     # Day 1-2: 表单验证，数据校验
+./run-app.sh exception      # Day 2-3: 异常处理，统一响应
+./run-app.sh config         # Day 4-5: 配置管理，属性注入
+./run-app.sh interceptor    # Day 5-6: 拦截器，请求处理
+./run-app.sh fileupload     # Day 6-7: 文件操作，完整业务
 
-# 3. Spring Data JPA
-./run-app.sh jpa
-# 控制台: http://localhost:8080/h2-console
+# 第3周：综合项目实战
+# 结合所有知识点，开发完整应用（博客、商城、教育平台等）
 ```
 
 ### 学习建议
 
-**第1天**：运行QuickStartApplication，理解Spring Boot基础
-**第2天**：运行RestfulApplication，学习RESTful API开发
-**第3天**：运行JpaApplication，掌握数据库操作
-**第4天**：综合实战，创建自己的用户管理系统
+**第1周**（基础篇）：
+- **Day 1-2**: 运行QuickStartApplication，理解Spring Boot自动配置和核心注解
+- **Day 3-4**: 运行RestfulApplication，学习RESTful API设计和HTTP接口开发
+- **Day 5-7**: 运行JpaApplication，掌握Spring Data JPA和数据库操作
+
+**第2周**（进阶篇）：
+- **Day 1-2**: 学习ValidationApplication，掌握JSR-380验证规范和数据校验
+- **Day 2-3**: 学习ExceptionHandlingApplication，理解全局异常处理和统一响应格式
+- **Day 4-5**: 学习ConfigPropertiesApplication，掌握配置属性管理和类型安全配置
+- **Day 5-6**: 学习InterceptorApplication，理解Filter和Interceptor的区别和使用场景
+- **Day 6-7**: 学习FileUploadApplication，完成文件上传下载的完整业务流程
+
+**第3周**（实战篇）：
+- 综合运用所有示例的知识点
+- 开发一个完整的实战项目（如用户管理系统、博客系统、在线商城等）
+- 添加更多功能：用户认证、权限控制、日志记录、接口文档等
+
+### 测试示例
+
+**基础示例测试**：
+```bash
+# 1. 快速入门
+curl http://localhost:8080/hello
+curl http://localhost:8080/greet?name=张三
+
+# 2. RESTful API
+curl http://localhost:8080/api/users
+curl -X POST http://localhost:8080/api/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"李四","email":"lisi@example.com","age":25}'
+
+# 3. Spring Data JPA
+curl http://localhost:8080/api/jpa/users
+curl http://localhost:8080/api/jpa/users/search?name=张
+```
+
+**进阶示例测试**：
+```bash
+# 4. 表单验证
+curl -X POST http://localhost:8080/api/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"testuser","email":"test@example.com","password":"123456","age":25}'
+
+# 5. 异常处理
+curl http://localhost:8080/api/user/999     # 测试资源不存在
+curl http://localhost:8080/api/permission   # 测试权限异常
+
+# 6. 配置管理
+curl http://localhost:8080/api/config/app
+curl http://localhost:8080/api/config/database
+
+# 7. 拦截器和过滤器
+curl http://localhost:8080/api/demo/hello
+curl http://localhost:8080/api/demo/secured -H "token: valid-token-123"
+
+# 8. 文件上传下载
+curl -F "file=@test.jpg" http://localhost:8080/api/files/upload
+curl -O http://localhost:8080/api/files/download/文件名.jpg
+```
 
 ### 下一步深入学习
 
-**Java现代特性** ⭐⭐⭐⭐⭐：
-- ✅ Records记录类（Java 14+）
-- ✅ Switch表达式（Java 14+）
-- ✅ 文本块（Java 15+）
-- ✅ var类型推断（Java 10+）
-- ✅ 密封类（Java 17+）
+完成8个示例后，你可以继续学习：
 
-**恭喜！你已经具备了学习Spring Boot的所有基础知识！** 🎉
+1. **Spring Boot高级特性**
+   - Spring Security（安全认证和授权）
+   - Spring Boot Actuator（监控和管理）
+   - Spring Boot Test（测试框架）
+   - WebSocket（实时通信）
 
-下一步学习建议：
+2. **数据库进阶**
+   - MyBatis / MyBatis-Plus（更灵活的ORM）
+   - 多数据源配置
+   - 数据库事务管理
+   - 分页和性能优化
 
-### 1️⃣ 立即开始Spring Boot（推荐）
-你现在已经完全掌握了：
-- IoC/DI容器原理
-- AOP切面编程思想
-- 配置管理基础
-- 异步编程模式
-- Builder模式设计
+3. **微服务架构**
+   - Spring Cloud（微服务全家桶）
+   - 服务注册与发现（Nacos/Eureka）
+   - 配置中心（Spring Cloud Config）
+   - API网关（Gateway）
 
-**可以直接开始学习：**
-- Spring Boot快速入门
-- Spring Data JPA
-- Spring MVC RESTful API
-- Spring Security
+4. **缓存和消息队列**
+   - Redis缓存（Spring Data Redis）
+   - RabbitMQ/Kafka消息队列
+   - 分布式缓存策略
 
-### 2️⃣ 深入进阶（可选）
-如果想继续深入Java基础：
-- 并发编程（ExecutorService、锁机制）
-- JVM原理和性能调优
-- 网络编程（Socket、Netty）
-- 微服务架构（Spring Cloud）
+5. **部署和运维**
+   - Docker容器化
+   - CI/CD持续集成
+   - 日志收集和监控
+   - 性能调优
 
-### 3️⃣ 推荐学习路径
+📖 完整文档：[spring-boot-examples/README.md](spring-boot-examples/README.md)
+
+---
+
+## 💡 学习技巧
+
+- 每天至少编写一个小程序
+- 遇到问题先尝试自己解决
+- 阅读代码注释，理解每行代码的作用
+- 使用调试功能，逐步执行代码
+- 记录学习笔记
+- 从简单示例开始，逐步深入
+- 完成每个示例后，尝试扩展功能
+
+---
+
+## 📝 常用命令参考
+
 ### Java命令
 ```bash
 # 查看Java版本
@@ -629,20 +763,100 @@ mvn package
 mvn clean
 
 # 查看依赖树
-mvn dependency:tre
-
-# 编译所有Java文件
-find src -name "*.java" -exec javac {} \;
-
-# 清理编译文件
-find src -name "*.class" -delete
+mvn dependency:tree
 ```
+
+### Spring Boot命令
+```bash
+cd spring-boot-examples
+
+# 运行指定应用
+./run-app.sh <app-name>
+
+# Maven方式运行
+mvn spring-boot:run -Dstart-class=com.example.<package>.<ClassName>
+```
+
+---
+
+## 🔧 常见问题
+
+### JdbcDemo运行错误："Table not found"
+
+**问题**：运行JdbcDemo时出现`Table "USERS" not found`错误
+
+**原因**：H2内存数据库默认在连接关闭后清空数据
+
+**解决**：确保URL包含`DB_CLOSE_DELAY=-1`参数
+```java
+String URL = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
+```
+
+📖 详细说明请查看：[H2数据库说明.md](H2数据库说明.md)
+
+### Maven命令找不到
+
+**问题**：`mvn: command not found`
+
+**解决方法**：
+1. 使用项目提供的Maven（推荐）
+   ```bash
+   cd spring-boot-examples
+   ./install-maven.sh
+   ```
+2. 或使用javac直接编译
+   ```bash
+   javac src/advanced/YourDemo.java
+   cd src && java advanced.YourDemo
+   ```
+
+### 类找不到或无法加载
+
+**问题**：`ClassNotFoundException`
+
+**解决**：检查包路径和编译输出目录
+```bash
+# 正确的编译和运行方式
+javac -d target/classes src/advanced/Demo.java
+java -cp target/classes advanced.Demo
+```
+
+### Spring Boot端口占用
+
+**问题**：`Port 8080 already in use`
+
+**解决**：
+1. 停止占用端口的进程
+   ```bash
+   # macOS/Linux
+   lsof -ti:8080 | xargs kill -9
+
+   # 或修改端口
+   vim spring-boot-examples/src/main/resources/application.yml
+   # 修改 server.port: 8081
+   ```
+
+---
 
 ## 🔗 学习资源
 
+### 官方文档
 - [Oracle Java官方文档](https://docs.oracle.com/en/java/)
+- [Spring Boot官方文档](https://spring.io/projects/spring-boot)
+- [Spring Framework文档](https://docs.spring.io/spring-framework/reference/)
+
+### 在线教程
 - [菜鸟教程 - Java](https://www.runoob.com/java/)
 - [廖雪峰Java教程](https://www.liaoxuefeng.com/wiki/1252599548343744)
+- [廖雪峰Spring Boot教程](https://www.liaoxuefeng.com/wiki/1252599548343744/1266263217140032)
+
+### 推荐书籍
+- 《Java核心技术》（Core Java）
+- 《Effective Java》
+- 《深入理解Java虚拟机》
+- 《Spring实战》（Spring in Action）
+
+---
 
 ## ✨ 保持学习热情
 
@@ -650,6 +864,11 @@ find src -name "*.class" -delete
 - 每个大神都是从新手开始的
 - 编程是一门需要实践的技能
 - 不要害怕犯错，错误是最好的老师
+- 坚持每天练习，哪怕只有30分钟
 - 享受编程的乐趣！
+
+**你已经完成了54个学习示例，这是一个了不起的成就！**
+
+继续加油，Spring Boot开发者之路就在眼前！🚀
 
 祝你学习愉快！🎉
