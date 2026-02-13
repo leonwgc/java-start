@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * 核心注解说明：
  * - @SpringBootApplication：组合注解，包含以下三个注解
- *   * @Configuration：标记配置类
- *   * @EnableAutoConfiguration：启用自动配置
- *   * @ComponentScan：组件扫描
+ * * @Configuration：标记配置类
+ * * @EnableAutoConfiguration：启用自动配置
+ * * @ComponentScan：组件扫描
  * - @RestController：REST控制器，返回JSON数据
  * - @GetMapping：处理GET请求
  */
@@ -74,34 +74,37 @@ public class QuickStartApplication {
     @GetMapping("/info")
     public AppInfo getInfo() {
         return new AppInfo(
-            "Spring Boot 学习示例",
-            "1.0.0",
-            "这是一个Spring Boot快速入门示例"
-        );
+                "Spring Boot 学习示例",
+                "1.0.0",
+                "这是一个Spring Boot快速入门示例");
+    }
+
+    record AppInfo(String name, String version, String description) {
     }
 
     /**
      * 应用信息对象
      * Spring Boot会自动将对象转换为JSON
      */
-    static class AppInfo {
-        private String name;
-        private String version;
-        private String description;
+    // static class AppInfo {
+    // private String name;
+    // private String version;
+    // private String description;
 
-        public AppInfo(String name, String version, String description) {
-            this.name = name;
-            this.version = version;
-            this.description = description;
-        }
+    // public AppInfo(String name, String version, String description) {
+    // this.name = name;
+    // this.version = version;
+    // this.description = description;
+    // }
 
-        public String getName() { return name; }
-        public void setName(String name) { this.name = name; }
+    // public String getName() { return name; }
+    // public void setName(String name) { this.name = name; }
 
-        public String getVersion() { return version; }
-        public void setVersion(String version) { this.version = version; }
+    // public String getVersion() { return version; }
+    // public void setVersion(String version) { this.version = version; }
 
-        public String getDescription() { return description; }
-        public void setDescription(String description) { this.description = description; }
-    }
+    // public String getDescription() { return description; }
+    // public void setDescription(String description) { this.description =
+    // description; }
+    // }
 }
