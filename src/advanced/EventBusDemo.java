@@ -130,9 +130,9 @@ public class EventBusDemo {
 
         System.out.println("发布异步事件...");
         long startTime = System.currentTimeMillis();
-        
+
         eventBus.publish("data.sync", "timestamp=" + System.currentTimeMillis());
-        
+
         long publishTime = System.currentTimeMillis() - startTime;
         System.out.println("发布耗时: " + publishTime + "ms（异步，不等待订阅者）\n");
 
@@ -160,7 +160,7 @@ public class EventBusDemo {
         eventBus.registerHandler("user.getByName", query -> {
             String username = (String) query;
             System.out.println("  [用户服务] 查询用户: " + username);
-            
+
             // 模拟数据库查询
             if ("admin".equals(username)) {
                 return new User("admin", "管理员", "admin@example.com");
@@ -171,7 +171,7 @@ public class EventBusDemo {
         // 执行查询
         System.out.println("查询用户: admin");
         User user = (User) eventBus.query("user.getByName", "admin");
-        
+
         if (user != null) {
             System.out.println("  查询结果:");
             System.out.println("    - ID: " + user.getId());
@@ -260,7 +260,7 @@ public class EventBusDemo {
         public void publish(String eventType, String eventData) {
             List<Consumer<String>> listeners = subscribers.get(eventType);
             if (listeners != null) {
-                listeners.forEach(listener -> 
+                listeners.forEach(listener ->
                     executor.submit(() -> listener.accept(eventData))
                 );
             }
@@ -376,10 +376,10 @@ public class EventBusDemo {
 
         public void register(String userId, String username, String email) {
             System.out.println("  [用户服务] 创建用户: " + username);
-            
+
             // 发布事件
             eventBus.publish(new UserCreatedEvent(userId, username, email));
-            
+
             System.out.println("  ✅ 用户注册完成");
         }
     }
@@ -414,9 +414,9 @@ public class EventBusDemo {
 
         public void createOrder(String orderId, String userId, double amount) {
             System.out.println("  [订单服务] 创建订单: " + orderId);
-            
+
             eventBus.publish(new OrderCreatedEvent(orderId, userId, amount));
-            
+
             System.out.println("  ✅ 订单创建完成");
         }
     }

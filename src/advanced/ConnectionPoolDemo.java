@@ -85,7 +85,7 @@ public class ConnectionPoolDemo {
         for (int i = 0; i < 5; i++) {
             // 从连接池获取连接
             Connection conn = pool.getConnection();
-            System.out.println("  获取连接 #" + (i + 1) + " - 当前可用: " + 
+            System.out.println("  获取连接 #" + (i + 1) + " - 当前可用: " +
                 pool.getAvailableCount());
 
             // 执行查询
@@ -98,7 +98,7 @@ public class ConnectionPoolDemo {
 
             // 归还连接
             pool.releaseConnection(conn);
-            System.out.println("  归还连接 #" + (i + 1) + " - 当前可用: " + 
+            System.out.println("  归还连接 #" + (i + 1) + " - 当前可用: " +
                 pool.getAvailableCount());
         }
 
@@ -129,16 +129,16 @@ public class ConnectionPoolDemo {
                     System.out.println("  [任务" + taskId + "] 尝试获取连接...");
                     Connection conn = pool.getConnection();
                     System.out.println("  [任务" + taskId + "] 获得连接，执行查询");
-                    
+
                     Thread.sleep(500); // 模拟查询耗时
-                    
+
                     Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery("SELECT " + taskId);
                     rs.next();
                     System.out.println("  [任务" + taskId + "] 查询结果: " + rs.getInt(1));
                     rs.close();
                     stmt.close();
-                    
+
                     pool.releaseConnection(conn);
                     System.out.println("  [任务" + taskId + "] 归还连接");
                 } catch (Exception e) {
@@ -224,12 +224,12 @@ public class ConnectionPoolDemo {
         private final String user;
         private final String password;
         private final int maxSize;
-        
+
         private final Queue<Connection> availableConnections;
         private final Set<Connection> usedConnections;
         private int connectionCount;
 
-        public SimpleConnectionPool(String url, String user, String password, int maxSize) 
+        public SimpleConnectionPool(String url, String user, String password, int maxSize)
                 throws SQLException {
             this.url = url;
             this.user = user;

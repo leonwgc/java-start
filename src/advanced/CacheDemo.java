@@ -47,10 +47,10 @@ public class CacheDemo {
         System.out.println("\n添加元素:");
         cache.put("A", "Value A");
         System.out.println("  添加 A -> " + cache);
-        
+
         cache.put("B", "Value B");
         System.out.println("  添加 B -> " + cache);
-        
+
         cache.put("C", "Value C");
         System.out.println("  添加 C -> " + cache);
 
@@ -184,7 +184,7 @@ public class CacheDemo {
         // 场景1: 用户信息缓存
         System.out.println("场景1: 用户信息缓存");
         UserCacheService userCache = new UserCacheService();
-        
+
         System.out.println("  第1次查询（从数据库）:");
         User user1 = userCache.getUserById("user123");
         System.out.println("    " + user1);
@@ -205,7 +205,7 @@ public class CacheDemo {
         // 场景3: 配置缓存
         System.out.println("\n场景3: 系统配置缓存");
         ConfigCache configCache = new ConfigCache();
-        
+
         System.out.println("  获取配置（第1次，从数据库）:");
         String config1 = configCache.getConfig("system.timeout");
         System.out.println("    system.timeout = " + config1);
@@ -311,7 +311,7 @@ public class CacheDemo {
             // 缓存未命中，查询数据库
             System.out.println("    [查询数据库]");
             user = queryFromDatabase(userId);
-            
+
             // 写入缓存
             if (user != null) {
                 cache.put(userId, user);
@@ -341,11 +341,11 @@ public class CacheDemo {
 
         public synchronized boolean allowRequest(String api, String userId) {
             String key = api + ":" + userId;
-            Queue<Long> timestamps = requestTimestamps.computeIfAbsent(key, 
+            Queue<Long> timestamps = requestTimestamps.computeIfAbsent(key,
                 k -> new LinkedList<>());
 
             long now = System.currentTimeMillis();
-            
+
             // 移除过期的时间戳
             while (!timestamps.isEmpty() && now - timestamps.peek() > windowMs) {
                 timestamps.poll();

@@ -245,7 +245,7 @@ Spring Data JPA
 - 快速开发：约定优于配置
 
 ### Q2: Spring Boot和Spring有什么区别？
-**A**: 
+**A**:
 - Spring：框架本身，需要大量配置
 - Spring Boot：基于Spring，自动配置，开箱即用
 
@@ -253,7 +253,7 @@ Spring Data JPA
 **A**: 不需要！但是你需要理解Spring的核心概念（IoC和AOP），这些你已经在前面的示例中学习过了。
 
 ### Q4: 如何调试Spring Boot应用？
-**A**: 
+**A**:
 1. 查看控制台日志
 2. 使用IDE的断点调试
 3. 使用Spring Boot Actuator监控

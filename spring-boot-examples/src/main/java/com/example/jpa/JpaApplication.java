@@ -44,9 +44,9 @@ public class JpaApplication {
     public static void main(String[] args) {
         System.out.println("=== Spring Data JPA 实战 ===\n");
         System.out.println("正在启动JPA示例应用...\n");
-        
+
         SpringApplication.run(JpaApplication.class, args);
-        
+
         System.out.println("\n✅ 应用启动成功！");
         System.out.println("📍 H2数据库控制台：http://localhost:8080/h2-console");
         System.out.println("   JDBC URL: jdbc:h2:mem:testdb");
@@ -62,7 +62,7 @@ public class JpaApplication {
     public CommandLineRunner demo(ProductService productService) {
         return args -> {
             System.out.println("\n=== 开始JPA操作演示 ===\n");
-            
+
             demonstrateCRUD(productService);
             demonstrateQuery(productService);
             demonstrateUpdate(productService);
@@ -85,7 +85,7 @@ public class JpaApplication {
         // 查询所有产品
         System.out.println("📋 查询所有产品:");
         List<Product> allProducts = productService.findAll();
-        allProducts.forEach(p -> 
+        allProducts.forEach(p ->
             System.out.println("  - " + p.getName() + "，价格: ¥" + p.getPrice() + "，库存: " + p.getStock())
         );
         System.out.println();
@@ -93,7 +93,7 @@ public class JpaApplication {
         // 根据ID查询
         System.out.println("🔍 查询ID为1的产品:");
         Optional<Product> product = productService.findById(laptop.getId());
-        product.ifPresent(p -> 
+        product.ifPresent(p ->
             System.out.println("  找到: " + p.getName() + "，创建时间: " + p.getCreatedAt())
         );
         System.out.println();
@@ -120,7 +120,7 @@ public class JpaApplication {
         // 按价格范围查询
         System.out.println("🔍 查询价格在100-500之间的产品:");
         List<Product> priceRange = productService.findByPriceRange(100.0, 500.0);
-        priceRange.forEach(p -> 
+        priceRange.forEach(p ->
             System.out.println("  - " + p.getName() + "，价格: ¥" + p.getPrice())
         );
         System.out.println();
@@ -128,7 +128,7 @@ public class JpaApplication {
         // 按库存查询
         System.out.println("🔍 查询低库存产品（库存<100）:");
         List<Product> lowStock = productService.findLowStockProducts(100);
-        lowStock.forEach(p -> 
+        lowStock.forEach(p ->
             System.out.println("  - " + p.getName() + "，库存: " + p.getStock())
         );
         System.out.println();
@@ -145,11 +145,11 @@ public class JpaApplication {
             Product product = products.get(0);
             System.out.println("✏️  更新产品: " + product.getName());
             System.out.println("  原价格: ¥" + product.getPrice());
-            
+
             product.setPrice(6999.00);
             product.setStock(60);
             productService.updateProduct(product);
-            
+
             System.out.println("  新价格: ¥" + product.getPrice());
             System.out.println("  新库存: " + product.getStock());
             System.out.println("✅ 更新成功\n");

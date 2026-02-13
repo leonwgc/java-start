@@ -53,18 +53,18 @@ public class RetryDemo {
             attemptCount++;
             try {
                 System.out.println("  尝试 #" + attemptCount);
-                
+
                 // 模拟可能失败的操作
                 if (attemptCount < 3) {
                     throw new RuntimeException("操作失败");
                 }
-                
+
                 System.out.println("  ✅ 操作成功！");
                 success = true;
-                
+
             } catch (Exception e) {
                 System.out.println("  ❌ 失败: " + e.getMessage());
-                
+
                 if (attemptCount >= maxAttempts) {
                     System.out.println("  ⚠️  已达到最大重试次数，放弃操作");
                 }
@@ -89,19 +89,19 @@ public class RetryDemo {
         System.out.println("最大重试次数: 3\n");
 
         int[] attemptCounter = {0};
-        
+
         try {
             String result = retryExecutor.execute(() -> {
                 attemptCounter[0]++;
                 System.out.println("  [" + new Date() + "] 执行尝试 #" + attemptCounter[0]);
-                
+
                 if (attemptCounter[0] < 2) {
                     throw new RuntimeException("模拟失败");
                 }
-                
+
                 return "成功结果";
             });
-            
+
             System.out.println("\n✅ 最终结果: " + result);
         } catch (Exception e) {
             System.out.println("\n❌ 所有尝试都失败了");
@@ -134,14 +134,14 @@ public class RetryDemo {
                 attemptCounter[0]++;
                 long elapsed = System.currentTimeMillis() - startTime;
                 System.out.println("  [" + elapsed + "ms] 执行尝试 #" + attemptCounter[0]);
-                
+
                 if (attemptCounter[0] < 3) {
                     throw new RuntimeException("模拟失败");
                 }
-                
+
                 return "成功结果";
             });
-            
+
             System.out.println("\n✅ 最终结果: " + result);
         } catch (Exception e) {
             System.out.println("\n❌ 所有尝试都失败了");
@@ -242,14 +242,14 @@ public class RetryDemo {
 
         public T execute(Supplier<T> operation) throws Exception {
             Exception lastException = null;
-            
+
             for (int attempt = 1; attempt <= maxAttempts; attempt++) {
                 try {
                     return operation.get();
                 } catch (Exception e) {
                     lastException = e;
                     System.out.println("    ❌ 失败: " + e.getMessage());
-                    
+
                     if (attempt < maxAttempts) {
                         long delay = calculateDelay(attempt);
                         System.out.println("    ⏱️  等待 " + delay + "ms 后重试...");
@@ -257,7 +257,7 @@ public class RetryDemo {
                     }
                 }
             }
-            
+
             throw lastException;
         }
 
@@ -291,7 +291,7 @@ public class RetryDemo {
 
     private static void retryOnlyRetryableException(Runnable operation) throws Exception {
         int maxAttempts = 3;
-        
+
         for (int attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
                 operation.run();
@@ -307,7 +307,7 @@ public class RetryDemo {
                 throw e;
             }
         }
-        
+
         throw new Exception("达到最大重试次数");
     }
 
@@ -327,12 +327,12 @@ public class RetryDemo {
             return retryExecutor.execute(() -> {
                 requestCount++;
                 System.out.println("  [请求#" + requestCount + "] GET " + url);
-                
+
                 // 模拟前2次失败
                 if (requestCount < 3) {
                     throw new RuntimeException("网络超时");
                 }
-                
+
                 return "{\"status\": \"success\"}";
             });
         }
@@ -352,12 +352,12 @@ public class RetryDemo {
             return retryExecutor.execute(() -> {
                 updateCount++;
                 System.out.println("  [更新#" + updateCount + "] " + sql);
-                
+
                 // 模拟死锁
                 if (updateCount < 2) {
                     throw new RuntimeException("Deadlock detected");
                 }
-                
+
                 System.out.println("  ✅ 更新成功");
                 return true;
             });
@@ -378,11 +378,11 @@ public class RetryDemo {
             retryExecutor.execute(() -> {
                 sendCount++;
                 System.out.println("  [发送#" + sendCount + "] to=" + userId + ", msg=" + message);
-                
+
                 if (sendCount < 2) {
                     throw new RuntimeException("消息队列连接失败");
                 }
-                
+
                 System.out.println("  ✅ 发送成功");
                 return null;
             });

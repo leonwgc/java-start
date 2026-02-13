@@ -43,9 +43,9 @@ public class RestfulApplication {
     public static void main(String[] args) {
         System.out.println("=== RESTful API 实战 ===\n");
         System.out.println("正在启动用户管理API服务...\n");
-        
+
         SpringApplication.run(RestfulApplication.class, args);
-        
+
         System.out.println("\n✅ API服务启动成功！");
         System.out.println("\n📖 可用接口：");
         System.out.println("GET    /api/users        - 获取所有用户");
@@ -87,7 +87,7 @@ class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         System.out.println("🔍 查询用户 ID: " + id);
-        
+
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             System.out.println("✅ 找到用户: " + user.get().getName());
@@ -107,10 +107,10 @@ class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         System.out.println("➕ 创建用户: " + user.getName());
-        
+
         User createdUser = userService.create(user);
         System.out.println("✅ 用户创建成功，ID: " + createdUser.getId());
-        
+
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
@@ -123,7 +123,7 @@ class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
         System.out.println("✏️  更新用户 ID: " + id);
-        
+
         Optional<User> updatedUser = userService.update(id, user);
         if (updatedUser.isPresent()) {
             System.out.println("✅ 用户更新成功");
@@ -141,7 +141,7 @@ class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         System.out.println("🗑️  删除用户 ID: " + id);
-        
+
         boolean deleted = userService.delete(id);
         if (deleted) {
             System.out.println("✅ 用户删除成功");
@@ -159,10 +159,10 @@ class UserController {
     @GetMapping("/search")
     public ResponseEntity<List<User>> searchUsers(@RequestParam(required = false) String name) {
         System.out.println("🔍 搜索用户，关键字: " + name);
-        
+
         List<User> users = userService.searchByName(name);
         System.out.println("✅ 找到 " + users.size() + " 条记录");
-        
+
         return ResponseEntity.ok(users);
     }
 }

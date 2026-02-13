@@ -52,7 +52,7 @@ public class SocketDemo {
 
                 // 等待客户端连接
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("  [服务端] 客户端已连接: " + 
+                System.out.println("  [服务端] 客户端已连接: " +
                     clientSocket.getInetAddress().getHostAddress());
 
                 // 读取客户端消息
@@ -144,7 +144,7 @@ public class SocketDemo {
             clientExecutor.submit(() -> {
                 try {
                     Socket socket = new Socket(HOST, serverPort);
-                    
+
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                     out.println("Client-" + clientNum + " 的消息");
 
@@ -175,14 +175,14 @@ public class SocketDemo {
 
         // 使用URLConnection获取网页内容
         System.out.println("模拟HTTP GET请求:");
-        
+
         // 注意：这里使用一个稳定的API
         String urlString = "https://httpbin.org/get";
-        
+
         try {
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            
+
             // 设置请求方法和属性
             connection.setRequestMethod("GET");
             connection.setRequestProperty("User-Agent", "Java-SocketDemo");
@@ -197,7 +197,7 @@ public class SocketDemo {
                 // 读取响应内容
                 BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
-                
+
                 String line;
                 int lineCount = 0;
                 System.out.println("  响应内容（前5行）:");
@@ -296,7 +296,7 @@ public class SocketDemo {
             try {
                 ServerSocket serverSocket = new ServerSocket(heartbeatPort);
                 Socket client = serverSocket.accept();
-                
+
                 BufferedReader in = new BufferedReader(
                     new InputStreamReader(client.getInputStream()));
                 PrintWriter out = new PrintWriter(client.getOutputStream(), true);
@@ -370,10 +370,10 @@ public class SocketDemo {
 
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(socket.getInputStream()));
-            
+
             System.out.println("  [客户端] 等待数据（2秒超时）...");
             in.readLine(); // 这里会超时
-            
+
         } catch (SocketTimeoutException e) {
             System.out.println("  [客户端] 读取超时！（正常，演示超时处理）");
         }

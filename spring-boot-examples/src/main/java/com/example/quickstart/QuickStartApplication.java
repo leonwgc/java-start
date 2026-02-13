@@ -39,9 +39,9 @@ public class QuickStartApplication {
     public static void main(String[] args) {
         System.out.println("=== Spring Boot 快速入门 ===\n");
         System.out.println("正在启动Spring Boot应用...\n");
-        
+
         SpringApplication.run(QuickStartApplication.class, args);
-        
+
         System.out.println("\n✅ 应用启动成功！");
         System.out.println("📍 访问地址：http://localhost:8080");
         System.out.println("📍 测试接口：http://localhost:8080/hello");
