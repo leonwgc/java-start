@@ -4,7 +4,14 @@
 
 ## 🆕 最新更新（2026-02）
 
-**最新：新增Java现代特性和高级编程** ⭐⭐⭐⭐⭐（2026-02-13）：
+**最新：新增基础设施层模式** ⭐⭐⭐⭐⭐（2026-02-13 下午）：
+
+**基础设施层（为Spring Boot做准备）**：
+- 🌐 [SocketDemo.java](src/advanced/SocketDemo.java) - 网络编程（TCP/IP、客户端-服务器模式）
+- 💾 [ConnectionPoolDemo.java](src/advanced/ConnectionPoolDemo.java) - 数据库连接池（HikariCP原理）
+- 🚀 [CacheDemo.java](src/advanced/CacheDemo.java) - 缓存机制（LRU算法、缓存问题）
+- 🔄 [RetryDemo.java](src/advanced/RetryDemo.java) - 重试机制（指数退避、Spring Retry基础）
+- 📡 [EventBusDemo.java](src/advanced/EventBusDemo.java) - 事件总线（发布订阅、Spring Event原理）
 
 **Java现代特性（Java 14-17+）**：
 - 📦 [RecordsDemo.java](src/advanced/RecordsDemo.java) - 记录类（不可变数据载体）
@@ -42,11 +49,12 @@
 
 ## 📋 项目介绍
 
-这是一个系统的Java学习代码库，包含 **44个精心设计的学习示例**，通过实际代码帮助你：
+这是一个系统的Java学习代码库，包含 **49个精心设计的学习示例**，通过实际代码帮助你：
 1. 掌握Java核心语法和现代特性
 2. 理解面向对象编程
 3. 学会常用设计模式和高级编程技巧
 4. **理解Spring框架核心思想**（IoC、AOP）
+5. **掌握基础设施层模式**（缓存、重试、事件总线等）
 
 ## 🛠️ 开发环境
 
@@ -330,6 +338,38 @@
     - 限制继承层次结构
     - 模式匹配和领域建模
     - 状态模式、事件系统、API响应类型
+
+#### 基础设施层模式
+
+41. **SocketDemo.java** - 网络编程 ⭐新增
+    - TCP/IP Socket通信
+    - 客户端-服务器模式
+    - 多客户端并发处理
+    - HTTP连接和心跳检测
+
+42. **ConnectionPoolDemo.java** - 数据库连接池 ⭐新增
+    - 连接池原理和实现
+ 6  - 自定义连接池（SimpleConnectionPool）
+    - 并发连接管理
+    - HikariCP配置（Spring Boot默认）
+
+43. **CacheDemo.java** - 缓存机制 ⭐新增
+    - LRU缓存算法实现
+    - TTL过期缓存
+    - 缓存策略（LRU、LFU、FIFO）
+    - 缓存问题（穿透、击穿、雪崩）
+
+44. **RetryDemo.java** - 重试机制 ⭐新增
+    - 固定延迟重试策略
+    - 指数退避重试算法
+    - 条件重试（异常类型判断）
+    - HTTP请求、数据库操作重试
+
+45. **EventBusDemo.java** - 事件总线 ⭐新增
+    - 发布-订阅模式
+    - 类型安全的事件系统
+    - 同步和异步事件处理
+    - Spring Event基础原理
 
 ### 第四阶段补充：单元测试 (src/basics)
 
