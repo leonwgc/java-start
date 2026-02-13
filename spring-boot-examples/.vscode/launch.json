@@ -3,39 +3,27 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug QuickStart",
+            "name": "QuickStart",
             "request": "launch",
             "mainClass": "com.example.quickstart.QuickStartApplication",
             "projectName": "spring-boot-examples",
-            "cwd": "${workspaceFolder}/spring-boot-examples"
+            "cwd": "${workspaceFolder}"
         },
         {
             "type": "java",
-            "name": "Debug Restful",
+            "name": "Restful API",
             "request": "launch",
             "mainClass": "com.example.restful.RestfulApplication",
             "projectName": "spring-boot-examples",
-            "cwd": "${workspaceFolder}/spring-boot-examples"
+            "cwd": "${workspaceFolder}"
         },
         {
             "type": "java",
-            "name": "Debug JPA",
+            "name": "JPA Database",
             "request": "launch",
             "mainClass": "com.example.jpa.JpaApplication",
             "projectName": "spring-boot-examples",
-            "cwd": "${workspaceFolder}/spring-boot-examples"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot Maven (QuickStart)",
-            "request": "launch",
-            "mainClass": "com.example.quickstart.QuickStartApplication",
-            "projectName": "spring-boot-examples",
-            "cwd": "${workspaceFolder}/spring-boot-examples",
-            "env": {
-                "SPRING_OUTPUT_ANSI_ENABLED": "ALWAYS"
-            },
-            "vmArgs": "-Dspring-boot.run.fork=false"
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
