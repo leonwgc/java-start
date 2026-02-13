@@ -35,6 +35,7 @@ public class QuickStartApplication {
     /**
      * 应用启动入口
      * main方法启动Spring Boot应用
+     * debug 新窗口打开spring-boot-examples目录，F5运行QuickStartApplication类
      */
     public static void main(String[] args) {
         System.out.println("=== Spring Boot 快速入门 ===\n");
