@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file. Paths;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -89,9 +89,8 @@ class FileStorageService {
 
     // 允许的文件类型
     private static final List<String> ALLOWED_EXTENSIONS = Arrays.asList(
-        "txt", "pdf", "doc", "docx", "xls", "xlsx",
-        "jpg", "jpeg", "png", "gif", "svg"
-    );
+            "txt", "pdf", "doc", "docx", "xls", "xlsx",
+            "jpg", "jpeg", "png", "gif", "svg");
 
     // 最大文件大小：10MB
     private static final long MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -137,13 +136,12 @@ class FileStorageService {
 
             // 6. 返回文件信息
             return new FileInfo(
-                uniqueFilename,
-                originalFilename,
-                file.getContentType(),
-                file.getSize(),
-                LocalDateTime.now(),
-                generateDownloadUrl(uniqueFilename)
-            );
+                    uniqueFilename,
+                    originalFilename,
+                    file.getContentType(),
+                    file.getSize(),
+                    LocalDateTime.now(),
+                    generateDownloadUrl(uniqueFilename));
 
         } catch (IOException ex) {
             log.error("❌ 文件保存失败: {}", originalFilename, ex);
@@ -175,25 +173,24 @@ class FileStorageService {
     public List<FileInfo> getAllFiles() {
         try (Stream<Path> paths = Files.walk(this.fileStorageLocation, 1)) {
             return paths
-                .filter(Files::isRegularFile)
-                .map(path -> {
-                    String filename = path.getFileName().toString();
-                    try {
-                        long size = Files.size(path);
-                        return new FileInfo(
-                            filename,
-                            filename,
-                            getContentType(filename),
-                            size,
-                            LocalDateTime.now(),
-                            generateDownloadUrl(filename)
-                        );
-                    } catch (IOException e) {
-                        return null;
-                    }
-                })
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                    .filter(Files::isRegularFile)
+                    .map(path -> {
+                        String filename = path.getFileName().toString();
+                        try {
+                            long size = Files.size(path);
+                            return new FileInfo(
+                                    filename,
+                                    filename,
+                                    getContentType(filename),
+                                    size,
+                                    LocalDateTime.now(),
+                                    generateDownloadUrl(filename));
+                        } catch (IOException e) {
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
         } catch (IOException ex) {
             log.error("❌ 获取文件列表失败", ex);
             return Collections.emptyList();
@@ -322,22 +319,22 @@ class FileController {
             FileInfo fileInfo = fileStorageService.storeFile(file);
 
             return ResponseEntity.ok(new ApiResponse(
-                200,
-                "文件上传成功",
-                fileInfo
-            ));
+                    200,
+                    "文件上传成功",
+                    fileInfo));
         } catch (Exception ex) {
             log.error("文件上传失败", ex);
             return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(new ApiResponse(400, "文件上传失败: " + ex.getMessage(), null));
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse(400, "文件上传失败: " + ex.getMessage(), null));
         }
     }
 
     /**
      * 2. 多文件上传
      * POST /api/files/upload-multiple
-     * curl -X POST -F "files=@file1.txt" -F "files=@file2.txt" http://localhost:8080/api/files/upload-multiple
+     * curl -X POST -F "files=@file1.txt" -F "files=@file2.txt"
+     * http://localhost:8080/api/files/upload-multiple
      */
     @PostMapping("/upload-multiple")
     public ResponseEntity<ApiResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
@@ -350,15 +347,14 @@ class FileController {
             }
 
             return ResponseEntity.ok(new ApiResponse(
-                200,
-                "文件上传成功，共" + fileInfos.size() + "个文件",
-                fileInfos
-            ));
+                    200,
+                    "文件上传成功，共" + fileInfos.size() + "个文件",
+                    fileInfos));
         } catch (Exception ex) {
             log.error("文件上传失败", ex);
             return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(new ApiResponse(400, "文件上传失败: " + ex.getMessage(), null));
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse(400, "文件上传失败: " + ex.getMessage(), null));
         }
     }
 
@@ -394,13 +390,11 @@ class FileController {
         List<FileInfo> files = fileStorageService.getAllFiles();
 
         return ResponseEntity.ok(new ApiResponse(
-            200,
-            "获取文件列表成功",
-            Map.of(
-                "totalFiles", files.size(),
-                "files", files
-            )
-        ));
+                200,
+                "获取文件列表成功",
+                Map.of(
+                        "totalFiles", files.size(),
+                        "files", files)));
     }
 
     /**
@@ -413,14 +407,13 @@ class FileController {
 
         if (deleted) {
             return ResponseEntity.ok(new ApiResponse(
-                200,
-                "文件删除成功",
-                filename
-            ));
+                    200,
+                    "文件删除成功",
+                    filename));
         } else {
             return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(new ApiResponse(404, "文件未找到或删除失败", filename));
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse(404, "文件未找到或删除失败", filename));
         }
     }
 
@@ -433,32 +426,29 @@ class FileController {
         Map<String, Object> guide = new HashMap<>();
 
         guide.put("文件上传限制", Map.of(
-            "最大文件大小", "10MB",
-            "支持的文件类型", "txt, pdf, doc, docx, xls, xlsx, jpg, jpeg, png, gif, svg"
-        ));
+                "最大文件大小", "10MB",
+                "支持的文件类型", "txt, pdf, doc, docx, xls, xlsx, jpg, jpeg, png, gif, svg"));
 
         guide.put("API接口", Map.of(
-            "单文件上传", "POST /api/files/upload",
-            "多文件上传", "POST /api/files/upload-multiple",
-            "文件下载", "GET /api/files/download/{filename}",
-            "文件列表", "GET /api/files",
-            "删除文件", "DELETE /api/files/{filename}"
-        ));
+                "单文件上传", "POST /api/files/upload",
+                "多文件上传", "POST /api/files/upload-multiple",
+                "文件下载", "GET /api/files/download/{filename}",
+                "文件列表", "GET /api/files",
+                "删除文件", "DELETE /api/files/{filename}"));
 
         guide.put("curl测试命令", Map.of(
-            "上传文件", "curl -X POST -F \"file=@yourfile.txt\" http://localhost:8080/api/files/upload",
-            "上传多个文件", "curl -X POST -F \"files=@file1.txt\" -F \"files=@file2.txt\" http://localhost:8080/api/files/upload-multiple",
-            "下载文件", "curl -O http://localhost:8080/api/files/download/filename.txt",
-            "查看所有文件", "curl http://localhost:8080/api/files",
-            "删除文件", "curl -X DELETE http://localhost:8080/api/files/filename.txt"
-        ));
+                "上传文件", "curl -X POST -F \"file=@yourfile.txt\" http://localhost:8080/api/files/upload",
+                "上传多个文件",
+                "curl -X POST -F \"files=@file1.txt\" -F \"files=@file2.txt\" http://localhost:8080/api/files/upload-multiple",
+                "下载文件", "curl -O http://localhost:8080/api/files/download/filename.txt",
+                "查看所有文件", "curl http://localhost:8080/api/files",
+                "删除文件", "curl -X DELETE http://localhost:8080/api/files/filename.txt"));
 
         guide.put("注意事项", List.of(
-            "文件名会自动生成UUID以防止重名",
-            "上传的文件存储在项目的uploads目录",
-            "下载文件时会设置Content-Disposition为attachment强制下载",
-            "文件类型和大小都会进行验证"
-        ));
+                "文件名会自动生成UUID以防止重名",
+                "上传的文件存储在项目的uploads目录",
+                "下载文件时会设置Content-Disposition为attachment强制下载",
+                "文件类型和大小都会进行验证"));
 
         return ResponseEntity.ok(guide);
     }
