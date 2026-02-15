@@ -65,6 +65,7 @@ public class CacheApplication {
      * 这里使用简单的ConcurrentMapCacheManager
      * 生产环境建议使用Redis、Caffeine等
      */
+    // 作用：告诉 Spring 容器，将这个方法的返回值（CacheManager 对象）注册为一个 Bean，其他组件可以通过依赖注入使用它。
     @Bean
     public CacheManager cacheManager() {
         ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager(
