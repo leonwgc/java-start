@@ -40,6 +40,9 @@ if [ -z "$APP_NAME" ]; then
     echo "  config      - 配置属性管理"
     echo "  interceptor - 拦截器和过滤器"
     echo "  fileupload  - 文件上传下载"
+    echo "  transaction - 事务管理"
+    echo "  cache       - 缓存应用"
+    echo "  scheduled   - 定时任务"
     echo ""
     echo "示例: ./run-app.sh quickstart"
     exit 1
@@ -77,6 +80,18 @@ case $APP_NAME in
     fileupload)
         CLASS_NAME="com.example.fileupload.FileUploadApplication"
         DESCRIPTION="文件上传下载"
+        ;;
+    transaction)
+        CLASS_NAME="com.example.transaction.TransactionApplication"
+        DESCRIPTION="事务管理"
+        ;;
+    cache)
+        CLASS_NAME="com.example.cache.CacheApplication"
+        DESCRIPTION="缓存应用"
+        ;;
+    scheduled)
+        CLASS_NAME="com.example.scheduled.ScheduledApplication"
+        DESCRIPTION="定时任务"
         ;;
     *)
         echo "❌ 未知的示例: $APP_NAME"

@@ -2,7 +2,7 @@
 
 ## 🎯 项目概述
 
-这是一个循序渐进的Spring Boot实战项目，包含 **8个完整示例**，从基础入门到进阶实战，基于你之前学习的Java基础和Spring核心概念。
+这是一个循序渐进的Spring Boot实战项目，包含 **11个完整示例**，从基础入门到进阶实战，基于你之前学习的Java基础和Spring核心概念。
 
 ## 📚 学习示例
 
@@ -18,6 +18,9 @@
 | 6 | Config | `./run-app.sh config` | ⭐⭐ | 配置管理 |
 | 7 | Interceptor | `./run-app.sh interceptor` | ⭐⭐⭐ | 拦截器和过滤器 |
 | 8 | FileUpload | `./run-app.sh fileupload` | ⭐⭐ | 文件上传下载 |
+| 9 | Transaction | `./run-app.sh transaction` | ⭐⭐⭐ | 事务管理 |
+| 10 | Cache | `./run-app.sh cache` | ⭐⭐⭐ | 缓存应用 |
+| 11 | Scheduled | `./run-app.sh scheduled` | ⭐⭐ | 定时任务 |
 
 ---
 
@@ -446,6 +449,189 @@ curl -X DELETE http://localhost:8080/api/files/filename.txt
 
 ---
 
+### 9️⃣ TransactionApplication - 事务管理
+
+**位置**: `src/main/java/com/example/transaction/TransactionApplication.java`
+
+**学习目标**:
+- 理解Spring事务管理机制
+- 掌握@Transactional注解的使用
+- 学习事务传播行为和隔离级别
+- 了解事务回滚规则和最佳实践
+
+**核心知识点**:
+- `@Transactional`：声明式事务管理注解
+- 事务传播行为：
+  * REQUIRED（默认）：有事务加入，无事务创建
+  * REQUIRES_NEW：总是创建新事务
+  * SUPPORTS、NOT_SUPPORTED、MANDATORY、NEVER、NESTED
+- 事务属性：
+  * propagation：传播行为
+  * isolation：隔离级别
+  * timeout：超时设置
+  * readOnly：只读事务
+  * rollbackFor：指定回滚异常
+  * noRollbackFor：指定不回滚异常
+- `@Version`：乐观锁版本控制
+- 事务边界和ACID特性
+
+**运行方式**:
+```bash
+./run-app.sh transaction
+```
+
+**测试接口**:
+```bash
+# 查看所有账户
+curl http://localhost:8080/api/accounts
+
+# 成功转账（事务提交）
+curl -X POST "http://localhost:8080/api/transfer?from=1&to=2&amount=100"
+
+# 失败转账（事务回滚 - 余额不足）
+curl -X POST "http://localhost:8080/api/transfer?from=1&to=2&amount=10000"
+
+# 查看交易日志
+curl http://localhost:8080/api/logs
+
+# 测试事务传播行为
+curl -X POST http://localhost:8080/api/test-propagation
+
+# 测试独立事务（REQUIRES_NEW）
+curl -X POST http://localhost:8080/api/test-requires-new
+```
+
+**关联前面的学习**:
+- JdbcDemo.java：JDBC事务基础
+- ConcurrencyDemo.java：并发控制
+- JpaApplication：JPA数据库操作
+
+---
+
+### 🔟 CacheApplication - 缓存应用
+
+**位置**: `src/main/java/com/example/cache/CacheApplication.java`
+
+**学习目标**:
+- 理解Spring Cache抽象层
+- 掌握缓存注解的使用
+- 学习缓存配置和管理
+- 了解缓存策略和最佳实践
+
+**核心知识点**:
+- `@EnableCaching`：启用缓存支持
+- `@Cacheable`：查询缓存，不存在则执行方法
+- `@CachePut`：更新缓存，总是执行方法
+- `@CacheEvict`：删除缓存（单个或全部）
+- `@Caching`：组合多个缓存操作
+- `CacheManager`：缓存管理器
+- SpEL表达式：灵活的缓存Key设计
+- 缓存策略：
+  * Cache-Aside（旁路缓存）
+  * Write-Through（写穿）
+  * Write-Behind（写后）
+
+**运行方式**:
+```bash
+./run-app.sh cache
+```
+
+**测试接口**:
+```bash
+# 第一次查询（慢，2秒延迟）
+curl http://localhost:8080/api/users/1
+# 响应：{"user":{...},"duration":"2003ms","cached":false}
+
+# 第二次查询（快，从缓存读取）
+curl http://localhost:8080/api/users/1
+# 响应：{"user":{...},"duration":"5ms","cached":true}
+
+# 更新用户（更新缓存）
+curl -X PUT http://localhost:8080/api/users/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name":"张三（已更新）","email":"zhangsan@example.com","age":26}'
+
+# 删除用户（清除缓存）
+curl -X DELETE http://localhost:8080/api/users/1
+
+# 查看缓存状态
+curl http://localhost:8080/api/cache/stats
+
+# 清空所有缓存
+curl -X DELETE http://localhost:8080/api/cache/all
+```
+
+**关联前面的学习**:
+- CacheDemo.java：LRU缓存算法实现
+- OptionalDemo.java：处理null值
+- ConcurrencyDemo.java：线程安全
+
+---
+
+### 1️⃣1️⃣ ScheduledApplication - 定时任务
+
+**位置**: `src/main/java/com/example/scheduled/ScheduledApplication.java`
+
+**学习目标**:
+- 理解Spring定时任务机制
+- 掌握@Scheduled注解的使用
+- 学习Cron表达式
+- 了解定时任务配置和最佳实践
+
+**核心知识点**:
+- `@EnableScheduling`：启用定时任务支持
+- `@Scheduled`：定义定时任务
+- fixedRate：固定频率（从开始时间算）
+- fixedDelay：固定延迟（从结束时间算）
+- initialDelay：初始延迟
+- cron：Cron表达式
+- `TaskScheduler`：任务调度器
+- 线程池配置：多任务并发执行
+- 动态任务：运行时启动/停止任务
+- Cron表达式格式：秒 分 时 日 月 周 [年]
+
+**运行方式**:
+```bash
+./run-app.sh scheduled
+```
+
+**测试接口**:
+```bash
+# 查看任务执行日志
+curl http://localhost:8080/api/tasks/logs
+
+# 查看任务状态
+curl http://localhost:8080/api/tasks/status
+
+# 手动触发任务
+curl -X POST http://localhost:8080/api/tasks/trigger
+
+# 启动动态任务
+curl -X POST http://localhost:8080/api/tasks/dynamic/start
+
+# 停止动态任务
+curl -X POST http://localhost:8080/api/tasks/dynamic/stop
+
+# 清空日志
+curl -X POST http://localhost:8080/api/tasks/logs/clear
+```
+
+**常用Cron表达式**:
+```
+0 0 2 * * ?          每天凌晨2点
+0 0/5 * * * ?        每5分钟
+0 0 9 * * MON-FRI    工作日上午9点
+0 0 0 1 * ?          每月1号凌晨
+0 0 8 ? * MON        每周一上午8点
+```
+
+**关联前面的学习**:
+- ScheduledTaskDemo.java：Java定时任务基础
+- ThreadDemo.java：多线程基础
+- AsyncDemo.java：异步编程
+
+---
+
 ## 🛠️ 运行要求
 
 ### 环境要求
@@ -526,13 +712,34 @@ java -jar target/spring-boot-examples-1.0.0.jar
 - 实现文件上传下载
 - 文件验证和安全处理
 
+#### Day 8：事务管理 ⭐⭐⭐
+- 运行 `./run-app.sh transaction`
+- 理解ACID特性和事务边界
+- 掌握@Transactional使用
+- 学习事务传播行为
+- 测试事务回滚场景
+
+#### Day 9：缓存应用 ⭐⭐⭐
+- 运行 `./run-app.sh cache`
+- 理解缓存的作用和使用场景
+- 掌握@Cacheable、@CachePut、@CacheEvict
+- 对比有无缓存的性能差异
+- 学习缓存管理策略
+
+#### Day 10：定时任务 ⭐
+- 运行 `./run-app.sh scheduled`
+- 理解fixedRate和fixedDelay区别
+- 学习Cron表达式语法
+- 观察不同类型任务执行
+- 实现动态任务启停
+
 ### 第3周：综合实战
 
 结合所有学到的知识，开发一个完整的小项目，例如：
-- 📝 博客系统：文章CRUD + 标签 + 分类 + 评论
-- 📋 任务管理系统：任务CRUD + 优先级 + 状态管理
-- 📚 图书管理系统：图书CRUD + 借阅管理
-- 👥 用户管理系统：用户CRUD + 角色权限 + 登录认证
+- 📝 博客系统：文章CRUD + 标签 + 分类 + 评论 + 缓存 + 定时发布
+- 📋 任务管理系统：任务CRUD + 优先级 + 状态管理 + 定时提醒
+- 📚 图书管理系统：图书CRUD + 借阅管理 + 事务处理
+- 👥 用户管理系统：用户CRUD + 角色权限 + 登录认证 + 数据缓存
 
 ### 学习建议
 

@@ -64,6 +64,30 @@
             "mainClass": "com.example.fileupload.FileUploadApplication",
             "projectName": "spring-boot-examples",
             "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Transaction Management",
+            "request": "launch",
+            "mainClass": "com.example.transaction.TransactionApplication",
+            "projectName": "spring-boot-examples",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Cache Application",
+            "request": "launch",
+            "mainClass": "com.example.cache.CacheApplication",
+            "projectName": "spring-boot-examples",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Scheduled Task",
+            "request": "launch",
+            "mainClass": "com.example.scheduled.ScheduledApplication",
+            "projectName": "spring-boot-examples",
+            "cwd": "${workspaceFolder}"
         }
     ]
 }

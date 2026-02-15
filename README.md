@@ -49,7 +49,7 @@
 
 ## 📋 项目介绍
 
-这是一个系统的Java学习代码库，包含 **54个精心设计的学习示例**（46个Java基础 + 8个Spring Boot实战），通过实际代码帮助你：
+这是一个系统的Java学习代码库，包含 **57个精心设计的学习示例**（46个Java基础 + 11个Spring Boot实战），通过实际代码帮助你：
 1. 掌握Java核心语法和现代特性
 2. 理解面向对象编程
 3. 学会常用设计模式和高级编程技巧
@@ -448,7 +448,30 @@
     - 文件存储和下载
     - 安全性处理（路径遍历防护）
 
-📖 **完整学习路径**：[SpringBoot学习路径.md](SpringBoot学习路径.md) | [Spring Boot详细文档](spring-boot-examples/README.md)
+**核心示例**（⭐⭐⭐）：
+
+55. **TransactionApplication** - 事务管理实战 ⭐新增
+    - @Transactional声明式事务
+    - 事务传播行为（REQUIRED、REQUIRES_NEW等）
+    - 事务隔离级别和超时设置
+    - 乐观锁（@Version）
+    - 事务回滚规则
+
+56. **CacheApplication** - 缓存应用实战 ⭐新增
+    - @EnableCaching启用缓存
+    - @Cacheable、@CachePut、@CacheEvict
+    - CacheManager缓存管理
+    - 缓存策略（Cache-Aside、Write-Through）
+    - 性能优化实践
+
+57. **ScheduledApplication** - 定时任务实战 ⭐新增
+    - @EnableScheduling启用定时任务
+    - @Scheduled注解（fixedRate、fixedDelay、cron）
+    - Cron表达式详解
+    - TaskScheduler线程池配置
+    - 动态任务管理
+
+📖 **完整学习路径**：[SpringBoot学习路径.md](SpringBoot学习路径.md) | [Spring Boot详细文档](spring-boot-examples/README.md) | [进阶示例说明](spring-boot-examples/2026-02-15-进阶示例说明.md)
 
 **快速启动**：
 ```bash
@@ -579,7 +602,7 @@ java -cp target/classes advanced.Demo
 - ✅ **Spring核心概念**（IoC、AOP、配置管理、异步编程、Builder模式）⭐⭐⭐
 - ✅ **Java现代特性**（Records、Switch表达式、文本块、var、密封类）⭐⭐⭐⭐⭐
 - ✅ **基础设施层**（Socket、连接池、缓存、重试、事件总线）⭐⭐⭐⭐
-- ✅ **Spring Boot实战**（8个完整示例：基础入门 + 进阶实战）🎯
+- ✅ **Spring Boot实战**（11个完整示例：基础入门 + 进阶实战 + 核心功能）🎯
 
 **🎊 恭喜！你已经完全准备好成为Spring Boot开发者了！**
 
@@ -601,6 +624,9 @@ java -cp target/classes advanced.Demo
 | 6 | Config | `./run-app.sh config` | ⭐⭐ | 配置管理 |
 | 7 | Interceptor | `./run-app.sh interceptor` | ⭐⭐⭐ | 拦截器和过滤器 |
 | 8 | FileUpload | `./run-app.sh fileupload` | ⭐⭐ | 文件上传下载 |
+| 9 | Transaction | `./run-app.sh transaction` | ⭐⭐⭐ | 事务管理 |
+| 10 | Cache | `./run-app.sh cache` | ⭐⭐⭐ | 缓存应用 |
+| 11 | Scheduled | `./run-app.sh scheduled` | ⭐⭐ | 定时任务 |
 
 ### 快速开始
 
@@ -618,6 +644,9 @@ cd spring-boot-examples
 ./run-app.sh config         # Day 4-5: 配置管理，属性注入
 ./run-app.sh interceptor    # Day 5-6: 拦截器，请求处理
 ./run-app.sh fileupload     # Day 6-7: 文件操作，完整业务
+./run-app.sh transaction    # Day 8: 事务管理，数据一致性
+./run-app.sh cache          # Day 9: 缓存应用，性能优化
+./run-app.sh scheduled      # Day 10: 定时任务，自动化
 
 # 第3周：综合项目实战
 # 结合所有知识点，开发完整应用（博客、商城、教育平台等）
@@ -636,6 +665,9 @@ cd spring-boot-examples
 - **Day 4-5**: 学习ConfigPropertiesApplication，掌握配置属性管理和类型安全配置
 - **Day 5-6**: 学习InterceptorApplication，理解Filter和Interceptor的区别和使用场景
 - **Day 6-7**: 学习FileUploadApplication，完成文件上传下载的完整业务流程
+- **Day 8**: 学习TransactionApplication，理解Spring事务管理和传播行为
+- **Day 9**: 学习CacheApplication，掌握缓存注解和性能优化
+- **Day 10**: 学习ScheduledApplication，学习定时任务和Cron表达式
 
 **第3周**（实战篇）：
 - 综合运用所有示例的知识点
