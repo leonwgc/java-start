@@ -25,23 +25,6 @@
 
     <!-- 依赖管理 -->
     <dependencies>
-        <!-- JUnit 5 测试框架 -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.10.1</version>
-            <!-- 学习项目：允许在src中使用JUnit进行演示 -->
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- JUnit 参数化测试支持 -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.10.1</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!-- Lombok - 简化代码 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
