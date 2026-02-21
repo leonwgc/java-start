@@ -132,12 +132,12 @@ public class RegexDemo {
 
         // 测试数据
         String[] testCases = {
-            "user@example.com",
-            "13812345678",
-            "320123199001011234",
-            "https://www.example.com",
-            "192.168.1.1",
-            "abc123!@#"
+                "user@example.com",
+                "13812345678",
+                "320123199001011234",
+                "https://www.example.com",
+                "192.168.1.1",
+                "abc123!@#"
         };
 
         System.out.println("验证结果:");
@@ -159,17 +159,16 @@ public class RegexDemo {
 
         // 模拟用户输入
         UserForm form1 = new UserForm(
-            "zhangsan",
-            "Zhang123!@#",
-            "zhangsan@example.com",
-            "13812345678"
-        );
+                "zhangsan",
+                "Zhang123!@#",
+                "zhangsan@example.com",
+                "13812345678");
 
         UserForm form2 = new UserForm(
-            "ls",  // 用户名太短
-            "123456",  // 密码太弱
-            "invalid-email",  // 邮箱格式错误
-            "12345"  // 电话号码格式错误
+                "ls", // 用户名太短
+                "123456", // 密码太弱
+                "invalid-email", // 邮箱格式错误
+                "12345" // 电话号码格式错误
         );
 
         System.out.println("表单1验证:");
@@ -219,33 +218,38 @@ public class RegexDemo {
         }
     }
 
+    // 使用建议：
+    // 场景 推荐方式
+    // 一次性验证 Pattern.matches() - 简洁
+    // 多次验证同一模式 Pattern.compile() + 复用 - 高效 「预编译模式」
+    // 验证工具类 static final Pattern - 最佳实践
+
     // ========== 辅助类 ==========
 
     // 验证器类
     static class Validator {
         // 邮箱验证
-        private static final Pattern EMAIL_PATTERN =
-            Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+        private static final Pattern EMAIL_PATTERN = Pattern
+                .compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
 
         // 手机号验证（中国大陆）
-        private static final Pattern PHONE_PATTERN =
-            Pattern.compile("^1[3-9]\\d{9}$");
+        private static final Pattern PHONE_PATTERN = Pattern.compile("^1[3-9]\\d{9}$");
 
         // 身份证验证（18位）
-        private static final Pattern ID_CARD_PATTERN =
-            Pattern.compile("^[1-9]\\d{5}(19|20)\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])\\d{3}[0-9Xx]$");
+        private static final Pattern ID_CARD_PATTERN = Pattern
+                .compile("^[1-9]\\d{5}(19|20)\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])\\d{3}[0-9Xx]$");
 
         // URL验证
-        private static final Pattern URL_PATTERN =
-            Pattern.compile("^(https?://)?([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$");
+        private static final Pattern URL_PATTERN = Pattern
+                .compile("^(https?://)?([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$");
 
         // IP地址验证
-        private static final Pattern IP_PATTERN =
-            Pattern.compile("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$");
+        private static final Pattern IP_PATTERN = Pattern
+                .compile("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$");
 
         // 强密码验证（至少8位，包含大小写字母、数字、特殊字符）
-        private static final Pattern STRONG_PASSWORD_PATTERN =
-            Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$");
+        private static final Pattern STRONG_PASSWORD_PATTERN = Pattern
+                .compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$");
 
         public static boolean isEmail(String email) {
             return EMAIL_PATTERN.matcher(email).matches();
