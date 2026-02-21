@@ -3,6 +3,12 @@ package advanced;
 import java.util.regex.*;
 import java.util.*;
 
+// 使用建议：
+// 场景 推荐方式
+// 一次性验证 Pattern.matches() - 简洁
+// 多次验证同一模式 Pattern.compile() + 复用 - 高效 「预编译模式」
+// 验证工具类 static final Pattern - 最佳实践
+
 /**
  * 正则表达式学习
  * 学习目标：
