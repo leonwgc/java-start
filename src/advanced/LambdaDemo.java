@@ -114,11 +114,11 @@ public class LambdaDemo {
     public static void demonstratePracticalUsage() {
         System.out.println("4. 实际应用场景\n");
 
-        List<Person> people = Arrays.asList(
-            new Person("张三", 25),
-            new Person("李四", 30),
-            new Person("王五", 22),
-            new Person("赵六", 35)
+        List<LambdaPerson> people = Arrays.asList(
+            new LambdaPerson("张三", 25),
+            new LambdaPerson("李四", 30),
+            new LambdaPerson("王五", 22),
+            new LambdaPerson("赵六", 35)
         );
 
         // 场景1：过滤年龄大于25的人
@@ -136,7 +136,7 @@ public class LambdaDemo {
         // 场景3：转换
         System.out.println("\n所有人的名字:");
         people.stream()
-              .map(Person::getName)
+              .map(LambdaPerson::getName)
               .forEach(name -> System.out.println("- " + name));
     }
 
@@ -152,12 +152,12 @@ interface Calculator {
     int calculate(int a, int b);
 }
 
-// Person类
-class Person {
+// LambdaPerson类
+class LambdaPerson {
     private String name;
     private int age;
 
-    public Person(String name, int age) {
+    public LambdaPerson(String name, int age) {
         this.name = name;
         this.age = age;
     }

@@ -64,7 +64,7 @@ public class GenericsDemo {
         // 创建不同类型的Box
         Box<String> stringBox = new Box<>("Hello World");
         Box<Integer> intBox = new Box<>(123);
-        Box<Person> personBox = new Box<>(new Person("张三", 25));
+        Box<GenericPerson> personBox = new Box<>(new GenericPerson("张三", 25));
 
         System.out.println("String Box: " + stringBox.get());
         System.out.println("Integer Box: " + intBox.get());
@@ -216,12 +216,12 @@ class Pair<K, V> {
     public V getValue() { return value; }
 }
 
-// 简单Person类
-class Person {
+// 简单GenericPerson类
+class GenericPerson {
     private String name;
     private int age;
 
-    public Person(String name, int age) {
+    public GenericPerson(String name, int age) {
         this.name = name;
         this.age = age;
     }

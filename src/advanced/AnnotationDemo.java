@@ -29,7 +29,7 @@ public class AnnotationDemo {
     public static void demonstrateCustomAnnotation() {
         System.out.println("1. 自定义注解示例\n");
 
-        UserService userService = new UserService();
+        AnnotatedUserService userService = new AnnotatedUserService();
         userService.getUser();
         userService.saveUser();
         userService.deleteUser();
@@ -40,7 +40,7 @@ public class AnnotationDemo {
     public static void demonstrateReflection() {
         System.out.println("2. 通过反射读取注解信息\n");
 
-        Class<UserService> clazz = UserService.class;
+        Class<AnnotatedUserService> clazz = AnnotatedUserService.class;
 
         // 读取类上的注解
         if (clazz.isAnnotationPresent(Service.class)) {
@@ -141,7 +141,7 @@ public class AnnotationDemo {
 // ========== 使用注解的类 ==========
 
 @Service(name = "userService", description = "用户服务类")
-class UserService {
+class AnnotatedUserService {
 
     @Permission(role = "USER", description = "所有用户可访问")
     public void getUser() {

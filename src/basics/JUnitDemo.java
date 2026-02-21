@@ -1,6 +1,8 @@
 package basics;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -180,7 +182,7 @@ public class JUnitDemo {
     }
 
     @ParameterizedTest
-    @org.junit.jupiter.params.provider.ValueSource(ints = {1, 2, 3, 4, 5})
+    @ValueSource(ints = {1, 2, 3, 4, 5})
     @DisplayName("参数化测试示例")
     void testWithParameters(int number) {
         assertTrue(number > 0 && number <= 5);

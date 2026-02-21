@@ -198,29 +198,29 @@ public class StreamDemo {
     public static void demonstratePracticalExample() {
         System.out.println("6. 实战案例：学生成绩分析\n");
 
-        List<Student> students = Arrays.asList(
-            new Student("张三", 85, "男"),
-            new Student("李四", 92, "女"),
-            new Student("王五", 78, "男"),
-            new Student("赵六", 95, "女"),
-            new Student("孙七", 88, "男")
+        List<StreamStudent> students = Arrays.asList(
+            new StreamStudent("张三", 85, "男"),
+            new StreamStudent("李四", 92, "女"),
+            new StreamStudent("王五", 78, "男"),
+            new StreamStudent("赵六", 95, "女"),
+            new StreamStudent("孙七", 88, "男")
         );
 
         // 找出成绩最高的学生
         students.stream()
-                .max(Comparator.comparing(Student::getScore))
+                .max(Comparator.comparing(StreamStudent::getScore))
                 .ifPresent(s -> System.out.println("最高分学生: " + s.getName() + ", 分数: " + s.getScore()));
 
         // 计算平均分
         double avgScore = students.stream()
-                                  .mapToInt(Student::getScore)
+                                  .mapToInt(StreamStudent::getScore)
                                   .average()
                                   .orElse(0.0);
         System.out.println("平均分: " + avgScore);
 
         // 按性别分组
-        Map<String, List<Student>> byGender = students.stream()
-                                                      .collect(Collectors.groupingBy(Student::getGender));
+        Map<String, List<StreamStudent>> byGender = students.stream()
+                                                      .collect(Collectors.groupingBy(StreamStudent::getGender));
         System.out.println("\n按性别分组:");
         byGender.forEach((gender, list) -> {
             System.out.println("  " + gender + ":");
@@ -230,19 +230,19 @@ public class StreamDemo {
         // 找出80分以上的学生名单
         List<String> excellentStudents = students.stream()
                                                  .filter(s -> s.getScore() >= 80)
-                                                 .map(Student::getName)
+                                                 .map(StreamStudent::getName)
                                                  .collect(Collectors.toList());
         System.out.println("\n80分以上的学生: " + excellentStudents);
     }
 }
 
-// Student类
-class Student {
+// StreamStudent类
+class StreamStudent {
     private String name;
     private int score;
     private String gender;
 
-    public Student(String name, int score, String gender) {
+    public StreamStudent(String name, int score, String gender) {
         this.name = name;
         this.score = score;
         this.gender = gender;

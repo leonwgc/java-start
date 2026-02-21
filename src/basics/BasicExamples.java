@@ -57,7 +57,7 @@ interface speack {
     void speak();
 }
 
-public class Test {
+public class BasicExamples {
     public static void main(String[] args) {
         var str = "hello, world";
         System.out.println("This is a test class.");
