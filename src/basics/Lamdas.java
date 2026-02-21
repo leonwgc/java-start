@@ -22,6 +22,10 @@ class Person {
         return this.city;
     }
 
+    public int getAge() {
+        return this.age;
+    }
+
     public static Person buildPerson(String name, int age, String city) {
         return new Person(name, age, city);
     }
@@ -36,7 +40,7 @@ public class Lamdas {
                 Person.buildPerson("Charlie", 35, "Shanghai"),
                 Person.buildPerson("David", 28, "Beijing"),
                 Person.buildPerson("Eve", 22, "Shanghai"),
-                Person.buildPerson("Frank", 40, "Beijing"));
+                Person.buildPerson("Frank", 42, "Beijing"));
 
         // 建议：
         // 如果不需要修改结果列表 → 用 .toList()（更简洁安全）
@@ -64,6 +68,14 @@ public class Lamdas {
                 System.out.println("  " + person.getName());
             }
         }
+
+        // mapToInt + sum 示例
+        var ageSum = list.stream().filter(p -> p.city.equals("Shanghai")).mapToInt(Person::getAge).sum();
+
+        System.out.println("Total age in Shanghai: " + ageSum);
+
+        // forEach + lambda 示例
+        list.stream().filter(p -> p.getAge() > 40).forEach(p -> System.out.println(p.getName() + " are getting old"));
 
         // lambda + thread 示例
         new Thread() {
