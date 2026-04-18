@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import com.example.utils.DynamicSqlBuilder;
 import com.example.utils.NativeSqlPageHelper;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Spring Data JPA 实战
@@ -43,16 +42,11 @@ import java.util.Map;
 public class JpaApplication {
 
     public static void main(String[] args) {
-        System.out.println("=== Spring Data JPA 实战 ===\n");
-        System.out.println("正在启动JPA示例应用...\n");
 
         SpringApplication.run(JpaApplication.class, args);
 
         System.out.println("\n✅ 应用启动成功！");
         System.out.println("📍 H2数据库控制台：http://localhost:8080/h2-console");
-        System.out.println("   JDBC URL: jdbc:h2:mem:testdb");
-        System.out.println("   Username: sa");
-        System.out.println("   Password: (留空)\n");
     }
 
     /**
@@ -98,50 +92,22 @@ public class JpaApplication {
         System.out.println("🔍 使用SQL工具查询:");
         DynamicSqlBuilder builder = new DynamicSqlBuilder();
         String sql = builder
-            .select("id, name, price, stock, created_at, updated_at")
-            .from("product")
-            .gt("price", 1000)
-            .buildSql();
+                .select("id, name, price, stock, created_at, updated_at")
+                .from("product")
+                .gt("price", 1000)
+                .buildSql();
 
         Pageable firstPage = PageRequest.of(1, 10, Sort.by(Sort.Direction.DESC, "stock"));
         Page<Product> page = sqlHelper.pageQuery(sql, builder.getParams(), firstPage, Product.class);
         System.out.println("✅ 价格>1000，按价格降序，第一页结果:");
         page.getContent().forEach(p -> System.out.println(
-            "  - " + p.getName() + "，价格: ¥" + p.getPrice() + "，库存: " + p.getStock()));
+                "  - " + p.getName() + "，价格: ¥" + p.getPrice() + "，库存: " + p.getStock()));
         System.out.println("📄 分页信息: page=" + (page.getNumber() + 1)
-            + ", size=" + page.getSize()
-            + ", total=" + page.getTotalElements());
-
-        // DynamicSqlBuilder builder = new DynamicSqlBuilder();
-        // String sql = builder
-        //         .select("id, name, price, stock, created_at, updated_at")
-        //         .from("product")
-        //         .buildSql() + " ORDER BY stock DESC LIMIT 10";
-        // List<Object[]> top10 = sqlHelper.listQuery(sql, Map.of());
-        // top10.forEach(row -> System.out.println("  - " + row[1] + "，库存: " + row[3]));
-
-        System.out.println();
-        // List<Product> allProducts = productService.findAll();
-        // allProducts.forEach(p ->
-        // System.out.println(" - " + p.getName() + "，价格: ¥" + p.getPrice() + "，库存: " +
-        // p.getStock())
-        // );
+                + ", size=" + page.getSize()
+                + ", total=" + page.getTotalElements());
 
         System.out.println();
 
-        // 根据ID查询
-        // System.out.println("🔍 查询ID为1的产品:");
-        // Optional<Product> product = productService.findById(laptop.getId());
-        // product.ifPresent(p ->
-        // System.out.println(" 找到: " + p.getName() + "，创建时间: " + p.getCreatedAt())
-        // );
-        // System.out.println();
-
-        // // 删除产品
-        // System.out.println("🗑️ 删除产品ID: " + laptop.getId());
-        // productService.deleteProduct(laptop.getId());
-        // System.out.println("✅ 删除成功");
-        // System.out.println("📋 当前产品数量: " + productService.count() + "\n");
     }
 
     /**
