@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 @Data
-public class DynamicSqlBuilder {
+public class SqlBuilder {
 
     private final StringBuilder select = new StringBuilder();
     private final StringBuilder from = new StringBuilder();
@@ -14,63 +14,63 @@ public class DynamicSqlBuilder {
     private final Map<String, Object> params = new HashMap<>();
 
     // ==================== 基础语句 ====================
-    public DynamicSqlBuilder select(String columns) {
+    public SqlBuilder select(String columns) {
         select.append(columns);
         return this;
     }
 
-    public DynamicSqlBuilder from(String table) {
+    public SqlBuilder from(String table) {
         from.append(table);
         return this;
     }
 
     // ==================== 常用条件 ====================
-    public DynamicSqlBuilder eq(String column, Object value) {
+    public SqlBuilder eq(String column, Object value) {
         addCondition(column, "=", value);
         return this;
     }
 
-    public DynamicSqlBuilder ne(String column, Object value) {
+    public SqlBuilder ne(String column, Object value) {
         addCondition(column, "!=", value);
         return this;
     }
 
-    public DynamicSqlBuilder like(String column, String value) {
+    public SqlBuilder like(String column, String value) {
         addLikeCondition(column, value, "%", "%");
         return this;
     }
 
-    public DynamicSqlBuilder likeLeft(String column, String value) {
+    public SqlBuilder likeLeft(String column, String value) {
         addLikeCondition(column, value, "%", "");
         return this;
     }
 
-    public DynamicSqlBuilder likeRight(String column, String value) {
+    public SqlBuilder likeRight(String column, String value) {
         addLikeCondition(column, value, "", "%");
         return this;
     }
 
-    public DynamicSqlBuilder gt(String column, Comparable<?> value) {
+    public SqlBuilder gt(String column, Comparable<?> value) {
         addCondition(column, ">", value);
         return this;
     }
 
-    public DynamicSqlBuilder ge(String column, Comparable<?> value) {
+    public SqlBuilder ge(String column, Comparable<?> value) {
         addCondition(column, ">=", value);
         return this;
     }
 
-    public DynamicSqlBuilder lt(String column, Comparable<?> value) {
+    public SqlBuilder lt(String column, Comparable<?> value) {
         addCondition(column, "<", value);
         return this;
     }
 
-    public DynamicSqlBuilder le(String column, Comparable<?> value) {
+    public SqlBuilder le(String column, Comparable<?> value) {
         addCondition(column, "<=", value);
         return this;
     }
 
-    public DynamicSqlBuilder in(String column, Iterable<?> value) {
+    public SqlBuilder in(String column, Iterable<?> value) {
         if (value != null && value.iterator().hasNext()) {
             and(column + " IN (:" + column + ")");
             params.put(column, value);
@@ -79,7 +79,7 @@ public class DynamicSqlBuilder {
     }
 
     // ==================== 新增你要的 ====================
-    public DynamicSqlBuilder between(String column, Comparable<?> start, Comparable<?> end) {
+    public SqlBuilder between(String column, Comparable<?> start, Comparable<?> end) {
         if (start != null && end != null) {
             and(column + " BETWEEN :" + column + "Start AND :" + column + "End");
             params.put(column + "Start", start);
@@ -88,26 +88,26 @@ public class DynamicSqlBuilder {
         return this;
     }
 
-    public DynamicSqlBuilder isNull(String column) {
+    public SqlBuilder isNull(String column) {
         and(column + " IS NULL");
         return this;
     }
 
-    public DynamicSqlBuilder isNotNull(String column) {
+    public SqlBuilder isNotNull(String column) {
         and(column + " IS NOT NULL");
         return this;
     }
 
     // 自定义 SQL 片段（万能兜底）
-    public DynamicSqlBuilder sql(String sqlFragment) {
+    public SqlBuilder sql(String sqlFragment) {
         and(sqlFragment);
         return this;
     }
 
     // ==================== OR 拼接 ====================
     // 用法：.or( b -> b.like("name", "a").eq("age",18) )
-    public DynamicSqlBuilder or(Consumer<DynamicSqlBuilder> consumer) {
-        DynamicSqlBuilder orBuilder = new DynamicSqlBuilder();
+    public SqlBuilder or(Consumer<SqlBuilder> consumer) {
+        SqlBuilder orBuilder = new SqlBuilder();
         consumer.accept(orBuilder);
         String orSql = orBuilder.getWhere().toString().trim();
         if (!orSql.isEmpty()) {

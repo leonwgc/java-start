@@ -9,12 +9,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import com.example.utils.DynamicSqlBuilder;
-import com.example.utils.NativeSqlPageHelper;
+import com.example.utils.SqlBuilder;
+import com.example.utils.SqlPageHelper;
 import java.util.List;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = { JpaApplication.class, NativeSqlPageHelper.class })
+@ComponentScan(basePackageClasses = { JpaApplication.class, SqlPageHelper.class })
 public class JpaApplication {
 
     public static void main(String[] args) {
@@ -30,11 +30,11 @@ public class JpaApplication {
      * 用于演示JPA的各种操作
      */
     @Bean
-    public CommandLineRunner demo(ProductService productService, NativeSqlPageHelper sqlHelper) {
+    public CommandLineRunner demo(ProductService productService, SqlPageHelper sqlPageHelper) {
         return args -> {
             System.out.println("\n=== 开始JPA操作演示 ===\n");
 
-            demonstrateCRUD(productService, sqlHelper);
+            demonstrateCRUD(productService, sqlPageHelper);
             // demonstrateQuery(productService, sqlHelper);
             // demonstrateUpdate(productService);
         };
@@ -43,7 +43,7 @@ public class JpaApplication {
     /**
      * 1. CRUD操作演示
      */
-    private void demonstrateCRUD(ProductService productService, NativeSqlPageHelper sqlHelper) {
+    private void demonstrateCRUD(ProductService productService, SqlPageHelper sqlPageHelper) {
         System.out.println("1. CRUD操作演示\n");
 
         // 创建产品
@@ -66,7 +66,7 @@ public class JpaApplication {
 
         // 使用 DynamicSqlBuilder + NativeSqlPageHelper 查询库存最多的10个产品
         System.out.println("🔍 使用SQL工具查询:");
-        DynamicSqlBuilder builder = new DynamicSqlBuilder();
+        SqlBuilder builder = new SqlBuilder();
         String sql = builder
                 .select("id, name, price, stock, created_at, updated_at")
                 .from("product")
@@ -74,7 +74,7 @@ public class JpaApplication {
                 .buildSql();
 
         Pageable firstPage = PageRequest.of(1, 10, Sort.by(Sort.Direction.DESC, "stock"));
-        Page<Product> page = sqlHelper.pageQuery(sql, builder.getParams(), firstPage, Product.class);
+        Page<Product> page = sqlPageHelper.pageQuery(sql, builder.getParams(), firstPage, Product.class);
         System.out.println("✅ 价格>1000，按价格降序，第一页结果:");
         page.getContent().forEach(p -> System.out.println(
                 "  - " + p.getName() + "，价格: ¥" + p.getPrice() + "，库存: " + p.getStock()));

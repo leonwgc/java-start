@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Component
-public class NativeSqlPageHelper {
+public class SqlPageHelper {
 
     @PersistenceContext
     private EntityManager entityManager;
