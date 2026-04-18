@@ -81,19 +81,19 @@ public class JpaApplication {
         System.out.println("1. CRUD操作演示\n");
 
         // 创建产品
-        System.out.println("➕ 创建50个产品...");
-        String[] names = { "笔记本电脑", "无线鼠标", "机械键盘", "显示器", "耳机",
-                "摄像头", "麦克风", "硬盘", "固态硬盘", "内存条" };
-        Product laptop = null;
-        for (int i = 0; i < 50; i++) {
-            String name = names[i % names.length] + "-" + (i + 1);
-            double price = Math.round((50 + Math.random() * 9950) * 100.0) / 100.0;
-            int stock = (int) (Math.random() * 200) + 1;
-            Product p = productService.createProduct(name, price, stock);
-            if (i == 0)
-                laptop = p;
-        }
-        System.out.println("✅ 创建了50个产品\n");
+        // System.out.println("➕ 创建100个产品...");
+        // String[] names = { "笔记本电脑", "无线鼠标", "机械键盘", "显示器", "耳机",
+        //         "摄像头", "麦克风", "硬盘", "固态硬盘", "内存条" };
+        // Product laptop = null;
+        // for (int i = 0; i < 100; i++) {
+        //     String name = names[i % names.length] + "-" + (i + 1);
+        //     double price = Math.round((50 + Math.random() * 9950) * 100.0) / 100.0;
+        //     int stock = (int) (Math.random() * 200) + 1;
+        //     Product p = productService.createProduct(name, price, stock);
+        //     if (i == 0)
+        //         laptop = p;
+        // }
+        // System.out.println("✅ 创建了100个产品\n");
 
         // 查询所有产品
         System.out.println("📋 查询所有产品:");
