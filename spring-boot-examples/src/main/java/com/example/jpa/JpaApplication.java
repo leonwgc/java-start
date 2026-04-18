@@ -9,12 +9,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import com.example.utils.SqlBuilder;
-import com.example.utils.SqlPageHelper;
+
+import com.example.jpa.utils.SqlBuilder;
+import com.example.jpa.utils.SqlHelper;
+
 import java.util.List;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = { JpaApplication.class, SqlPageHelper.class })
+@ComponentScan(basePackageClasses = { JpaApplication.class, SqlHelper.class })
 public class JpaApplication {
 
     public static void main(String[] args) {
@@ -30,7 +32,7 @@ public class JpaApplication {
      * 用于演示JPA的各种操作
      */
     @Bean
-    public CommandLineRunner demo(ProductService productService, SqlPageHelper sqlPageHelper) {
+    public CommandLineRunner demo(ProductService productService, SqlHelper sqlPageHelper) {
         return args -> {
             System.out.println("\n=== 开始JPA操作演示 ===\n");
 
@@ -43,7 +45,7 @@ public class JpaApplication {
     /**
      * 1. CRUD操作演示
      */
-    private void demonstrateCRUD(ProductService productService, SqlPageHelper sqlPageHelper) {
+    private void demonstrateCRUD(ProductService productService, SqlHelper sqlPageHelper) {
         System.out.println("1. CRUD操作演示\n");
 
         // 创建产品

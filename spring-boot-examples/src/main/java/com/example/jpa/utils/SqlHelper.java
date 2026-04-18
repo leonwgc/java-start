@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.example.jpa.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +25,9 @@ import java.util.regex.Pattern;
  * 5. SQL注入防护、参数验证、日志记录、异常处理
  */
 @Component
-public class SqlPageHelper {
+public class SqlHelper {
 
-    private static final Logger logger = LoggerFactory.getLogger(SqlPageHelper.class);
+    private static final Logger logger = LoggerFactory.getLogger(SqlHelper.class);
     private static final Pattern VALID_FIELD_PATTERN = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9_.]*$");
     private static final int DEFAULT_QUERY_TIMEOUT = 30000; // 30秒
     private static final int MAX_RESULT_SIZE = 100000; // 最大结果集数量

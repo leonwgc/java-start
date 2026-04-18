@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.example.jpa.utils.SqlHelper;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ class SqlPageHelperTest {
     private Query query;
 
     @InjectMocks
-    private SqlPageHelper sqlPageHelper;
+    private SqlHelper sqlPageHelper;
 
     private String testSql;
     private Map<String, Object> testParams;

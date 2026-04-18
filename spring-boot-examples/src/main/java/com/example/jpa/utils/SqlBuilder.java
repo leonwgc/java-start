@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.example.jpa.utils;
 
 import lombok.Data;
 import java.util.HashMap;
