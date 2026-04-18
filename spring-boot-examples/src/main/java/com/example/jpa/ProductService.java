@@ -1,5 +1,6 @@
 package com.example.jpa;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,11 +13,8 @@ import java.util.Optional;
 @Service
 class ProductService {
 
-    private final ProductRepository productRepository;
-
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    @Autowired
+    private ProductRepository productRepository;
 
     public Product createProduct(String name, Double price, Integer stock) {
         Product product = new Product(name, price, stock);
