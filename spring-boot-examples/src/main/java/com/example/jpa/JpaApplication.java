@@ -13,30 +13,6 @@ import com.example.utils.DynamicSqlBuilder;
 import com.example.utils.NativeSqlPageHelper;
 import java.util.List;
 
-/**
- * Spring Data JPA 实战
- * 学习目标：
- * 1. 理解JPA和Hibernate的关系
- * 2. 掌握实体类的定义和注解
- * 3. 学会使用Spring Data JPA Repository
- * 4. 了解JPQL查询语言
- *
- * JPA是什么？
- * - JPA：Java Persistence API（Java持久化API）
- * - ORM：对象关系映射（Object-Relational Mapping）
- * - Hibernate：JPA的实现之一（Spring Boot默认使用）
- * - 简化数据库操作，无需编写SQL
- *
- * Spring Data JPA核心：
- * - Repository接口：自动实现CRUD操作
- * - 方法命名规则：findByXxx、deleteByXxx等
- * - @Query注解：自定义JPQL查询
- * - 分页和排序支持
- *
- * 关联前面的学习：
- * - JdbcDemo.java：手动编写SQL
- * - JPA：自动生成SQL，更加简洁
- */
 @SpringBootApplication
 @ComponentScan(basePackageClasses = { JpaApplication.class, NativeSqlPageHelper.class })
 public class JpaApplication {

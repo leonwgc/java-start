@@ -1,4 +1,11 @@
 {
+    "github.copilot.chat.localeOverride": "en",
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "text": "Write all auto-generated commit messages in English."
+        }
+    ],
+    "github.copilot.chat.model": "auto",
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.import.maven.enabled": true,
     "java.compile.nullAnalysis.mode": "automatic",
