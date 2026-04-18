@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -223,6 +224,7 @@ public class SqlPageHelper {
      * @param params 参数Map
      * @return 影响的行数
      */
+    @Transactional(rollbackFor = Exception.class)
     public int executeUpdate(String sql, Map<String, Object> params) {
         validateInput(sql);
         if (sql.trim().toUpperCase().startsWith("SELECT")) {
