@@ -26,74 +26,47 @@ public class DynamicSqlBuilder {
 
     // ==================== 常用条件 ====================
     public DynamicSqlBuilder eq(String column, Object value) {
-        if (value != null) {
-            and(column + " = :" + column);
-            params.put(column, value);
-        }
+        addCondition(column, "=", value);
         return this;
     }
 
     public DynamicSqlBuilder ne(String column, Object value) {
-        if (value != null) {
-            and(column + " != :" + column);
-            params.put(column, value);
-        }
+        addCondition(column, "!=", value);
         return this;
     }
 
     public DynamicSqlBuilder like(String column, String value) {
-        if (value != null) {
-            and(column + " LIKE :" + column);
-            params.put(column, "%" + value + "%");
-        }
+        addLikeCondition(column, value, "%", "%");
         return this;
     }
 
     public DynamicSqlBuilder likeLeft(String column, String value) {
-        if (value != null) {
-            and(column + " LIKE :" + column);
-            params.put(column, "%" + value);
-        }
+        addLikeCondition(column, value, "%", "");
         return this;
     }
 
     public DynamicSqlBuilder likeRight(String column, String value) {
-        if (value != null) {
-            and(column + " LIKE :" + column);
-            params.put(column, value + "%");
-        }
+        addLikeCondition(column, value, "", "%");
         return this;
     }
 
     public DynamicSqlBuilder gt(String column, Comparable<?> value) {
-        if (value != null) {
-            and(column + " > :" + column);
-            params.put(column, value);
-        }
+        addCondition(column, ">", value);
         return this;
     }
 
     public DynamicSqlBuilder ge(String column, Comparable<?> value) {
-        if (value != null) {
-            and(column + " >= :" + column);
-            params.put(column, value);
-        }
+        addCondition(column, ">=", value);
         return this;
     }
 
     public DynamicSqlBuilder lt(String column, Comparable<?> value) {
-        if (value != null) {
-            and(column + " < :" + column);
-            params.put(column, value);
-        }
+        addCondition(column, "<", value);
         return this;
     }
 
     public DynamicSqlBuilder le(String column, Comparable<?> value) {
-        if (value != null) {
-            and(column + " <= :" + column);
-            params.put(column, value);
-        }
+        addCondition(column, "<=", value);
         return this;
     }
 
@@ -144,6 +117,22 @@ public class DynamicSqlBuilder {
             params.putAll(orBuilder.getParams());
         }
         return this;
+    }
+
+    private void addCondition(String column, String operator, Object value) {
+        if (value == null) {
+            return;
+        }
+        and(column + " " + operator + " :" + column);
+        params.put(column, value);
+    }
+
+    private void addLikeCondition(String column, String value, String prefix, String suffix) {
+        if (value == null) {
+            return;
+        }
+        and(column + " LIKE :" + column);
+        params.put(column, prefix + value + suffix);
     }
 
     // ==================== 内部拼接 ====================
