@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Component
 public class NativeSqlPageHelper {
@@ -32,7 +34,8 @@ public class NativeSqlPageHelper {
         query.setMaxResults(pageable.getPageSize());
 
         long total = ((Number) countQuery.getSingleResult()).longValue();
-        return new PageImpl<>(query.getResultList(), pageable, total);
+        List<T> content = castList(query.getResultList());
+        return new PageImpl<T>(Objects.requireNonNull(content), pageable, total);
     }
 
     // 返回 Object[] 分页（多表DTO用）
@@ -51,7 +54,8 @@ public class NativeSqlPageHelper {
         query.setMaxResults(pageable.getPageSize());
 
         long total = ((Number) countQuery.getSingleResult()).longValue();
-        return new PageImpl<>(query.getResultList(), pageable, total);
+        List<Object[]> content = castObjectArrayList(query.getResultList());
+        return new PageImpl<Object[]>(Objects.requireNonNull(content), pageable, total);
     }
 
     // 拼接排序
@@ -83,18 +87,28 @@ public class NativeSqlPageHelper {
     }
 
     // 返回列表（不分页）
-    public <T> java.util.List<T> listQuery(String sql, Map<String, Object> params,
-                                           Class<T> resultClass) {
+    public <T> List<T> listQuery(String sql, Map<String, Object> params,
+                                 Class<T> resultClass) {
         Query query = entityManager.createNativeQuery(sql, resultClass);
         setParams(query, params);
-        return query.getResultList();
+        return castList(query.getResultList());
     }
 
     // 返回 Object[] 列表（不分页）
-    public java.util.List<Object[]> listQuery(String sql, Map<String, Object> params) {
+    public List<Object[]> listQuery(String sql, Map<String, Object> params) {
         Query query = entityManager.createNativeQuery(sql);
         setParams(query, params);
-        return query.getResultList();
+        return castObjectArrayList(query.getResultList());
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private <T> List<T> castList(List rawResults) {
+        return (List<T>) rawResults;
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private List<Object[]> castObjectArrayList(List rawResults) {
+        return (List<Object[]>) rawResults;
     }
 
     // 设置参数

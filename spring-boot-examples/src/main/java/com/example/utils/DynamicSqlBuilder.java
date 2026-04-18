@@ -11,7 +11,7 @@ public class DynamicSqlBuilder {
     private final StringBuilder select = new StringBuilder();
     private final StringBuilder from = new StringBuilder();
     private final StringBuilder where = new StringBuilder();
-    private final Map<String, Object> params = new HashMap();
+    private final Map<String, Object> params = new HashMap<>();
 
     // ==================== 基础语句 ====================
     public DynamicSqlBuilder select(String columns) {
@@ -138,7 +138,8 @@ public class DynamicSqlBuilder {
         consumer.accept(orBuilder);
         String orSql = orBuilder.getWhere().toString().trim();
         if (!orSql.isEmpty()) {
-            if (orSql.startsWith("AND ")) orSql = orSql.substring(4);
+            if (orSql.startsWith("AND "))
+                orSql = orSql.substring(4);
             and("(" + orSql + ")");
             params.putAll(orBuilder.getParams());
         }
@@ -157,8 +158,8 @@ public class DynamicSqlBuilder {
     // 构建完整 SQL
     public String buildSql() {
         return "SELECT " + select.toString().trim() +
-               " FROM "  + from.toString().trim() +
-               where.toString();
+                " FROM " + from.toString().trim() +
+                where.toString();
     }
 
     // 获取参数
