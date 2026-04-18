@@ -5,11 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-
 import com.example.jpa.utils.SqlBuilder;
 import com.example.jpa.utils.SqlHelper;
 
@@ -68,32 +63,33 @@ public class JpaApplication {
 
         // 使用 DynamicSqlBuilder + NativeSqlPageHelper 查询库存最多的10个产品
         System.out.println("🔍 使用SQL工具查询:");
-        SqlBuilder builder = new SqlBuilder();
-        String sql = builder
-                .select("id, name, price, stock, created_at, updated_at")
-                .from("product")
-                .gt("price", 1000)
-                .buildSql();
+        // SqlBuilder builder = new SqlBuilder();
+        // String sql = builder
+        // .select("id, name, price, stock, created_at, updated_at")
+        // .from("product")
+        // .gt("price", 1000)
+        // .buildSql();
 
-        Pageable firstPage = PageRequest.of(1, 10, Sort.by(Sort.Direction.DESC, "stock"));
-        Page<Product> page = sqlPageHelper.pageQuery(sql, builder.getParams(), firstPage, Product.class);
-        System.out.println("✅ 价格>1000，按价格降序，第一页结果:");
-        page.getContent().forEach(p -> System.out.println(
-                "  - " + p.getName() + "，价格: ¥" + p.getPrice() + "，库存: " + p.getStock()));
-        System.out.println("📄 分页信息: page=" + (page.getNumber() + 1)
-                + ", size=" + page.getSize()
-                + ", total=" + page.getTotalElements());
+        // Pageable firstPage = PageRequest.of(1, 10, Sort.by(Sort.Direction.DESC,
+        // "stock"));
+        // Page<Product> page = sqlPageHelper.pageQuery(sql, builder.getParams(),
+        // firstPage, Product.class);
+        // System.out.println("✅ 价格>1000，按价格降序，第一页结果:");
+        // page.getContent().forEach(p -> System.out.println(
+        // " - " + p.getName() + "，价格: ¥" + p.getPrice() + "，库存: " + p.getStock()));
+        // System.out.println("📄 分页信息: page=" + (page.getNumber() + 1)
+        // + ", size=" + page.getSize()
+        // + ", total=" + page.getTotalElements());
 
         System.out.println("单个对象查询:");
 
         var sb1 = new SqlBuilder()
-                .select("*")
+                .select("name,price,stock")
                 .from("product")
-                .eq("id", 401);
-        Product pd = sqlPageHelper.queryForObject(sb1.buildSql(), sb1.getParams(), Product.class);
-        var pdDetail = new ProductDto(pd.getName(), pd.getPrice(), pd.getStock());
-        System.out.println("✅ 查询ID=401的产品: " + pdDetail.getName() + "，价格: ¥" + pdDetail.getPrice() + "，库存: "
-                + pdDetail.getStock());
+                .eq("id", 401L);
+        ProductDto pd = sqlPageHelper.queryForObject(sb1.buildSql(), sb1.getParams(), ProductDto.class);
+        System.out.println("✅ 查询ID=401的产品: " + pd.getName() + "，价格: ¥" + pd.getPrice() + "，库存: "
+                + pd.getStock());
 
         System.out.println();
     }
