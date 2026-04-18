@@ -84,8 +84,18 @@ public class JpaApplication {
                 + ", size=" + page.getSize()
                 + ", total=" + page.getTotalElements());
 
-        System.out.println();
+        System.out.println("单个对象查询:");
 
+        var sb1 = new SqlBuilder()
+                .select("*")
+                .from("product")
+                .eq("id", 401);
+        Product pd = sqlPageHelper.queryForObject(sb1.buildSql(), sb1.getParams(), Product.class);
+        var pdDetail = new ProductDto(pd.getName(), pd.getPrice(), pd.getStock());
+        System.out.println("✅ 查询ID=401的产品: " + pdDetail.getName() + "，价格: ¥" + pdDetail.getPrice() + "，库存: "
+                + pdDetail.getStock());
+
+        System.out.println();
     }
 
     /**
