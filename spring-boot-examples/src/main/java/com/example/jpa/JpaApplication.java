@@ -5,6 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import com.example.utils.DynamicSqlBuilder;
 import com.example.utils.NativeSqlPageHelper;
 import java.util.List;
@@ -91,14 +95,31 @@ public class JpaApplication {
         System.out.println("📋 查询所有产品:");
 
         // 使用 DynamicSqlBuilder + NativeSqlPageHelper 查询库存最多的10个产品
-        System.out.println("🔍 使用SQL工具查询库存最多的10个产品:");
+        System.out.println("🔍 使用SQL工具查询:");
         DynamicSqlBuilder builder = new DynamicSqlBuilder();
         String sql = builder
-                .select("id, name, price, stock, created_at, updated_at")
-                .from("product")
-                .buildSql() + " ORDER BY stock DESC LIMIT 10";
-        List<Object[]> top10 = sqlHelper.listQuery(sql, Map.of());
-        top10.forEach(row -> System.out.println("  - " + row[1] + "，库存: " + row[3]));
+            .select("id, name, price, stock, created_at, updated_at")
+            .from("product")
+            .gt("price", 1000)
+            .buildSql();
+
+        Pageable firstPage = PageRequest.of(1, 10, Sort.by(Sort.Direction.DESC, "stock"));
+        Page<Product> page = sqlHelper.pageQuery(sql, builder.getParams(), firstPage, Product.class);
+        System.out.println("✅ 价格>1000，按价格降序，第一页结果:");
+        page.getContent().forEach(p -> System.out.println(
+            "  - " + p.getName() + "，价格: ¥" + p.getPrice() + "，库存: " + p.getStock()));
+        System.out.println("📄 分页信息: page=" + (page.getNumber() + 1)
+            + ", size=" + page.getSize()
+            + ", total=" + page.getTotalElements());
+
+        // DynamicSqlBuilder builder = new DynamicSqlBuilder();
+        // String sql = builder
+        //         .select("id, name, price, stock, created_at, updated_at")
+        //         .from("product")
+        //         .buildSql() + " ORDER BY stock DESC LIMIT 10";
+        // List<Object[]> top10 = sqlHelper.listQuery(sql, Map.of());
+        // top10.forEach(row -> System.out.println("  - " + row[1] + "，库存: " + row[3]));
+
         System.out.println();
         // List<Product> allProducts = productService.findAll();
         // allProducts.forEach(p ->
