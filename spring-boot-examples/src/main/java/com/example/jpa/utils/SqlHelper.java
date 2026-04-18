@@ -45,7 +45,7 @@ public class SqlHelper {
      * @return 分页对象
      */
     public <T> Page<T> pageQuery(String sql, Map<String, Object> params,
-                                 Pageable pageable, Class<T> resultClass) {
+            Pageable pageable, Class<T> resultClass) {
         validateInput(sql, pageable);
         try {
             String sqlWithSort = applySort(sql, pageable.getSort());
@@ -85,7 +85,7 @@ public class SqlHelper {
      * @return 分页对象
      */
     public Page<Object[]> pageQuery(String sql, Map<String, Object> params,
-                                    Pageable pageable) {
+            Pageable pageable) {
         validateInput(sql, pageable);
         try {
             String sqlWithSort = applySort(sql, pageable.getSort());
@@ -125,7 +125,7 @@ public class SqlHelper {
      * @return 对象列表
      */
     public <T> List<T> listQuery(String sql, Map<String, Object> params,
-                                 Class<T> resultClass) {
+            Class<T> resultClass) {
         validateInput(sql);
         try {
             logger.debug("执行列表查询: {}", sql);
@@ -269,8 +269,8 @@ public class SqlHelper {
                 orderClause.append(", ");
             }
             orderClause.append(property)
-                       .append(" ")
-                       .append(order.getDirection().name());
+                    .append(" ")
+                    .append(order.getDirection().name());
         }
         return sql + " ORDER BY " + orderClause;
     }
@@ -370,7 +370,7 @@ public class SqlHelper {
      * @param rawResults 原始结果列表
      * @return 转换后的列表
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private <T> List<T> castList(List rawResults) {
         return (List<T>) rawResults;
     }
@@ -381,7 +381,7 @@ public class SqlHelper {
      * @param rawResults 原始结果列表
      * @return Object数组列表
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private List<Object[]> castObjectArrayList(List rawResults) {
         return (List<Object[]>) rawResults;
     }
@@ -397,16 +397,12 @@ public class SqlHelper {
             return;
         }
 
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-
+        params.forEach((key, value) -> {
             try {
                 query.setParameter(key, value);
             } catch (IllegalArgumentException e) {
                 logger.warn("参数绑定失败: key={}, value={}", key, value);
-                // 参数可能在SQL中不存在，继续处理其他参数
             }
-        }
+        });
     }
 }
