@@ -3,6 +3,11 @@ package com.example.jpa.utils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -31,8 +36,8 @@ public class JpaSpecHelper {
 
     // ==================== 分页查询（实体类） ====================
     public <T> Page<T> pageQuery(Class<T> entityClass,
-                                 List<SearchCondition> conditions,
-                                 Pageable pageable) {
+            List<SearchCondition> conditions,
+            Pageable pageable) {
         if (pageable == null) {
             throw new IllegalArgumentException("分页参数不能为空");
         }
@@ -241,9 +246,9 @@ public class JpaSpecHelper {
 
     @SuppressWarnings("null")
     private <T> Predicate toPredicate(Specification<T> spec,
-                                      Root<T> root,
-                                      CriteriaQuery<?> query,
-                                      CriteriaBuilder cb) {
+            Root<T> root,
+            CriteriaQuery<?> query,
+            CriteriaBuilder cb) {
         return spec.toPredicate(root, query, cb);
     }
 
@@ -273,25 +278,13 @@ public class JpaSpecHelper {
     }
 
     // ==================== 条件对象 ====================
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class SearchCondition {
-        private String field;       // 字段名，支持级联：user.name
+        private String field; // 字段名，支持级联：user.name
         private SearchOperator operator; // 操作符
-        private Object value;       // 值
-
-        public static SearchCondition build(String field, SearchOperator operator, Object value) {
-            SearchCondition condition = new SearchCondition();
-            condition.setField(field);
-            condition.setOperator(operator);
-            condition.setValue(value);
-            return condition;
-        }
-
-        // getter setter
-        public String getField() {return field;}
-        public void setField(String field) {this.field = field;}
-        public SearchOperator getOperator() {return operator;}
-        public void setOperator(SearchOperator operator) {this.operator = operator;}
-        public Object getValue() {return value;}
-        public void setValue(Object value) {this.value = value;}
+        private Object value; // 值
     }
 }
