@@ -27,11 +27,11 @@ public class JpaApplication {
      * 用于演示JPA的各种操作
      */
     @Bean
-    public CommandLineRunner demo(ProductService productService, SqlHelper sqlPageHelper) {
+    public CommandLineRunner demo(ProductService productService, SqlHelper sqlHelper) {
         return args -> {
             System.out.println("\n=== 开始JPA操作演示 ===\n");
 
-            demonstrateCRUD(productService, sqlPageHelper);
+            demonstrateCRUD(productService, sqlHelper);
             // demonstrateQuery(productService, sqlHelper);
             // demonstrateUpdate(productService);
         };
@@ -40,7 +40,7 @@ public class JpaApplication {
     /**
      * 1. CRUD操作演示
      */
-    private void demonstrateCRUD(ProductService productService, SqlHelper sqlPageHelper) {
+    private void demonstrateCRUD(ProductService productService, SqlHelper sqlHelper) {
         System.out.println("1. CRUD操作演示\n");
 
         // 创建产品
@@ -87,7 +87,7 @@ public class JpaApplication {
                 .select("name,price,stock")
                 .from("product")
                 .eq("id", 401L);
-        ProductDto pd = sqlPageHelper.queryForObject(sb1.buildSql(), sb1.getParams(), ProductDto.class);
+        ProductDto pd = sqlHelper.queryForObject(sb1.buildSql(), sb1.getParams(), ProductDto.class);
         System.out.println("✅ 查询ID=401的产品: " + pd.getName() + "，价格: ¥" + pd.getPrice() + "，库存: "
                 + pd.getStock());
 
