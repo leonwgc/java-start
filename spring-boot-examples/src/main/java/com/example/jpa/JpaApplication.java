@@ -19,6 +19,15 @@ public class JpaApplication {
     @Autowired
     private ProductMapper productMapper;
 
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private SqlHelper sqlHelper;
+
+    @Autowired
+    private JpaSpecHelper jpaSpecHelper;
+
     public static void main(String[] args) {
 
         SpringApplication.run(JpaApplication.class, args);
@@ -32,11 +41,11 @@ public class JpaApplication {
      * 用于演示JPA的各种操作
      */
     @Bean
-    public CommandLineRunner demo(ProductService productService, SqlHelper sqlHelper, JpaSpecHelper jpaSpecHelper) {
+    public CommandLineRunner demo() {
         return args -> {
             System.out.println("\n=== 开始JPA操作演示 ===\n");
 
-            demonstrateCRUD(productService, sqlHelper, jpaSpecHelper);
+            demonstrateCRUD();
             // demonstrateQuery(productService, sqlHelper);
             // demonstrateUpdate(productService);
         };
@@ -45,7 +54,7 @@ public class JpaApplication {
     /**
      * 1. CRUD操作演示
      */
-    private void demonstrateCRUD(ProductService productService, SqlHelper sqlHelper, JpaSpecHelper jpaSpecHelper) {
+    private void demonstrateCRUD() {
         System.out.println("1. CRUD操作演示\n");
 
         // 创建产品
