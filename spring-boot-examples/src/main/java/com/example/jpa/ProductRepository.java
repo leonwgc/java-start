@@ -55,4 +55,6 @@ interface ProductRepository extends JpaRepository<Product, Long> {
      */
     @Query(value = "SELECT * FROM product WHERE stock = 0", nativeQuery = true)
     List<Product> findOutOfStockProducts();
+
+    ProductProject findProjectedById(Long id);
 }

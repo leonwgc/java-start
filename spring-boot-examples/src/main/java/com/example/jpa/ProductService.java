@@ -53,4 +53,9 @@ class ProductService {
     public List<Product> findLowStockProducts(Integer threshold) {
         return productRepository.findByStockLessThanOrderByStockAsc(threshold);
     }
+
+    public ProductProject findProjectedById(Long id) {
+        return productRepository.findProjectedById(id);
+    }
+
 }

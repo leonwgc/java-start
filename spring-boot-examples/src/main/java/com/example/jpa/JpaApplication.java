@@ -6,11 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import com.example.jpa.utils.SqlHelper;
+import com.example.jpa.utils.JpaSpecHelper.SearchOperator;
+import com.example.jpa.utils.JpaSpecHelper;
 
 import java.util.List;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = { JpaApplication.class, SqlHelper.class })
+@ComponentScan(basePackageClasses = { JpaApplication.class, SqlHelper.class, JpaSpecHelper.class })
 public class JpaApplication {
 
     public static void main(String[] args) {
@@ -26,11 +28,11 @@ public class JpaApplication {
      * 用于演示JPA的各种操作
      */
     @Bean
-    public CommandLineRunner demo(ProductService productService, SqlHelper sqlHelper) {
+    public CommandLineRunner demo(ProductService productService, SqlHelper sqlHelper, JpaSpecHelper jpaSpecHelper) {
         return args -> {
             System.out.println("\n=== 开始JPA操作演示 ===\n");
 
-            demonstrateCRUD(productService, sqlHelper);
+            demonstrateCRUD(productService, sqlHelper, jpaSpecHelper);
             // demonstrateQuery(productService, sqlHelper);
             // demonstrateUpdate(productService);
         };
@@ -39,7 +41,7 @@ public class JpaApplication {
     /**
      * 1. CRUD操作演示
      */
-    private void demonstrateCRUD(ProductService productService, SqlHelper sqlHelper) {
+    private void demonstrateCRUD(ProductService productService, SqlHelper sqlHelper, JpaSpecHelper jpaSpecHelper) {
         System.out.println("1. CRUD操作演示\n");
 
         // 创建产品
@@ -87,8 +89,19 @@ public class JpaApplication {
                 .from("product")
                 .eq("id", 401L);
         ProductDto pd = sqlHelper.queryForObject(sqlBuilder.buildSql(), sqlBuilder.getParams(), ProductDto.class);
-        System.out.println("✅ 查询ID=401的产品: " + pd.getName() + "，价格: ¥" + pd.getPrice() + "，库存: "
+        System.out.println("✅ 使用SqlHelper查询ID=401的产品: " + pd.getName() + "，价格: ¥" + pd.getPrice() + "，库存: "
                 + pd.getStock());
+
+        System.out.println("Spec helper查询单个对象: 必须要用Product entity");
+        List<JpaSpecHelper.SearchCondition> conditions = List
+                .of(JpaSpecHelper.SearchCondition.of("id", SearchOperator.EQ, 401L));
+        var pd1 = jpaSpecHelper.findOne(Product.class, conditions);
+        System.out.println("✅ 使用Specification查询ID=401的产品: " + pd1.getName() + "，价格: ¥" + pd1.getPrice() + "，库存: "
+                + pd1.getStock());
+
+        var pd2 = productService.findProjectedById(401L);
+        System.out.println("✅ 使用接口投影查询ID=401的产品: " + pd2.getName() + "，价格: ¥" + pd2.getPrice() + "，库存: "
+                + pd2.getStock());
 
         System.out.println();
     }
@@ -96,6 +109,7 @@ public class JpaApplication {
     /**
      * 2. 查询方法演示
      */
+    @SuppressWarnings("unused")
     private void demonstrateQuery(ProductService productService) {
         System.out.println("2. 查询方法演示\n");
 
@@ -122,6 +136,7 @@ public class JpaApplication {
     /**
      * 3. 更新操作演示
      */
+    @SuppressWarnings("unused")
     private void demonstrateUpdate(ProductService productService) {
         System.out.println("3. 更新操作演示\n");
 

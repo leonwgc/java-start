@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -279,12 +278,15 @@ public class JpaSpecHelper {
 
     // ==================== 条件对象 ====================
     @Data
-    @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     public static class SearchCondition {
         private String field; // 字段名，支持级联：user.name
         private SearchOperator operator; // 操作符
         private Object value; // 值
+
+        public static SearchCondition of(String field, SearchOperator operator, Object value) {
+            return new SearchCondition(field, operator, value);
+        }
     }
 }
