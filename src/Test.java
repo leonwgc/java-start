@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.google.common.base.Joiner;
@@ -7,6 +9,19 @@ import com.google.common.base.Splitter;
 
 public class Test {
     public static void main(String[] args) {
+
+        var arr = List.of("1", "2", "3");
+
+        arr.stream().filter(s -> s.equals("2")).forEach(System.out::println);
+
+        Map<String, Object> map = new java.util.HashMap<>();
+        map.put("leon", 1);
+        map.put("wang", 2);
+
+        map.forEach((k, v) -> System.out.printf("%s %s%n", k, v));
+
+        System.out.println();
+
         var a = Optional.of(5);
 
         System.out.println(a.isPresent());
@@ -24,6 +39,6 @@ public class Test {
 
         System.out.println(Splitter.on(',').trimResults().omitEmptyStrings().split("a, b   , c"));
 
-        Preconditions.checkArgument(false,"should not be false");
+        Preconditions.checkArgument(false, "should not be false");
     }
 }
