@@ -1,5 +1,6 @@
 package com.example.jpa;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,9 @@ import java.util.List;
 @SpringBootApplication
 @ComponentScan(basePackageClasses = { JpaApplication.class, SqlHelper.class, JpaSpecHelper.class })
 public class JpaApplication {
+
+    @Autowired
+    private ProductMapper productMapper;
 
     public static void main(String[] args) {
 
@@ -95,13 +99,15 @@ public class JpaApplication {
         System.out.println("Spec helper查询单个对象: 必须要用Product entity");
         List<JpaSpecHelper.SearchCondition> conditions = List
                 .of(JpaSpecHelper.SearchCondition.of("id", SearchOperator.EQ, 401L));
-        var pd1 = jpaSpecHelper.findOne(Product.class, conditions);
-        System.out.println("✅ 使用Specification查询ID=401的产品: " + pd1.getName() + "，价格: ¥" + pd1.getPrice() + "，库存: "
-                + pd1.getStock());
+        Product pd1 = jpaSpecHelper.findOne(Product.class, conditions);
+        var dto1 = productMapper.toDto(pd1);
+        System.out.println("✅ 使用Specification查询ID=401的产品: " + dto1.getName() + "，价格: ¥" + dto1.getPrice() + "，库存: "
+                + dto1.getStock());
 
-        var pd2 = productService.findProjectedById(401L);
-        System.out.println("✅ 使用接口投影查询ID=401的产品: " + pd2.getName() + "，价格: ¥" + pd2.getPrice() + "，库存: "
-                + pd2.getStock());
+        ProductProject pd2 = productService.findProjectedById(401L);
+        var dto = productMapper.toProjectionDto(pd2);
+        System.out.println("✅ 使用接口投影查询ID=401的产品: " + dto.getName() + "，价格: ¥" + dto.getPrice() + "，库存: "
+                + dto.getStock());
 
         System.out.println();
     }

@@ -71,6 +71,21 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- MapStruct 核心 -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
+
+        <!-- 注解处理器 -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.5.5.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Spring Boot DevTools（热重载） -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,6 +100,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
