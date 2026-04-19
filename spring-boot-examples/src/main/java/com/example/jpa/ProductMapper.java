@@ -1,9 +1,10 @@
 package com.example.jpa;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring") // 交给Spring管理
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING) // 交给Spring管理
 public interface ProductMapper {
     @Mapping(source = "name", target = "name")
     ProductDto toDto(Product proudct);
