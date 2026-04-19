@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import com.example.jpa.utils.SqlBuilder;
 import com.example.jpa.utils.SqlHelper;
 
 import java.util.List;
@@ -83,11 +82,11 @@ public class JpaApplication {
 
         System.out.println("单个对象查询:");
 
-        var sb1 = new SqlBuilder()
+        var sqlBuilder = new SqlHelper.SqlBuilder()
                 .select("name,price,stock")
                 .from("product")
                 .eq("id", 401L);
-        ProductDto pd = sqlHelper.queryForObject(sb1.buildSql(), sb1.getParams(), ProductDto.class);
+        ProductDto pd = sqlHelper.queryForObject(sqlBuilder.buildSql(), sqlBuilder.getParams(), ProductDto.class);
         System.out.println("✅ 查询ID=401的产品: " + pd.getName() + "，价格: ¥" + pd.getPrice() + "，库存: "
                 + pd.getStock());
 
