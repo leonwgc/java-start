@@ -1,9 +1,11 @@
 package com.example.jpa.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import java.util.Date;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL) // 只序列化非 null 字段
 public class ApiResponse<T> {
     private String result;
     private long timestamp;
