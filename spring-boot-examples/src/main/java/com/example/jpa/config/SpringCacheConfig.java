@@ -3,7 +3,7 @@ package com.example.jpa.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCache;
@@ -52,23 +52,17 @@ public class SpringCacheConfig {
                         .build());
     }
 
-    // 缓存独立 ObjectMapper，不影响接口！
+    // Redis 缓存使用专用的 redisObjectMapper（包含 @class 类型信息）
     private RedisCacheManager redisCacheManager(
             RedisConnectionFactory factory,
-            ObjectMapper globalMapper) {
-        ObjectMapper cacheMapper = globalMapper.copy();
-        cacheMapper.activateDefaultTyping(
-                cacheMapper.getPolymorphicTypeValidator(),
-                ObjectMapper.DefaultTyping.NON_FINAL,
-                JsonTypeInfo.As.PROPERTY);
-
+            ObjectMapper redisObjectMapper) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofMinutes(5))
                 .computePrefixWith(cacheName -> cacheName + ":")
                 .serializeKeysWith(
                         RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
-                        new GenericJackson2JsonRedisSerializer(cacheMapper)));
+                        new GenericJackson2JsonRedisSerializer(redisObjectMapper)));
 
         return RedisCacheManager.builder(factory).cacheDefaults(config).build();
     }
@@ -77,7 +71,7 @@ public class SpringCacheConfig {
     @Bean
     public CacheManager cacheManager(
             @NonNull RedisConnectionFactory factory,
-            ObjectMapper objectMapper) {
+            @Qualifier("redisObjectMapper") ObjectMapper redisObjectMapper) {
         var localCacheManager = new org.springframework.cache.support.SimpleCacheManager();
         localCacheManager.setCaches(List.of(localCache()));
         localCacheManager.afterPropertiesSet();
@@ -85,7 +79,7 @@ public class SpringCacheConfig {
         var composite = new CompositeCacheManager();
         composite.setCacheManagers(List.of(
                 localCacheManager,
-                redisCacheManager(factory, objectMapper)));
+                redisCacheManager(factory, redisObjectMapper)));
         composite.afterPropertiesSet();
         return composite;
     }
