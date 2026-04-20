@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse<?> jacksonError(InvalidDefinitionException e) {
         log.error("JSON序列化异常", e);
-        return ApiResponse.error(500, "时间格式序列化错误，请检查LocalDateTime配置");
+        return ApiResponse.fail("时间格式序列化错误，请检查LocalDateTime配置", "500");
     }
 
     // 参数校验异常
@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
         FieldError error = e.getBindingResult().getFieldErrors().get(0);
         String msg = error.getField() + ":" + error.getDefaultMessage();
         log.error("参数校验异常:{}", msg);
-        return ApiResponse.error(400, msg);
+        return ApiResponse.fail(msg, "400");
     }
 
     // 日期解析异常
@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse<?> dateError(DateTimeParseException e) {
         log.error("日期格式错误", e);
-        return ApiResponse.error(400, "日期格式请使用 yyyy-MM-dd HH:mm:ss");
+        return ApiResponse.fail("日期格式请使用 yyyy-MM-dd HH:mm:ss", "400");
     }
 
     // 404接口不存在
@@ -48,7 +48,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse<?> notFound(NoHandlerFoundException e) {
         log.error("404:{}", e.getRequestURL());
-        return ApiResponse.error(404, "接口不存在");
+        return ApiResponse.fail("接口不存在", "404");
     }
 
     // 通用运行异常
@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse<?> runtimeError(RuntimeException e) {
         log.error("业务异常", e);
-        return ApiResponse.error(500, e.getMessage());
+        return ApiResponse.fail(e.getMessage(), "500");
     }
 
     // 兜底所有异常
@@ -64,6 +64,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse<?> allError(Exception e) {
         log.error("系统异常", e);
-        return ApiResponse.error(500, "服务器内部错误");
+        return ApiResponse.fail("服务器内部错误", "500");
     }
 }

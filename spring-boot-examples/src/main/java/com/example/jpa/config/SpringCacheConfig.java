@@ -3,8 +3,7 @@ package com.example.jpa.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
-import jakarta.annotation.Nonnull;
-
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCache;
@@ -17,6 +16,8 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.lang.NonNull;
+
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.time.Duration;
@@ -39,54 +40,53 @@ import java.time.Duration;
 //     }
 // }
 
-@Configuration // 告诉Spring：这是配置类，启动时加载
-@EnableCaching // ✅ 开启 Spring Cache 注解功能（必须加！否则 @Cacheable 不生效）
+@Configuration
+@EnableCaching
 public class SpringCacheConfig {
 
-    private final ObjectMapper objectMapper;
-
-    public SpringCacheConfig(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
-
-    // 一级本地缓存 Caffeine
     private CaffeineCache localCache() {
-        return new CaffeineCache(
-                "localCache",
-                Objects.requireNonNull(Caffeine.newBuilder()
-                        .maximumSize(10000) // 最大1万条
-                        .expireAfterWrite(1, TimeUnit.MINUTES) // 1分钟过期
-                        .build()));
+        return new CaffeineCache("localCache",
+                Caffeine.newBuilder()
+                        .maximumSize(10000)
+                        .expireAfterWrite(1, TimeUnit.MINUTES)
+                        .build());
     }
 
-    // 二级 Redis 缓存
-    private RedisCacheManager redisCacheManager(RedisConnectionFactory factory) {
+    // 缓存独立 ObjectMapper，不影响接口！
+    private RedisCacheManager redisCacheManager(
+            RedisConnectionFactory factory,
+            ObjectMapper globalMapper) {
+        ObjectMapper cacheMapper = globalMapper.copy();
+        cacheMapper.activateDefaultTyping(
+                cacheMapper.getPolymorphicTypeValidator(),
+                ObjectMapper.DefaultTyping.NON_FINAL,
+                JsonTypeInfo.As.PROPERTY);
+
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Objects.requireNonNull(Duration.ofMinutes(5)))
+                .entryTtl(Duration.ofMinutes(5))
                 .computePrefixWith(cacheName -> cacheName + ":")
                 .serializeKeysWith(
                         RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair
-                        .fromSerializer(new GenericJackson2JsonRedisSerializer(Objects.requireNonNull(objectMapper))));
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
+                        new GenericJackson2JsonRedisSerializer(cacheMapper)));
 
-        return RedisCacheManager.builder(Objects.requireNonNull((factory))).cacheDefaults(config).build();
+        return RedisCacheManager.builder(factory).cacheDefaults(config).build();
     }
 
-    // 多级缓存：Caffeine + Redis
+    @SuppressWarnings("null")
     @Bean
-    public CacheManager cacheManager(@Nonnull RedisConnectionFactory factory) {
-        org.springframework.cache.support.SimpleCacheManager localCacheManager = new org.springframework.cache.support.SimpleCacheManager();
-        List<org.springframework.cache.Cache> caches = new ArrayList<>();
-        caches.add(localCache());
-        localCacheManager.setCaches(caches);
+    public CacheManager cacheManager(
+            @NonNull RedisConnectionFactory factory,
+            ObjectMapper objectMapper) {
+        var localCacheManager = new org.springframework.cache.support.SimpleCacheManager();
+        localCacheManager.setCaches(List.of(localCache()));
         localCacheManager.afterPropertiesSet();
 
-        CompositeCacheManager compositeCacheManager = new CompositeCacheManager();
-        List<CacheManager> cacheManagers = new ArrayList<>();
-        cacheManagers.add(localCacheManager);
-        cacheManagers.add(redisCacheManager(factory));
-        compositeCacheManager.setCacheManagers(cacheManagers);
-        compositeCacheManager.afterPropertiesSet();
-        return compositeCacheManager;
+        var composite = new CompositeCacheManager();
+        composite.setCacheManagers(List.of(
+                localCacheManager,
+                redisCacheManager(factory, objectMapper)));
+        composite.afterPropertiesSet();
+        return composite;
     }
 }

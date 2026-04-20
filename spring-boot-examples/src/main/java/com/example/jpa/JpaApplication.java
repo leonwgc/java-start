@@ -134,7 +134,7 @@ public class JpaApplication {
 
     @GetMapping("/get/{id}")
     public Product hello(@PathVariable Long id) {
-        return productService.findById(id).orElseThrow(() -> new RuntimeException("产品不存在"));
+        return productService.findById(id).orElseThrow(() -> new RuntimeException("产品未找到"));
     }
 
     /**
