@@ -1,9 +1,14 @@
-package com.example.jpa;
+package com.example.jpa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+
+import com.example.jpa.entity.Product;
+import com.example.jpa.projection.ProductProject;
+import com.example.jpa.repository.ProductRepository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +17,7 @@ import java.util.Optional;
  * 业务逻辑层，调用Repository进行数据访问
  */
 @Service
-class ProductService {
+public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;

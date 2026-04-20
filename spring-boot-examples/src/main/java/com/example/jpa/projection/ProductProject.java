@@ -1,4 +1,4 @@
-package com.example.jpa;
+package com.example.jpa.projection;
 
 public interface ProductProject {
     String getName();

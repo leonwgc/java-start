@@ -1,8 +1,12 @@
-package com.example.jpa;
+package com.example.jpa.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import com.example.jpa.entity.Product;
+import com.example.jpa.projection.ProductProject;
+
 import java.util.List;
 
 /**
@@ -23,7 +27,7 @@ import java.util.List;
  * - OrderBy：排序
  */
 @Repository
-interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     /**
      * 根据名称模糊查询

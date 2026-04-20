@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.jpa.entity.Product;
+import com.example.jpa.dto.ProductDto;
+import com.example.jpa.mapper.ProductMapper;
+import com.example.jpa.projection.ProductProject;
+import com.example.jpa.service.ProductService;
+
 import com.example.jpa.utils.SqlHelper;
 import com.example.jpa.utils.JpaSpecHelper.SearchOperator;
 import com.example.jpa.utils.JpaSpecHelper;
@@ -128,7 +134,7 @@ public class JpaApplication {
 
     @GetMapping("/get/{id}")
     public Product hello(@PathVariable Long id) {
-        return productService.findById(id).orElse(null);
+        return productService.findById(id).orElseThrow(() -> new RuntimeException("产品不存在"));
     }
 
     /**

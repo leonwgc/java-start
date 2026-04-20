@@ -1,7 +1,12 @@
-package com.example.jpa;
+package com.example.jpa.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
+
+import com.example.jpa.dto.ProductDto;
+import com.example.jpa.entity.Product;
+import com.example.jpa.projection.ProductProject;
+
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING) // 交给Spring管理

@@ -1,11 +1,10 @@
-package com.example.jpa;
+package com.example.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-
 
 /**
  * 产品实体类
@@ -22,7 +21,7 @@ import java.time.LocalDateTime;
 @Table(name = "product")
 @Getter
 @Setter
-class Product {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
