@@ -31,18 +31,19 @@ spring:
         "[format_sql]": true
 
   # 缓存配置
+  # Redis 配置
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000
+
+  # Spring Cache 核心配置
   cache:
-    type: simple
-  # data:
-  #   redis:
-  #     host: localhost
-  #     port: 6379
-  #     password:
-  #     database: 0
-  #     lettuce:
-  #         pool:
-  #           max-active: 8
-  #           max-idle: 8
+    type: redis
+    redis:
+      time-to-live: 1800000  # 30分钟
+      cache-null-values: true # 缓存空值，防穿透
 
 # 日志配置
 logging:
