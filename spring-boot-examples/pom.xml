@@ -58,6 +58,24 @@
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
+        <!-- Caffeine 本地一级缓存 -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
+        <!-- Redis 二级缓存（你本来就有） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- Jackson（Spring Web 自带，但显式引入更稳） -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
         <!-- Spring Boot AOP -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
