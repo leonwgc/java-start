@@ -67,7 +67,6 @@ public class SpringCacheConfig {
         return RedisCacheManager.builder(factory).cacheDefaults(config).build();
     }
 
-    @SuppressWarnings("null")
     @Bean
     public CacheManager cacheManager(
             @NonNull RedisConnectionFactory factory,

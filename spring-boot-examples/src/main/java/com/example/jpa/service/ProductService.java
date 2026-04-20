@@ -9,6 +9,8 @@ import com.example.jpa.entity.Product;
 import com.example.jpa.projection.ProductProject;
 import com.example.jpa.repository.ProductRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ import java.util.Optional;
  * 产品服务类
  * 业务逻辑层，调用Repository进行数据访问
  */
+@Slf4j
 @Service
 public class ProductService {
 
@@ -33,6 +36,8 @@ public class ProductService {
 
     @Cacheable(value = "product", key = "#id")
     public Optional<Product> findById(@NonNull Long id) {
+        // ⬇️⬇️⬇️ 关键：只有**没命中缓存、查数据库时**才会走进这里！
+        log.info("【从数据库查询】产品 ID: {}", id);
         return productRepository.findById(id);
     }
 
