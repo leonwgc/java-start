@@ -35,6 +35,19 @@ public class ApiResponse<T> {
         return res;
     }
 
+    // 失败（枚举）
+    public static ApiResponse<?> fail(ErrorCodeEnum code) {
+        ApiResponse<?> res = new ApiResponse<>();
+        res.setResult("fail");
+        res.setTimestamp(new Date().getTime());
+
+        ErrorInfo info = new ErrorInfo();
+        info.setMessage(code.getMessage());
+        info.setCode(code.getCode());
+        res.setError(info);
+        return res;
+    }
+
     // 错误内部类
     @Data
     public static class ErrorInfo {

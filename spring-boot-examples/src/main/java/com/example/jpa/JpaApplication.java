@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.jpa.entity.Product;
+import com.example.jpa.exception.BusinessException;
+import com.example.jpa.common.ErrorCodeEnum;
 import com.example.jpa.dto.ProductDto;
 import com.example.jpa.mapper.ProductMapper;
 import com.example.jpa.projection.ProductProject;
@@ -135,7 +137,7 @@ public class JpaApplication {
     @GetMapping("/get/{id}")
     public Product hello(@PathVariable Long id) {
         return productService.findById(id)
-                .orElseThrow(() -> new RuntimeException("产品不存在"));
+                .orElseThrow(() -> new BusinessException(ErrorCodeEnum.DATA_NOT_EXIST));
     }
 
     /**

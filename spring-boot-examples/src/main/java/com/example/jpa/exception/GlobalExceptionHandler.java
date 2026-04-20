@@ -1,69 +1,49 @@
 package com.example.jpa.exception;
 
 import com.example.jpa.common.ApiResponse;
-import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
+import com.example.jpa.common.ErrorCodeEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
-
-import java.time.format.DateTimeParseException;
 
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Jackson序列化异常（你的LocalDateTime报错专属）
-    @ExceptionHandler(InvalidDefinitionException.class)
-    @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<?> jacksonError(InvalidDefinitionException e) {
-        log.error("JSON序列化异常", e);
-        return ApiResponse.fail("时间格式序列化错误，请检查LocalDateTime配置", "500");
-    }
-
-    // 参数校验异常
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<?> validError(MethodArgumentNotValidException e) {
-        FieldError error = e.getBindingResult().getFieldErrors().get(0);
-        String msg = error.getField() + ":" + error.getDefaultMessage();
-        log.error("参数校验异常:{}", msg);
-        return ApiResponse.fail(msg, "400");
-    }
-
-    // 日期解析异常
-    @ExceptionHandler(DateTimeParseException.class)
-    @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<?> dateError(DateTimeParseException e) {
-        log.error("日期格式错误", e);
-        return ApiResponse.fail("日期格式请使用 yyyy-MM-dd HH:mm:ss", "400");
-    }
-
-    // 404接口不存在
+    // 404
     @ExceptionHandler(NoHandlerFoundException.class)
-    @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<?> notFound(NoHandlerFoundException e) {
-        log.error("404:{}", e.getRequestURL());
-        return ApiResponse.fail("接口不存在", "404");
+    public ApiResponse<?> handle404() {
+        return ApiResponse.fail(ErrorCodeEnum.NOT_FOUND);
     }
 
-    // 通用运行异常
-    @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<?> runtimeError(RuntimeException e) {
-        log.error("业务异常", e);
-        return ApiResponse.fail(e.getMessage(), "500");
+    // 401 未授权
+    @ExceptionHandler(SecurityException.class)
+    public ApiResponse<?> handle401() {
+        return ApiResponse.fail(ErrorCodeEnum.UNAUTHORIZED);
     }
 
-    // 兜底所有异常
+    // 400 参数错误
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ApiResponse<?> handleBadRequest() {
+        return ApiResponse.fail(ErrorCodeEnum.BAD_REQUEST);
+    }
+
+    // 业务异常
+    @ExceptionHandler(BusinessException.class)
+    public ApiResponse<?> handleBusiness(BusinessException e) {
+        return ApiResponse.fail(e.getErrorCode());
+    }
+
+    // 空指针
+    @ExceptionHandler(NullPointerException.class)
+    public ApiResponse<?> handleNPE() {
+        return ApiResponse.fail(ErrorCodeEnum.NULL_POINTER);
+    }
+
+    // 兜底
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<?> allError(Exception e) {
-        log.error("系统异常", e);
-        return ApiResponse.fail("服务器内部错误", "500");
+    public ApiResponse<?> handleServer() {
+        return ApiResponse.fail(ErrorCodeEnum.SERVER_ERROR);
     }
 }
