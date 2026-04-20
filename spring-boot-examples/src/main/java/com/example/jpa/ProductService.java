@@ -1,6 +1,7 @@
 package com.example.jpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -25,6 +26,7 @@ class ProductService {
         return productRepository.findAll();
     }
 
+    @Cacheable(value = "product", key = "#id")
     public Optional<Product> findById(@NonNull Long id) {
         return productRepository.findById(id);
     }

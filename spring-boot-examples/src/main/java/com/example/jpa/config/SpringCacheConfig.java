@@ -1,8 +1,10 @@
 package com.example.jpa.config;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.benmanes.caffeine.cache.Caffeine;
+
+import jakarta.annotation.Nonnull;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCache;
@@ -15,10 +17,9 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.lang.NonNull;
-
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 // example:
 // @Service
@@ -42,41 +43,44 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching // ✅ 开启 Spring Cache 注解功能（必须加！否则 @Cacheable 不生效）
 public class SpringCacheConfig {
 
-    // 一级本地缓存 Caffeine：1分钟过期
+    private final ObjectMapper objectMapper;
+
+    public SpringCacheConfig(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+    // 一级本地缓存 Caffeine
     private CaffeineCache localCache() {
         return new CaffeineCache(
                 "localCache",
                 Objects.requireNonNull(Caffeine.newBuilder()
-                        .maximumSize(10000) // 最大1万条缓存，超过就LRU淘汰
-                        .expireAfterWrite(1, TimeUnit.MINUTES) // 写入后1分钟过期
+                        .maximumSize(10000) // 最大1万条
+                        .expireAfterWrite(1, TimeUnit.MINUTES) // 1分钟过期
                         .build()));
     }
 
-    // 二级Redis缓存：5分钟过期
-    private RedisCacheManager redisCacheManager(@NonNull RedisConnectionFactory factory) {
+    // 二级 Redis 缓存
+    private RedisCacheManager redisCacheManager(RedisConnectionFactory factory) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Objects.requireNonNull(java.time.Duration.ofMinutes(5)))
-                .computePrefixWith(cacheName -> cacheName + ":") // 缓存key前缀，默认是 cacheName::key，这里改成 cacheName:key
-                .serializeKeysWith(RedisSerializationContext.SerializationPair
-                        .fromSerializer(new StringRedisSerializer()))
+                .entryTtl(Objects.requireNonNull(Duration.ofMinutes(5)))
+                .computePrefixWith(cacheName -> cacheName + ":")
+                .serializeKeysWith(
+                        RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair
-                        .fromSerializer(
-                                new GenericJackson2JsonRedisSerializer(Objects.requireNonNull(objectMapper()))));
+                        .fromSerializer(new GenericJackson2JsonRedisSerializer(Objects.requireNonNull(objectMapper))));
 
-        return RedisCacheManager.builder(factory).cacheDefaults(config).build();
+        return RedisCacheManager.builder(Objects.requireNonNull((factory))).cacheDefaults(config).build();
     }
 
-    // 组合多级缓存：先本地 -> 再Redis
+    // 多级缓存：Caffeine + Redis
     @Bean
-    public CacheManager cacheManager(@NonNull RedisConnectionFactory factory) {
-        // 创建本地缓存管理器
+    public CacheManager cacheManager(@Nonnull RedisConnectionFactory factory) {
         org.springframework.cache.support.SimpleCacheManager localCacheManager = new org.springframework.cache.support.SimpleCacheManager();
         List<org.springframework.cache.Cache> caches = new ArrayList<>();
         caches.add(localCache());
         localCacheManager.setCaches(caches);
         localCacheManager.afterPropertiesSet();
 
-        // 创建组合缓存管理器
         CompositeCacheManager compositeCacheManager = new CompositeCacheManager();
         List<CacheManager> cacheManagers = new ArrayList<>();
         cacheManagers.add(localCacheManager);
@@ -84,16 +88,5 @@ public class SpringCacheConfig {
         compositeCacheManager.setCacheManagers(cacheManagers);
         compositeCacheManager.afterPropertiesSet();
         return compositeCacheManager;
-    }
-
-    // Jackson序列化，SpringBoot3标准，无fastjson
-    @Bean
-    public ObjectMapper objectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.activateDefaultTyping(
-                mapper.getPolymorphicTypeValidator(),
-                ObjectMapper.DefaultTyping.NON_FINAL, 
-                JsonTypeInfo.As.PROPERTY);
-        return mapper;
     }
 }

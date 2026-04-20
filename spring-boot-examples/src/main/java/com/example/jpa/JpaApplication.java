@@ -6,6 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import com.example.jpa.utils.SqlHelper;
 import com.example.jpa.utils.JpaSpecHelper.SearchOperator;
 import com.example.jpa.utils.JpaSpecHelper;
@@ -14,6 +18,7 @@ import java.util.List;
 
 @SpringBootApplication
 @ComponentScan(basePackageClasses = { JpaApplication.class, SqlHelper.class, JpaSpecHelper.class })
+@RestController
 public class JpaApplication {
 
     @Autowired
@@ -119,6 +124,11 @@ public class JpaApplication {
                 + dto.getStock());
 
         System.out.println();
+    }
+
+    @GetMapping("/get/{id}")
+    public Product hello(@PathVariable Long id) {
+        return productService.findById(id).orElse(null);
     }
 
     /**

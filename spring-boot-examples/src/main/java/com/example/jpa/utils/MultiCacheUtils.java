@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 public class MultiCacheUtils {
 
     @Resource
-    private StringRedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -54,7 +54,7 @@ public class MultiCacheUtils {
         }
 
         // 2. Redis
-        String redisVal = redisTemplate.opsForValue().get(key);
+        String redisVal = stringRedisTemplate.opsForValue().get(key);
         if (redisVal != null) {
             localCache.put(key, redisVal);
             try {
@@ -72,7 +72,7 @@ public class MultiCacheUtils {
         // 4. 回填缓存
         try {
             String json = Objects.requireNonNull(objectMapper.writeValueAsString(dbData));
-            redisTemplate.opsForValue().set(key, json, redisExpireSeconds, TimeUnit.SECONDS);
+            stringRedisTemplate.opsForValue().set(key, json, redisExpireSeconds, TimeUnit.SECONDS);
             localCache.put(key, json);
         } catch (JsonProcessingException ignored) {
         }
@@ -81,7 +81,7 @@ public class MultiCacheUtils {
     }
 
     public void delete(@NonNull String key) {
-        redisTemplate.delete(key);
+        stringRedisTemplate.delete(key);
         localCache.invalidate(key);
     }
 }
