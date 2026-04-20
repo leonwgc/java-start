@@ -5,7 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import com.example.jpa.entity.Product;
 import com.example.jpa.dto.ProductDto;
 import com.example.jpa.mapper.ProductMapper;
@@ -20,7 +19,7 @@ import com.example.jpa.utils.JpaSpecHelper;
 import java.util.List;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = { JpaApplication.class, SqlHelper.class, JpaSpecHelper.class })
+// 移除限制性的 @ComponentScan，让 Spring Boot 自动扫描 com.example.jpa 包及其子包
 public class JpaApplication {
 
     @Autowired

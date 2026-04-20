@@ -6,14 +6,38 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // 404
+    // 404 - NoHandlerFoundException
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ApiResponse<?> handle404() {
+    public ApiResponse<?> handle404(NoHandlerFoundException e) {
+
+        String path = e.getRequestURL();
+
+        // 忽略 swagger 内部资源，不打印、不返回错误
+        if (path.contains("swagger") || path.contains("api-docs")) {
+            return null; // 直接跳过，不处理
+        }
+
+        log.error("404 接口不存在: {}", path);
+        return ApiResponse.fail(ErrorCodeEnum.NOT_FOUND);
+    }
+
+    // 404 - NoResourceFoundException (静态资源不存在)
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ApiResponse<?> handleResourceNotFound(NoResourceFoundException e) {
+        String path = e.getResourcePath();
+
+        // 忽略 swagger 相关的静态资源404，避免日志污染
+        if (path.contains("swagger") || path.contains("api-docs") || path.contains(".well-known")) {
+            return null;
+        }
+
+        log.error("404 静态资源不存在: {}", path);
         return ApiResponse.fail(ErrorCodeEnum.NOT_FOUND);
     }
 

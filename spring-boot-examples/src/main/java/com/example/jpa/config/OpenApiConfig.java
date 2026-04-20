@@ -1,10 +1,19 @@
 package com.example.jpa.config;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "JPA 项目 API 文档", version = "1.0", description = "产品接口文档"))
 public class OpenApiConfig {
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("产品管理API")
+                        .version("1.0.0")
+                        .description("我的SpringBoot项目接口文档"));
+    }
 }
