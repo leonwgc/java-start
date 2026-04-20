@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+
 import com.example.jpa.entity.Product;
 import com.example.jpa.dto.ProductDto;
 import com.example.jpa.mapper.ProductMapper;
@@ -18,7 +20,11 @@ import com.example.jpa.utils.JpaSpecHelper;
 
 import java.util.List;
 
+// Swagger UI: http://localhost:8080/swagger-ui/index.html
+// OpenAPI JSON: http://localhost:8080/v3/api-docs
+
 @SpringBootApplication
+@ComponentScan(basePackages = "com.example.jpa") // 确保扫描到所有组件
 // 移除限制性的 @ComponentScan，让 Spring Boot 自动扫描 com.example.jpa 包及其子包
 public class JpaApplication {
 

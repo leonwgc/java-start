@@ -41,6 +41,14 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
             @NonNull ServerHttpRequest request,
             @NonNull ServerHttpResponse response) {
 
+        // 排除 Swagger UI 和 OpenAPI 文档相关的请求
+        String path = request.getURI().getPath();
+        if (path.contains("/v3/api-docs") || 
+            path.contains("/swagger-ui") || 
+            path.contains("/swagger-resources")) {
+            return body;
+        }
+
         // 如果返回值已经是 ApiResponse，直接返回
         if (body instanceof ApiResponse) {
             return body;
