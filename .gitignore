@@ -69,3 +69,5 @@ Desktop.ini
 
 # Spring Boot
 spring-boot-*.log
+
+logs
