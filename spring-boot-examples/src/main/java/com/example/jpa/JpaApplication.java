@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.jpa.entity.Product;
+import com.example.jpa.common.ApiResponse;
 import com.example.jpa.dto.ProductDto;
 import com.example.jpa.mapper.ProductMapper;
 import com.example.jpa.projection.ProductProject;
@@ -133,8 +134,12 @@ public class JpaApplication {
     }
 
     @GetMapping("/get/{id}")
-    public Product hello(@PathVariable Long id) {
-        return productService.findById(id).orElseThrow(() -> new RuntimeException("产品未找到"));
+    public ApiResponse<Product> hello(@PathVariable Long id) {
+        var result = productService.findById(id);
+        if (result.isEmpty()) {
+            throw new RuntimeException("产品不存在");
+        }
+        return ApiResponse.success(result.get());
     }
 
     /**
