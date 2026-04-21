@@ -28,11 +28,11 @@ public class SpringCacheConfig {
         @Value("${spring.cache.redis.key-prefix:cache:}")
         private String keyPrefix;
 
-        // Redis 缓存使用专用的 redisObjectMapper（包含 @class 类型信息）
+        // Spring Redis 缓存使用专用的 springRedisObjectMapper（包含 @class 类型信息）
         @Bean
         public CacheManager cacheManager(
                         @NonNull RedisConnectionFactory factory,
-                        @Qualifier("redisObjectMapper") ObjectMapper redisObjectMapper) {
+                        @Qualifier("springRedisObjectMapper") ObjectMapper redisObjectMapper) {
                 RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                                 .entryTtl(Duration.ofMillis(timeToLive))
                                 .computePrefixWith(cacheName -> keyPrefix + cacheName + ":")

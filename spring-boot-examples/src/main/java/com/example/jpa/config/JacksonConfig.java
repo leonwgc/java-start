@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Configuration;
 public class JacksonConfig {
 
     // HTTP 响应用的 ObjectMapper（不包含 @class）
-    @Bean
-    public ObjectMapper objectMapper() {
+    @Bean("objectMapper")
+    ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         JavaTimeModule module = new JavaTimeModule();
 
@@ -34,9 +34,9 @@ public class JacksonConfig {
         return mapper;
     }
 
-    // Redis 专用的 ObjectMapper（包含 @class 类型信息）
-    @Bean
-    public ObjectMapper redisObjectMapper() {
+    // Spring Redis 专用的 ObjectMapper（包含 @class 类型信息）
+    @Bean("springRedisObjectMapper")
+    ObjectMapper springRedisObjectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         JavaTimeModule module = new JavaTimeModule();
 
