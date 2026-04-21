@@ -15,8 +15,8 @@ import com.example.jpa.service.ProductService;
 
 import com.example.jpa.utils.SqlHelper;
 
-import com.example.jpa.utils.JpaSpecHelper.SearchOperator;
-import com.example.jpa.utils.JpaSpecHelper;
+import com.example.jpa.utils.JpaHelper.SearchOperator;
+import com.example.jpa.utils.JpaHelper;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class JpaApplication {
     private SqlHelper sqlHelper;
 
     @Autowired
-    private JpaSpecHelper jpaSpecHelper;
+    private JpaHelper jpaSpecHelper;
 
     public static void main(String[] args) {
 
@@ -118,8 +118,8 @@ public class JpaApplication {
                 + pd.getStock());
 
         System.out.println("Spec helper查询单个对象: 必须要用Product entity");
-        List<JpaSpecHelper.SearchCondition> conditions = List
-                .of(JpaSpecHelper.SearchCondition.of("id", SearchOperator.EQ, 401L));
+        List<JpaHelper.SearchCondition> conditions = List
+                .of(JpaHelper.SearchCondition.of("id", SearchOperator.EQ, 401L));
         Product pd1 = jpaSpecHelper.findOne(Product.class, conditions);
         var dto1 = productMapper.toDto(pd1);
         System.out.println("✅ 使用Specification查询ID=401的产品: " + dto1.getName() + "，价格: ¥" + dto1.getPrice() + "，库存: "

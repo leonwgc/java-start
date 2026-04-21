@@ -25,9 +25,9 @@ import java.util.*;
  * 替代原生SQL，类型安全、防注入、支持动态条件、分页、排序、多表关联
  */
 @Component
-public class JpaSpecHelper {
+public class JpaHelper {
 
-    private static final Logger logger = LoggerFactory.getLogger(JpaSpecHelper.class);
+    private static final Logger logger = LoggerFactory.getLogger(JpaHelper.class);
     private static final int MAX_RESULT_SIZE = 100000;
 
     @PersistenceContext

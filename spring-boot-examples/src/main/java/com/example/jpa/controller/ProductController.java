@@ -19,7 +19,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @Operation(summary = "根据ID查询产品", description = "先走本地Caffeine缓存→Redis缓存→数据库")
+    @Operation(summary = "根据ID查询产品", description = "先走Redis缓存→数据库")
     @GetMapping("/{id}")
     public Product hello(@PathVariable Long id) {
         return productService.findById(id)
