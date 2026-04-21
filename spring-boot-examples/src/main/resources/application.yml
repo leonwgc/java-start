@@ -42,11 +42,9 @@ spring:
   cache:
     type: redis
     redis:
-      time-to-live: 1800000  # 30分钟
+      time-to-live: 300000  # 5分钟（毫秒）
+      key-prefix: "cache:"  # Redis key 前缀
       cache-null-values: true # 缓存空值，防穿透
-  mvc:
-    # 关闭这个！！！就是它导致无限循环
-    throw-exception-if-no-handler-found: false
 
   web:
     resources:
@@ -58,8 +56,6 @@ logging:
   level:
     root: INFO
     "[com.example]": DEBUG
-    # 降低 Swagger 相关的 404 警告日志级别
-    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: ERROR
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
