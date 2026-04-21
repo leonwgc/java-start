@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
 
     // 404 接口不存在
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ApiResponse<?> handle404(NoHandlerFoundException e) {
+    public ApiResponse<?> handle404(NoHandlerFoundException e) throws NoHandlerFoundException {
         String path = e.getRequestURL();
 
         // ✅ Swagger 相关路径 -> 不返回错误，让框架正常处理
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
 
     // 404 静态资源不存在
     @ExceptionHandler(NoResourceFoundException.class)
-    public ApiResponse<?> handleResourceNotFound(NoResourceFoundException e) {
+    public ApiResponse<?> handleResourceNotFound(NoResourceFoundException e) throws NoResourceFoundException {
         String path = e.getResourcePath();
 
         // ✅ Swagger 静态资源 -> 直接放行，不拦截

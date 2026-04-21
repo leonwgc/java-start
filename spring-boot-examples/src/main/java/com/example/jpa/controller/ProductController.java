@@ -21,8 +21,7 @@ public class ProductController {
 
     @Operation(summary = "根据ID查询产品", description = "先走Redis缓存→数据库")
     @GetMapping("/{id}")
-    public Product hello(@PathVariable Long id) {
-        return productService.findById(id)
-                .orElseThrow(() -> new BusinessException(ErrorCodeEnum.DATA_NOT_EXIST));
+    public Product getProduct(@PathVariable Long id) {
+        return productService.findById(id);
     }
 }

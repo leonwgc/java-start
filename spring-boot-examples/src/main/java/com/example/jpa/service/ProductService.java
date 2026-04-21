@@ -35,10 +35,9 @@ public class ProductService {
     }
 
     @Cacheable(value = "product", key = "#id")
-    public Optional<Product> findById(@NonNull Long id) {
-        // ⬇️⬇️⬇️ 关键：只有**没命中缓存、查数据库时**才会走进这里！
+    public Product findById(@NonNull Long id) {
         log.info("【从数据库查询】产品 ID: {}", id);
-        return productRepository.findById(id);
+        return productRepository.findById(id).orElse(null);
     }
 
     @NonNull
